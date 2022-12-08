@@ -45,15 +45,15 @@
                     <div class="row">
                         <div class="col-lg-12 text-right">
                             <div class="logo_container">
-                                <a href="#">t2k<span>Shop</span></a>
+                                <a href="/">t2k<span>Shop</span></a>
                             </div>
                             <nav class="navbar">
                                 <ul class="navbar_menu">
-                                    <li><a href="index.html">home</a></li>
-                                    <li><a href="#">shop</a></li>
+                                    <li><a href="/">home</a></li>
+                                    <li><a href="/product/user">shop</a></li>
                                     <li><a href="#">promotion</a></li>
                                     <li><a href="#">Notify</a></li>
-                                    <li><a href="contact.html">contact</a></li>
+                                    <li><a href="/">contact</a></li>
                                 </ul>
                                 <ul class="navbar_user">
                                     <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
