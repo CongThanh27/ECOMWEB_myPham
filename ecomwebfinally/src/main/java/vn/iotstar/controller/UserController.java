@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import vn.iotstar.entity.User;
@@ -102,5 +102,35 @@ public class UserController {
 	public ModelAndView delete(ModelMap model, @PathVariable("id") Integer id) {
 		userService.deleteById(id);
 		return new ModelAndView("redirect:/user", model);
+	}
+	
+	//==============================================
+	
+	@RequestMapping("/login")
+	public String showLogin() {
+		return "/user/login";
+	}
+	
+	@PostMapping("/checkLogin")
+	public String checkLogin(ModelMap model, @RequestParam("email")String email, 
+			@RequestParam("hashedpassword")String hashedpassword, 
+			HttpSession session) {
+		if (userService.checkLogin(email, hashedpassword)) {
+			System.out.println("Login thanh cong");
+			session.setAttribute("emailtoweb", email);
+			model.addAttribute("session", email);
+			model.addAttribute("user", userService.findAll());
+			
+			return "/user/test";
+		} else {
+			System.out.println("Login that bai");
+			model.addAttribute("error", "Email or Password not exist");
+		}
+		return "/user/login";
+	}
+	
+	@GetMapping("/logout")
+	public String logout() {
+		return "redirect:/user/login";
 	}
 }

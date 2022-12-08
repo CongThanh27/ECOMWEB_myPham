@@ -2,6 +2,7 @@ package vn.iotstar.service.Impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 import org.springframework.stereotype.Service;
 
 import vn.iotstar.entity.User;
@@ -31,6 +33,11 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
+	public Optional<User> findByEmail(String name) {
+		return UserRepository.findByEmail(name);
+	}
+
+	@Override
 	public List<User> findAll() {
 		return UserRepository.findAll();
 	}
@@ -38,6 +45,10 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public Page<User> findAll(Pageable pageable) {
 		return UserRepository.findAll(pageable);
+	}
+
+	public <S extends User, R> R findBy(Example<S> example, Function<FetchableFluentQuery<S>, R> queryFunction) {
+		return UserRepository.findBy(example, queryFunction);
 	}
 
 	@Override
@@ -89,6 +100,15 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public void deleteAll() {
 		UserRepository.deleteAll();
+	}
+	
+	@Override
+	public Boolean checkLogin(String email, String hashedpassword) {
+		Optional<User> optUser = findByEmail(email);
+		if (optUser.isPresent() && optUser.get().getHashedpassword().equals(hashedpassword)) {
+			return true;
+		}
+		return false;
 	}
 
 }
