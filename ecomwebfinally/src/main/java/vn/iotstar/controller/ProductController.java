@@ -124,7 +124,7 @@ public class ProductController {
 			
 	        model.addAttribute("product", product);
 			model.addAttribute("review", listkq);
-			model.addAttribute("slreview", reviewService.count());
+			model.addAttribute("slreview", list.size());
 			return new ModelAndView("user/product/productDetails", model);
 		}
 		model.addAttribute("error", "Product không tồn tại");

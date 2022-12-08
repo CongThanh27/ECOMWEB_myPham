@@ -15,7 +15,7 @@
 					<ul>
 						<li><a href="index.html">Home</a></li>
 						<li><a href="/product/user"><i class="fa fa-angle-right" aria-hidden="true"></i>Product</a></li>
-						<li class="active"><a href="/product/user/list/${product.id}"><i class="fa fa-angle-right" aria-hidden="true">${product.name}</i></a></li>
+						<li class="active"><a href="/product/user/list/${product.id}"><i class="fa fa-angle-right" aria-hidden="true"> ${product.name}</i></a></li>
 					</ul>
 				</div>
 
@@ -207,8 +207,8 @@
 									method="POST" enctype="multipart/form-data">
 										<div>
 											<h1>Add Review</h1>	
-											<input readonly="readonly" value="${product.id}"  type="text" name="productid" id="review_name" class="form_input input_name" required="required" data-error="Name is required.">
-											<input readonly="readonly" id="review_name" value="1" class="form_input input_name" type="text" name="userid" placeholder="Xử lý hiện tên" required="required" data-error="Name is required.">
+											<input hidden="hidden" readonly="readonly" value="${product.id}"  type="text" name="productid" id="review_name" class="form_input input_name" required="required" data-error="Name is required.">
+											<input hidden="hidden" readonly="readonly" id="review_name" value="1" class="form_input input_name" type="text" name="userid" placeholder="Xử lý hiện tên" required="required" data-error="Name is required.">
 											<!-- <input id="review_email" class="form_input input_email" type="email" name="email" placeholder="Email*" required="required" data-error="Valid email is required."> -->
 										</div>
 										<div>
@@ -221,7 +221,7 @@
 												<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 											</ul>
 											     	     
-                                                <input type="text" class="form-control" readonly="readonly" name="rating" value="" id="rating" />
+                                                <input  hidden="hidden" type="text" class="form-control" readonly="readonly" name="rating" value="" id="rating" />
 											<textarea id="review_message" class="input_review" name="content"  placeholder="Your Review" rows="4" required data-error="Please, leave us a review."></textarea>
 										</div>
 										<div class="text-left text-sm-right">
