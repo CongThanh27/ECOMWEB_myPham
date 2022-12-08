@@ -63,7 +63,7 @@ public class Product {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	private Date createat;
-
+	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	private Date updateat;

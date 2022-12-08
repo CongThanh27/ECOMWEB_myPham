@@ -203,12 +203,13 @@
 
 								<div class="add_review">
 									
-									<form id="review_form"  action=<c:url value = ""/>
+									<form id="review_form"  action=<c:url value = "/product/saveofUpdateRating"/>
 									method="POST" enctype="multipart/form-data">
 										<div>
-											<h1>Add Review</h1>
-											<input id="review_name" class="form_input input_name" type="text" name="name" placeholder="Name*" required="required" data-error="Name is required.">
-											<input id="review_email" class="form_input input_email" type="email" name="email" placeholder="Email*" required="required" data-error="Valid email is required.">
+											<h1>Add Review</h1>	
+											<input readonly="readonly" value="${product.id}"  type="text" name="productid" id="review_name" class="form_input input_name" required="required" data-error="Name is required.">
+											<input readonly="readonly" id="review_name" value="1" class="form_input input_name" type="text" name="userid" placeholder="Xử lý hiện tên" required="required" data-error="Name is required.">
+											<!-- <input id="review_email" class="form_input input_email" type="email" name="email" placeholder="Email*" required="required" data-error="Valid email is required."> -->
 										</div>
 										<div>
 											<h1>Your Rating:</h1>
@@ -219,13 +220,15 @@
 												<li><i class="fa fa-star" aria-hidden="true"></i></li>
 												<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 											</ul>
-											     <span id="so11111" name="so11111">2</span>
-                                                <input type="text" class="form-control" readonly="readonly" name="categoryId" value="${so11111.text}" id="categoryId" />
-											<textarea id="review_message" class="input_review" name="message"  placeholder="Your Review" rows="4" required data-error="Please, leave us a review."></textarea>
+											     	     
+                                                <input type="text" class="form-control" readonly="readonly" name="rating" value="" id="rating" />
+											<textarea id="review_message" class="input_review" name="content"  placeholder="Your Review" rows="4" required data-error="Please, leave us a review."></textarea>
 										</div>
 										<div class="text-left text-sm-right">
 											<button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">submit</button>
 										</div>
+
+										
 									</form>
 								</div>
 

@@ -6,7 +6,11 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<title>Colo Shop</title>
+
+
+<!-- Site meta -->
+<title>Home</title>
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Colo Shop Template">
@@ -42,6 +46,9 @@
 	<jsp:include page="/common/category/footer.jsp"></jsp:include>
 
 	<!--=== End Footer v4 ===-->
+
+
+
 
 	<script src="${URL}js/jquery-3.2.1.min.js"></script>
 	<script src="${URL}styles/bootstrap4/popper.js"></script>
