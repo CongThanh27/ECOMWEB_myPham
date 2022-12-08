@@ -57,12 +57,15 @@ jQuery(document).ready(function($)
     function initQuantity1() {
         if ($('.user_star_rating li').length) {
             var plus = $('#so11111');
+            var rating = 'rating';
+         
             var stars = $('.user_star_rating li');
             stars.each(function() {
                 var star = $(this);
                 star.on('click', function() {
                     var i = star.index();
                     plus.text(i + 1);
+                    document.getElementById(rating).value = i+1;
                 });
 
             });
@@ -266,7 +269,7 @@ jQuery(document).ready(function($)
 				star.on('click', function()
 				{
 					var i = star.index();
-
+ 					$('#rating').value = i;
 					stars.find('i').each(function()
 					{
 						$(this).removeClass('fa-star');

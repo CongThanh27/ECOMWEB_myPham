@@ -137,6 +137,14 @@ public class ProductServiceImpl implements IProductService{
 		// TODO Auto-generated method stub
 		return productRepository.findBytrademarkContaining(trademark);
 	}
+
+
+
+	@Override
+	public List<Product> findByratingContaining(Integer rating) {
+		// TODO Auto-generated method stub
+		return productRepository.findByratingContaining(rating);
+	}
 	
 	
 	

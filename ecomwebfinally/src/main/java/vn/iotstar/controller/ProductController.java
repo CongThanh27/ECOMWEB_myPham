@@ -2,7 +2,10 @@ package vn.iotstar.controller;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +36,7 @@ import vn.iotstar.model.ProductModel;
 import vn.iotstar.model.ReviewModel;
 import vn.iotstar.service.ICategoryService;
 import vn.iotstar.service.IProductService;
+import vn.iotstar.service.IReviewService;
 import vn.iotstar.service.IStoreService;
 import vn.iotstar.service.IUserService;
 
@@ -49,6 +53,9 @@ public class ProductController {
 	IStoreService storeService;
 	@Autowired
 	IUserService userService;
+	@Autowired
+	IReviewService reviewService;
+	
 	
 	@GetMapping("")
 	public String list(ModelMap model) {
@@ -92,7 +99,7 @@ public class ProductController {
 
 	}
 	
-	@SuppressWarnings("null")
+	
 	@GetMapping("user/list/{id}")
 	public ModelAndView ChiTiet(ModelMap model, @PathVariable("id") int id) throws IOException {
 		Optional<Product> opt = productService.findById(id);
@@ -112,15 +119,20 @@ public class ProductController {
 	        	review.setImgages(item.getUser().getAvatar());
 	        	listkq.add(review);
 	        }
+	        
+	       
+			
 	        model.addAttribute("product", product);
 			model.addAttribute("review", listkq);
-			model.addAttribute("slreview", userService.count());
+			model.addAttribute("slreview", reviewService.count());
 			return new ModelAndView("user/product/productDetails", model);
 		}
 		model.addAttribute("error", "Product không tồn tại");
 		return new ModelAndView("forward:/product/user", model);
 
 	}
+	
+
 	
 	@PostMapping("saveofUpdate")
 	public ModelAndView saveOrUpdate(ModelMap model, @Valid @ModelAttribute("product") ProductModel product,
@@ -174,6 +186,24 @@ public class ProductController {
 		//entity.setStore(store.get());
 		productService.save(entity);
 		return new ModelAndView("redirect:/product", model);
+	}
+	@PostMapping("saveofUpdateRating")
+	public ModelAndView saveOrUpdateRating(ModelMap model, @Valid @ModelAttribute("review") ReviewModel review,
+			BindingResult result) {
+		Review entity = new Review();
+
+		/*
+		 * if (result.hasErrors()) { return new ModelAndView("product/addOrEdit"); }
+		 */
+		BeanUtils.copyProperties(review, entity);
+		Date getDate = new Date();
+		entity.setCreateat(getDate);
+		entity.setUpdateat(getDate);
+		entity.setProduct(productService.getById(review.getProductid()));
+		entity.setUser(userService.getById(review.getUserid()));
+		reviewService.save(entity);
+		String a ="redirect:/product/user/list/"+review.getProductid();
+		return new ModelAndView(a, model);
 	}
 	
 	@GetMapping("delete/{id}")
