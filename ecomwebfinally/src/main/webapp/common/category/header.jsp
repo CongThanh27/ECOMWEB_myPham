@@ -62,7 +62,7 @@
                                     <li class="checkout">
                                         <a href="#">
                                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                            <span id="checkout_items" class="checkout_items">10</span>
+                                            <span id="checkout_items" class="checkout_items">18</span>
                                         </a>
                                     </li>
                                 </ul>
