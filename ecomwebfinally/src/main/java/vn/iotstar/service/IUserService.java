@@ -39,5 +39,9 @@ public interface IUserService {
 	<S extends User> Optional<S> findOne(Example<S> example);
 
 	<S extends User> S save(S entity);
+	
+	Boolean checkLogin(String username, String password);
+
+	Optional<User> findByEmail(String name);
 
 }

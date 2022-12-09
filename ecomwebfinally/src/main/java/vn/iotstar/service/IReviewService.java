@@ -31,5 +31,7 @@ public interface IReviewService {
 	List<Review> findAll();
 
 	<S extends Review> S save(S entity);
+	
+	
 
 }

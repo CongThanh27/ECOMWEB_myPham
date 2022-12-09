@@ -24,12 +24,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import vn.iotstar.entity.Cart;
+
 import vn.iotstar.entity.CartItem;
 import vn.iotstar.entity.Product;
 import vn.iotstar.model.CartItemModel;
 import vn.iotstar.service.ICartItemService;
 //import vn.iotstar.service.ICartService;
 import vn.iotstar.service.IProductService;
+import vn.iotstar.service.IUserService;
 
 @Controller
 @RequestMapping("/user/cart/item")
@@ -37,7 +39,8 @@ public class CartItemController {
 
 	@Autowired
 	ICartItemService cartItemService;
-
+	@Autowired
+	IUserService userService;
 	@Autowired
 	IProductService productService;
 
@@ -46,6 +49,15 @@ public class CartItemController {
 	 */
 	@Autowired
 	ServletContext application;
+int userid=1;
+	@GetMapping("List")
+	public ModelAndView ListC(ModelMap model, HttpSession sesson) {
+		Optional<User> user = userService.findById(userid);
+		
+		List<CartItem> CartItems = cartItemService.findAll();
+		model.addAttribute("CartItems", CartItems);
+		return new ModelAndView("user/cartItem/list", model);
+	}
 
 	@GetMapping("")
 	public ModelAndView List(ModelMap model, HttpSession sesson) {

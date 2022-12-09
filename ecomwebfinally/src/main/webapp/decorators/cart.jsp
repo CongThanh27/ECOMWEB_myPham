@@ -24,8 +24,9 @@
     <link rel="stylesheet" type="text/css" href="${URL}plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="${URL}styles/categories_styles.css">
     <link rel="stylesheet" type="text/css" href="${URL}styles/categories_responsive.css">
+    
 	<!-- Favicon -->
-	<link rel="icon" type="image/png" href="images/favicon.png">
+	<link rel="icon" type="image/png" href="${URL1}images/favicon.png">
 	<!-- Web Font -->
 	<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
 	

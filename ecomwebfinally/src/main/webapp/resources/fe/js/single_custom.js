@@ -57,12 +57,15 @@ jQuery(document).ready(function($)
     function initQuantity1() {
         if ($('.user_star_rating li').length) {
             var plus = $('#so11111');
+            var rating = 'rating';
+         
             var stars = $('.user_star_rating li');
             stars.each(function() {
                 var star = $(this);
                 star.on('click', function() {
                     var i = star.index();
                     plus.text(i + 1);
+                    document.getElementById(rating).value = i+1;
                 });
 
             });
@@ -234,6 +237,8 @@ jQuery(document).ready(function($)
 			{
 				var x = parseInt(value.text());
 				value.text(x + 1);
+				document.getElementById('soluong').value = x + 1;
+				
 			});
 
 			minus.on('click', function()
@@ -242,6 +247,8 @@ jQuery(document).ready(function($)
 				if(x > 1)
 				{
 					value.text(x - 1);
+					document.getElementById('soluong').value = x - 1;
+					
 				}
 			});
 		}
@@ -266,7 +273,7 @@ jQuery(document).ready(function($)
 				star.on('click', function()
 				{
 					var i = star.index();
-
+ 					$('#rating').value = i;
 					stars.find('i').each(function()
 					{
 						$(this).removeClass('fa-star');

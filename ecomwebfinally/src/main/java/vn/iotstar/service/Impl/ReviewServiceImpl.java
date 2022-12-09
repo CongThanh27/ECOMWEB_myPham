@@ -72,6 +72,8 @@ public class ReviewServiceImpl implements IReviewService{
 	public void deleteAll() {
 		reviewRepository.deleteAll();
 	}
+
+	
 	
 	
 }
