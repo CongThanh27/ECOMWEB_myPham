@@ -22,7 +22,7 @@ public interface IReviewService {
 
 	Optional<Review> findById(Integer id);
 
-	List<Review> findAllById(Integer integer);
+	List<Review> findAllById(Iterable<Integer> ids);
 
 	List<Review> findAll(Sort sort);
 
@@ -31,5 +31,7 @@ public interface IReviewService {
 	List<Review> findAll();
 
 	<S extends Review> S save(S entity);
+	
+	
 
 }

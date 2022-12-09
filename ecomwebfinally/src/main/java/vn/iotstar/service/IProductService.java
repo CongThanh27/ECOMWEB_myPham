@@ -36,4 +36,6 @@ public interface IProductService {
 	Product getById(Integer id);
 	List<Product> findBytrademarkContaining(String trademark);
 	List<Product> findByratingContaining(Integer rating);
+	
+	Integer avgRating(Product product);
 }

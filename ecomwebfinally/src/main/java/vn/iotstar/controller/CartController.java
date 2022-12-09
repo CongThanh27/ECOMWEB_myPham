@@ -59,7 +59,7 @@ public class CartController {
 	}
 	@GetMapping("list")
 	public String list1(ModelMap model) {
-		return "carts/list1";
+		return "carts/list";
 	}
 
 	@GetMapping("add")

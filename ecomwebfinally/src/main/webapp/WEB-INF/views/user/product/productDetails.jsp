@@ -77,10 +77,21 @@
 							<span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
 							<!-- <input type="text" name="listImage" value="1"  id="quantity_value" /> -->
 							<span id="quantity_value">1</span>
+							
 							<span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
 						</div>
-						<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+						<form id="review_form"  action=<c:url value = "/product/AddCart"/>
+									method="POST" enctype="multipart/form-data">
+								<input  hidden="hidden" type="text"  name="count" value="1" id="soluong" />
+								<input  hidden="hidden" type="text"  name="storeid" value="${Storeid}"  />
+								<input  hidden="hidden" type="text"  name="userid" value="1"  />
+								<input  hidden="hidden" type="text"  name="productid" value="${product.id}" />	
+						 					
+						<button type="submit" class="red_button add_to_cart_button">add to cart</button>
+						
+						</form>
 						<div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
+						
 					</div>
 				</div>
 			</div>
