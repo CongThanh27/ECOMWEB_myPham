@@ -1,32 +1,27 @@
 package vn.iotstar.controller;
 
 import java.io.IOException;
-import java.util.Date;
+
 import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 
-import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import vn.iotstar.entity.Cart;
-
 import vn.iotstar.entity.CartItem;
-import vn.iotstar.entity.Product;
+import vn.iotstar.entity.User;
 import vn.iotstar.model.CartItemModel;
 import vn.iotstar.service.ICartItemService;
 //import vn.iotstar.service.ICartService;

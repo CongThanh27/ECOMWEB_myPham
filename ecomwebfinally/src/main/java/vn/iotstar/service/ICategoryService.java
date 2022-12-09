@@ -55,5 +55,7 @@ public interface ICategoryService {
 	Category findOneByName(String name);
 
 	List<Category> findByNameContaining(String name);
+	
+	List<Category> findTop3ByOrderByIdAsc();
 
 }

@@ -13,4 +13,6 @@ public interface ProductRepository extends JpaRepository <Product,Integer>{
 	List<Product> findBynameContaining(String name);
 	List<Product> findBytrademarkContaining(String trademark);
 	List<Product> findByratingContaining(int rating);
+	List<Product> findTop13ByOrderBySoldDesc();
+	List<Product> findTop10ByOrderByCreateatDesc();
 }

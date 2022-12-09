@@ -163,4 +163,20 @@ public class ProductServiceImpl implements IProductService{
 		
 		return rating;
 	}
+
+
+
+	@Override
+	public List<Product> findTop13ByOrderBySoldDesc() {
+		// TODO Auto-generated method stub
+		return productRepository.findTop13ByOrderBySoldDesc();
+	}
+
+
+
+	@Override
+	public List<Product> findTop10ByOrderByCreateatDesc() {
+		// TODO Auto-generated method stub
+		return productRepository.findTop10ByOrderByCreateatDesc();
+	}
 }

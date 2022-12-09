@@ -38,4 +38,8 @@ public interface IProductService {
 	List<Product> findByratingContaining(Integer rating);
 	
 	Integer avgRating(Product product);
+	
+	List<Product> findTop13ByOrderBySoldDesc();
+	
+	List<Product> findTop10ByOrderByCreateatDesc();
 }

@@ -23,5 +23,8 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
 	// Ham phan trang
 	Page<Category> findByNameContaining(String name, Pageable pageable);
+	
+	//lấy 3 cate 
+	List<Category> findTop3ByOrderByIdAsc();
 
 }

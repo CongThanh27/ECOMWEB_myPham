@@ -51,7 +51,7 @@
                                 <ul class="navbar_menu">
                                     <li><a href="/">home</a></li>
                                     <li><a href="/product/user">shop</a></li>
-                                    <li><a href="#">promotion</a></li>
+                                    <!-- <li><a href="/product/user">promotion</a></li> -->
                                     <li><a href="#">Notify</a></li>
                                     <li><a href="/">contact</a></li>
                                 </ul>

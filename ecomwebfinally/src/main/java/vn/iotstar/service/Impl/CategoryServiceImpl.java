@@ -134,4 +134,9 @@ public class CategoryServiceImpl implements ICategoryService {
 		categoryRepository.deleteAll();
 	}
 
+	@Override
+	public List<Category> findTop3ByOrderByIdAsc() {
+		return categoryRepository.findTop3ByOrderByIdAsc();
+	}
+
 }
