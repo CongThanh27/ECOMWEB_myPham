@@ -60,7 +60,7 @@
                                     <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
                                     <!--Cate -->
                                     <li class="checkout">
-                                        <a href="#">
+                                        <a href="/user/cart/List">
                                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                             <span id="checkout_items" class="checkout_items">10</span>
                                         </a>

@@ -138,15 +138,7 @@ public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartM
 		
 		List<Product> page = productService.findAll();
 		List<Category> cate = categoryService.findAll();
-		List<ProductModel> list = new ArrayList<ProductModel>();
-		for(Product item : page) {
-			ProductModel pro = new ProductModel();
-			BeanUtils.copyProperties(item, pro);
-			pro.setStoreid(item.getStore().getId());
-			list.add(pro);
-		}
-		//model.addAttribute("store");
-		model.addAttribute("product", list); 
+		model.addAttribute("product", page); 
 		model.addAttribute("category", cate);
 		return "user/product/list";
 	}

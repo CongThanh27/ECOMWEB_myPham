@@ -46,6 +46,7 @@ public class Order {
 	private String address;
 	private Integer phone;
 	private String status; // Trang thai don hang
+	private int trangthai;
 	private Float price;
 
 	@Temporal(TemporalType.DATE)

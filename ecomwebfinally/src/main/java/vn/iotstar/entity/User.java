@@ -30,7 +30,7 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer id;
+	private Integer id;
 	
 	private String firstName;
 	private String lastName;
@@ -42,7 +42,8 @@ public class User {
 	private Boolean role;// mặt định là user, là admin hoặc user của 1 shop tạo ra
 	private String address;
 	private String avatar;
-
+	private Boolean isSeller;
+	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	private Date createat;

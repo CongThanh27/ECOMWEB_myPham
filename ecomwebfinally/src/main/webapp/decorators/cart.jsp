@@ -109,7 +109,7 @@
 	<!-- ScrollUp JS -->
 	<script src="${URL1}js/scrollup.js"></script>
 	<!-- Onepage Nav JS -->
-	<script src="j${URL1}s/onepage-nav.min.js"></script>
+	<script src="${URL1}js/onepage-nav.min.js"></script>
 	<!-- Easing JS -->
 	<script src="${URL1}js/easing.js"></script>
 	<!-- Active JS -->
