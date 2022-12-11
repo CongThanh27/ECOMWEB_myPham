@@ -37,7 +37,7 @@ public class Product {
 	private Integer id;
 	private String trademark;
 	
-	@Type(type="org.hibernate.type.NTextType")
+	@Column(columnDefinition = "nvarchar(MAX)")
 	private String name;
 	@Column(columnDefinition = "nvarchar(MAX)")
 	private String desciption;

@@ -32,6 +32,7 @@ public class Delivery {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@Column(columnDefinition = "nvarchar(300)")
 	private String name;
 	private Float price;
 	private String desciption;

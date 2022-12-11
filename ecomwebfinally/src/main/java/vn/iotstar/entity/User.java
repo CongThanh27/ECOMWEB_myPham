@@ -3,6 +3,7 @@ package vn.iotstar.entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,8 +32,9 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+	@Column(columnDefinition = "nvarchar(50)")
 	private String firstName;
+	@Column(columnDefinition = "nvarchar(50)")
 	private String lastName;
 
 	private String email;
@@ -40,6 +42,7 @@ public class User {
 
 	private String hashedpassword;// mật khẩu mã hóa
 	private Boolean role;// mặt định là user, là admin hoặc user của 1 shop tạo ra
+	@Column(columnDefinition = "nvarchar(255)")
 	private String address;
 	private String avatar;
 	private Boolean isSeller;

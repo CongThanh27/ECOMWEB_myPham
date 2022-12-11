@@ -61,19 +61,7 @@ public class HomeController {
 		model.addAttribute("user", userModel);
 		return "/user/profile";
 	}
-	@GetMapping("")
-	public String list(ModelMap model) {
-		List<Category> cate = categoryService.findTop3ByOrderByIdAsc();		
-		model.addAttribute("category", cate);
-		
-		List<Product> list = productService.findTop10ByOrderByCreateatDesc();
-		model.addAttribute("product", list);
-		
-		List<Product> listBest = productService.findTop13ByOrderBySoldDesc();
-		model.addAttribute("productb", listBest);
-		return "index";
-	}
-	
+
 	@GetMapping("/logout")
 	public String logout() {
 		session.removeAttribute("user");
