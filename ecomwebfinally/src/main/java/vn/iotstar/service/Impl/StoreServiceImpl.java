@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import vn.iotstar.Repository.StoreRepository;
 import vn.iotstar.entity.Store;
+import vn.iotstar.entity.User;
 import vn.iotstar.service.IStoreService;
 
 @Service
@@ -72,6 +73,11 @@ public class StoreServiceImpl  implements IStoreService{
 	@Override
 	public <S extends Store> List<S> findAll(Example<S> example, Sort sort) {
 		return storerepository.findAll(example, sort);
+	}
+	
+	@Override
+	public Store findByUser(User user) {
+		return storerepository.findByUser(user);
 	}
 	
 	

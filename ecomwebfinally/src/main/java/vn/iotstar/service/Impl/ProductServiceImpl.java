@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import vn.iotstar.Repository.ProductRepository;
 import vn.iotstar.entity.Product;
+import vn.iotstar.entity.Store;
 import vn.iotstar.service.IProductService;
 import org.springframework.util.StringUtils;
 @Service
@@ -146,6 +147,10 @@ public class ProductServiceImpl implements IProductService{
 		return productRepository.findByratingContaining(rating);
 	}
 	
+	@Override
+	public List<Product> findByStore(Store store) {
+		return productRepository.findByStore(store);
+	}
 	
 	
 }

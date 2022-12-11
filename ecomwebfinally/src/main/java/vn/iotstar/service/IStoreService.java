@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import vn.iotstar.entity.Store;
+import vn.iotstar.entity.User;
 
 public interface IStoreService {
 
@@ -33,5 +34,7 @@ public interface IStoreService {
 	<S extends Store> S save(S entity);
 
 	Store getById(Integer id);
+	
+	Store findByUser(User user);
 
 }
