@@ -15,7 +15,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Title Tag  -->
-    <title>Eshop - eCommerce HTML5 Template.</title>
+    <title>Giỏ hàng</title>
      <link rel="stylesheet" type="text/css" href="${URL}styles/bootstrap4/bootstrap.min.css">
     <link href="${URL}plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="${URL}plugins/OwlCarousel2-2.2.1/owl.carousel.css">
@@ -26,7 +26,7 @@
     <link rel="stylesheet" type="text/css" href="${URL}styles/categories_responsive.css">
     
 	<!-- Favicon -->
-	<link rel="icon" type="image/png" href="${URL1}images/favicon.png">
+	<%-- <link rel="icon" type="image/png" href="${URL1}images/favicon.png"> --%>
 	<!-- Web Font -->
 	<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
 	

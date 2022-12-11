@@ -43,8 +43,9 @@ public class Delivery {
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
+	
 	private Date updateat;
-
-	@OneToOne(mappedBy = "delivery")
-	private Order orders;
+	
+	@OneToMany(mappedBy = "delivery")
+	List<Order> orders;
 }

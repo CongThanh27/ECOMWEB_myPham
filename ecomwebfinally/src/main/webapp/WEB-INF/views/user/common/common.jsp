@@ -3,113 +3,124 @@
 <%@ include file="/common/taglib.jsp"%>
 
 <div class="container product_section_container">
-			<!-- Start Checkout -->
-		<section class="shop checkout section">
-		<form id="review_form"  action=<c:url value = "/user/cart/SaveOrder"/>
-									method="POST" >
+	<!-- Start Checkout -->
+	<section class="shop checkout section">
+		
 			<div class="container">
-				<div class="row"> 
+				<div class="row">
 					<div class="col-lg-8 col-12">
 						<div class="checkout-form">
 							<h2>Thông tin giao hàng</h2>
 							<p>Hoàn tất thông tin để đặt hàng!!</p>
 							<!-- Form -->
-							
-								<div class="row">
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
-											<label>First Name<span>*</span></label>
-											<input readonly="readonly"  type="text" name="firstName" placeholder="" required="required" value="${user.firstName}">
-										</div>
+						<form class="form" id="review_form" action=<c:url value = "/user/cart/SaveOrder"/>
+							method="POST">
+							<div class="row">
+								<div class="col-lg-6 col-md-6 col-12">
+									<div class="form-group">
+										<label>First Name<span>*</span></label> <input
+											readonly="readonly" type="text" name="firstName"
+											placeholder="" required="required" value="${user.firstName}">
 									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
-											<label>Last Name<span>*</span></label>
-											<input readonly="readonly" type="text" name="lastName" placeholder="" required="required" value="${user.lastName}">
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
-											<label>Email<span>*</span></label>
-											<input readonly="readonly" type="email" name="email" placeholder="" required="required" value="${user.lastName}@gmail.com">
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
-											<label>Phone <span>*</span></label>
-											<input readonly="readonly" type="number" name="phone" placeholder="" required="required" value="${user.phone}">
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
-											<label>Đơn vị vận chuyển giao hàng<span>*</span></label>
-											<select name="delivery" id="delivery" onchange="deliveryChanged(this)">
-												<option >--Vui lòng chọn hình thức giao hàng--</option>
-												<c:forEach items="${delivery}" var="delivery">
-												<option value="${delivery.price},${delivery.id}">${delivery.name}, ${delivery.desciption}</option>
-												</c:forEach>
-										
-											</select>
-												<input readonly="readonly" value="1" id ="deliveryid" name="delivereid">
-												<!--  hidden="hidden" -->
-											<script language="javascript">
-         									
-        									    function deliveryChanged(obj)
-           											{ 
-        									    	var value = obj.value;
-        									    	var idvc = value.slice(value.indexOf(",")+1);
-        									    	var gia = value.slice(0,value.indexOf(","));
-        									    	var vanchuyen = $('#vanchuyen');
-        									    	var tong = $('#tong');
-        									    	var bandau = $('#bandau');
-        									    	vanchuyen.text(gia);       									    	
-        									    	tong.text(parseInt(bandau.text())+ parseInt(gia));
-        									    	document.getElementById('deliveryid').value = idvc;       									    	
-											        }											 
-											</script>
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
-											<label>Tỉnh / Thành phố<span>*</span></label>
-											<select name="state-province" id="state-province">
-												<option value="Thành phố HCM" selected="selected">Thành phố HCM</option>
-
-											</select>
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
-											<label>Địa chỉ<span>*</span></label>
-											<input type="text" name="address" placeholder="" required="required">
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
-											<label>Đường<span>*</span></label>
-											<input type="text" name="address1" placeholder="" required="required">
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
-											<label>Nhập mã giảm giá<span></span></label>
-											<input type="text" name="post" placeholder="" required="required">
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
-											<label>Company<span>*</span></label>
-											<select name="company_name" id="company">
-												<option value="company" selected="selected">Giao đến</option>
-												<option>Trường Học</option>
-												<option>Nhà Riêng</option>
-												
-											</select>
-										</div>
-									</div>
-							
 								</div>
-							
+								<div class="col-lg-6 col-md-6 col-12">
+									<div class="form-group">
+										<label>Last Name<span>*</span></label> <input
+											readonly="readonly" type="text" name="lastName"
+											placeholder="" required="required" value="${user.lastName}">
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-12">
+									<div class="form-group">
+										<label>Email<span>*</span></label> <input readonly="readonly"
+											type="email" name="email" placeholder="" required="required"
+											value="${user.lastName}@gmail.com">
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-12">
+									<div class="form-group">
+										<label>Phone <span>*</span></label> <input readonly="readonly"
+											type="number" name="phone" placeholder="" required="required"
+											value="${user.phone}">
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-12">
+									<div class="form-group">
+										<label>Đơn vị vận chuyển giao hàng<span>*</span></label> <select
+											 id="delivery"
+											onchange="deliveryChanged(this)">
+											<option>--Vui lòng chọn hình thức giao hàng--</option>
+											<c:forEach items="${delivery}" var="delivery">
+												<option value="${delivery.price},${delivery.id}">${delivery.name},
+													${delivery.desciption}</option>
+											</c:forEach>
+
+										</select>
+									<input hidden="hidden" readonly="readonly" value="1" id="deliveryid" name="delivereid">
+
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-12">
+									<div class="form-group">
+										<label>Tỉnh / Thành phố<span>*</span></label> <select
+											name="state-province" id="state-province">
+											<option value="Thành phố HCM" selected="selected">Thành
+												phố HCM</option>
+
+										</select>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-12">
+									<div class="form-group">
+										<label>Địa chỉ<span>*</span></label> <input type="text"
+											name="address" placeholder="" required="required">
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-12">
+									<div class="form-group">
+										<label>Đường<span>*</span></label> <input type="text"
+											name="address1" placeholder="" required="required">
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-12">
+									<div class="form-group">
+										<label>Nhập mã giảm giá<span></span></label> <input
+											type="text" name="post" placeholder="" required="required">
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-12">
+									<div class="form-group">
+										<label>Company<span>*</span></label> <select
+											name="company_name" id="company">
+											<option value="company" selected="selected">Giao đến</option>
+											<option>Trường Học</option>
+											<option>Nhà Riêng</option>
+
+										</select>
+									</div>
+								</div>
+
+							</div>
+														<!-- Button Widget -->
+							<div class="single-widget get-button">
+								<div class="content">
+									<div class="button">
+										<button type="submit" class="btn" value="Submit">Đặt
+											Hàng</button>
+										<!-- <a href="/user/cart/SaveOrder" class="btn">Đặt Hàng</a> -->
+									</div>
+								</div>
+							</div>
+							<div class="single-widget get-button">
+								<div class="content">
+									<div class="button">
+										
+										 <a href="/user/cart/List" class="btn">Hủy</a>
+									</div>
+								</div>
+							</div>
+							<!--/ End Button Widget -->
+						</form>
 							<!--/ End Form -->
 						</div>
 					</div>
@@ -117,13 +128,13 @@
 						<div class="order-details">
 							<!-- Order Widget -->
 							<div class="single-widget">
-								<h2>CART  TOTALS</h2>
+								<h2>CART TOTALS</h2>
 								<div class="content">
 									<ul>
-										<li>Sub Total $<span id ="bandau">${sum}</span></li>
-										<li>(+) Shipping $<span id ="vanchuyen" ></span></li>
-										<li>(-) Shipping $<span id ="giamvanchuyen" >0</span></li>
-										<li>Total $<span id ="tong">${sum}</span></li>
+										<li>Sub Total $<span id="bandau">${sum}</span></li>
+										<li>(+) Shipping $<span id="vanchuyen"></span></li>
+										<li>(-) Shipping $<span id="giamvanchuyen">0</span></li>
+										<li>Total $<span id="tong">${sum}</span></li>
 									</ul>
 								</div>
 							</div>
@@ -133,9 +144,10 @@
 								<h2>Payments</h2>
 								<div class="content">
 									<div class="checkbox">
-										<label ><input name="updates" id="1" type="checkbox" checked="checked" >Thanh toán khi nhận hàng</label>
-										<label ><input name="news" id="2" type="checkbox"> Thẻ tín dụng</label>
-										<label ><input name="news" id="3" type="checkbox"> Ví T2K</label>
+										<label><input name="updates" id="1" type="checkbox"
+											checked="checked">Thanh toán khi nhận hàng</label> <label><input
+											name="news" id="2" type="checkbox"> Thẻ tín dụng</label> <label><input
+											name="news" id="3" type="checkbox"> Ví T2K</label>
 									</div>
 								</div>
 							</div>
@@ -147,23 +159,29 @@
 								</div>
 							</div>
 							<!--/ End Payment Method Widget -->
-							<!-- Button Widget -->
-							<div class="single-widget get-button">
-								<div class="content">
-									<div class="button">
-									<button  type="submit" class="btn" value="Submit">Đặt Hàng</button>
-										<!-- <a href="/user/cart/SaveOrder" class="btn">Đặt Hàng</a> -->
-									</div>
-								</div>
-							</div>
-							<!--/ End Button Widget -->
+
 						</div>
 					</div>
 				</div>
 			</div>
-			</form>
-		</section>
-		<!--/ End Checkout -->
+
+			<!--  hidden="hidden" -->
+			<script language="javascript">
+				function deliveryChanged(obj) {
+					var value = obj.value;
+					var idvc = value.slice(value.indexOf(",") + 1);
+					var gia = value.slice(0, value.indexOf(","));
+					var vanchuyen = $('#vanchuyen');
+					var tong = $('#tong');
+					var bandau = $('#bandau');
+					vanchuyen.text(gia);
+					tong.text(parseInt(bandau.text()) + parseInt(gia));
+					document.getElementById('deliveryid').value = idvc;
+				}
+			</script>
+		
+	</section>
+	<!--/ End Checkout -->
 </div>
 
 <!-- Benefit -->

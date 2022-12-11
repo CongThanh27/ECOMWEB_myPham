@@ -68,13 +68,23 @@ public class CartItemController {
 	IOrderItemService orderItemService;
 	@Autowired
 	IDeliveryService deliveryService;
-	/*
-	 * @Autowired ICartService cartService;
-	 */
 	@Autowired
 	ServletContext application;
 	
 	int userid=1;
+	@GetMapping("hi")
+	public String list(ModelMap model) {
+		
+		return "deliveries/list";
+	}
+	@GetMapping("Order")
+	public ModelAndView ListOrder(ModelMap model, HttpSession sesson) {
+		Optional<User> user = userService.findById(userid);
+		User users = user.get();
+		List<Order> listorder = users.getOrders();		
+		model.addAttribute("order", listorder);
+		return new ModelAndView("deliveries/list", model);
+	}
 	@GetMapping("List")
 	public ModelAndView ListC(ModelMap model, HttpSession sesson) {
 		float sum=0;
@@ -165,7 +175,8 @@ public class CartItemController {
 					Random generator = new Random(); 
 					int nhandang =generator.nextInt();					
 					entity.setTrangthai(nhandang);
-					//entity.setDelivery(deliveryService.getById(order.getDelivereid()));
+					entity.setDelivery(deliveryService.getById(order.getDelivereid()));
+					entity.setGiaohang(1);
 					//Tính tổng tiền cho 1 hóa đơn của store
 					Optional<Cart> cart = cartService.findByStore(item);
 					Cart gh = cart.get();
@@ -211,7 +222,7 @@ public class CartItemController {
 			String message="";
 			message ="Thành công";
 			model.addAttribute("message", message); 
-			String a ="redirect:/product/user";
+			String a ="redirect:/user/cart/Order";
 		return new ModelAndView(a, model);
 	}
 	

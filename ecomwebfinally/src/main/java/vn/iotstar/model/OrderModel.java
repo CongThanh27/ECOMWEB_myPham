@@ -18,6 +18,7 @@ public class OrderModel {
 	private Integer phone;
 	private String status; // Trang thai don hang
 	private int trangthai;
+	private int giaohang=1;
 	private float price;
 	private Date createat;
 	private Date updateat;
