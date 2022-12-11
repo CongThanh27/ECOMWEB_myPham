@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import vn.iotstar.entity.Category;
-import vn.iotstar.entity.Delivery;
 import vn.iotstar.model.CategoryModel;
 import vn.iotstar.service.ICategoryService;
 

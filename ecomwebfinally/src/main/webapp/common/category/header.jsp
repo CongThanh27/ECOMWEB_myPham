@@ -76,7 +76,7 @@
                                 <ul class="navbar_menu">
                                     <li><a href="/">home</a></li>
                                     <li><a href="/product/user">shop</a></li>
-                                    <li><a href="#">promotion</a></li>
+                                    <!-- <li><a href="/product/user">promotion</a></li> -->
                                     <li><a href="#">Notify</a></li>
                                     <li><a href="/">contact</a></li>
                                 </ul>
@@ -87,7 +87,7 @@
                                     <li class="checkout">
                                         <a href="/user/cart/List">
                                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                            <span id="checkout_items" class="checkout_items">10</span>
+                                            <span id="checkout_items" class="checkout_items">18</span>
                                         </a>
                                     </li>
                                 </ul>
