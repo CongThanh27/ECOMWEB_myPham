@@ -13,10 +13,18 @@ public class CustomSiteMeshFileter extends ConfigurableSiteMeshFilter {
 		.addDecoratorPath("/", "/decorators/home.jsp")
 		.addDecoratorPath("/product/user/list/*", "/decorators/detail.jsp")
 		.addDecoratorPath("/product/*", "/decorators/cate.jsp")
-		
-		
+		.addDecoratorPath("/user/cart/*", "/decorators/cart.jsp")
+		.addDecoratorPath("/user/cart/Order", "/decorators/delivery.jsp")
+		.addDecoratorPath("/admin/*", "/decorators/admin.jsp")
+		.addDecoratorPath("/user/cart/AddThongTin", "/decorators/cart.jsp")
 		.addDecoratorPath("/admin/carts/*", "/decorators/cart.jsp")
-		.addDecoratorPath("/user/*", "/decorators/login.jsp")
+		.addDecoratorPath("/login", "/decorators/login.jsp")
+		.addDecoratorPath("/user/*", "/decorators/home.jsp")
+		.addDecoratorPath("/register", "/decorators/register.jsp")
+		.addDecoratorPath("/forgotpassword", "/decorators/forgotpassword.jsp")
+		.addDecoratorPath("/recoverpassword", "/decorators/recoverpassword.jsp")
+		.addDecoratorPath("/recoverpassword/*", "/decorators/recoverpassword.jsp")
+		.addDecoratorPath("/seller", "/decorators/seller.jsp")
 		
 		
 				.addExcludedPath("/login*");

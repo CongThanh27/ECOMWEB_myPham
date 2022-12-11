@@ -33,7 +33,7 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public Optional<User> findByEmail(String name) {
+	public User findByEmail(String name) {
 		return UserRepository.findByEmail(name);
 	}
 
@@ -104,8 +104,17 @@ public class UserServiceImpl implements IUserService {
 	
 	@Override
 	public Boolean checkLogin(String email, String hashedpassword) {
-		Optional<User> optUser = findByEmail(email);
-		if (optUser.isPresent() && optUser.get().getHashedpassword().equals(hashedpassword)) {
+		User optUser = findByEmail(email);
+		if (optUser != null && optUser.getHashedpassword().equals(hashedpassword)) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public Boolean checkRecover(String email) {
+		User optUser = findByEmail(email);
+		if (optUser != null) {
 			return true;
 		}
 		return false;

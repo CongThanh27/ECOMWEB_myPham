@@ -3,6 +3,7 @@ package vn.iotstar.entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,9 +33,9 @@ public class Store {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
+	@Column(columnDefinition = "nvarchar(200)")
 	private String name;
-
+	@Column(columnDefinition = "nvarchar(MAX)")
 	private String bio;// mô tả
 	// private Integer ownerId;// từ user nào id user
 	@OneToOne

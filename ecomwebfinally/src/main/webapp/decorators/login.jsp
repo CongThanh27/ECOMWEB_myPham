@@ -21,6 +21,22 @@
 	href="${URL}plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="${URL}dist/css/adminlte.min.css">
+
+<!-- Logo -->
+<link rel="stylesheet" type="text/css"
+	href="${URL}styles/bootstrap4/bootstrap.min.css">
+<link href="${URL}plugins/font-awesome-4.7.0/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css"
+	href="${URL}plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css"
+	href="${URL}plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css"
+	href="${URL}plugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" type="text/css"
+	href="${URL}styles/main_styles.css">
+<link rel="stylesheet" type="text/css"
+	href="${URL}styles/responsive.css">
 </head>
 <body>
 
@@ -45,5 +61,14 @@
 	<script src="${URL}plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<!-- AdminLTE App -->
 	<script src="${URL}dist/js/adminlte.min.js"></script>
+	
+	<!-- Logo -->
+	<script src="${URL}js/jquery-3.2.1.min.js"></script>
+	<script src="${URL}styles/bootstrap4/popper.js"></script>
+	<script src="${URL}styles/bootstrap4/bootstrap.min.js"></script>
+	<script src="${URL}plugins/Isotope/isotope.pkgd.min.js"></script>
+	<script src="${URL}plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+	<script src="${URL}plugins/easing/easing.js"></script>
+	<script src="${URL}js/custom.js"></script>
 </body>
 </html>

@@ -24,5 +24,7 @@ public interface DeliveryRepository extends JpaRepository<Delivery, Integer> {
 
 	// Ham phan trang
 	Page<Category> findByNameContaining(String name, Pageable pageable);
+	
+
 
 }

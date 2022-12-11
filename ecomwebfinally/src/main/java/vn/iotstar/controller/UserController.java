@@ -28,7 +28,7 @@ import vn.iotstar.model.UserModel;
 import vn.iotstar.service.IUserService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
 	@Autowired
@@ -106,31 +106,4 @@ public class UserController {
 	
 	//==============================================
 	
-	@RequestMapping("/login")
-	public String showLogin() {
-		return "/user/login";
-	}
-	
-	@PostMapping("/checkLogin")
-	public String checkLogin(ModelMap model, @RequestParam("email")String email, 
-			@RequestParam("hashedpassword")String hashedpassword, 
-			HttpSession session) {
-		if (userService.checkLogin(email, hashedpassword)) {
-			System.out.println("Login thanh cong");
-			session.setAttribute("emailtoweb", email);
-			model.addAttribute("session", email);
-			model.addAttribute("user", userService.findAll());
-			
-			return "/user/test";
-		} else {
-			System.out.println("Login that bai");
-			model.addAttribute("error", "Email or Password not exist");
-		}
-		return "/user/login";
-	}
-	
-	@GetMapping("/logout")
-	public String logout() {
-		return "redirect:/user/login";
-	}
 }

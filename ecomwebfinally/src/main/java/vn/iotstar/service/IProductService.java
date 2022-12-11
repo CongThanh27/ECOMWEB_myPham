@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import vn.iotstar.entity.Product;
+import vn.iotstar.entity.Store;
 
 public interface IProductService {
 
@@ -36,4 +37,13 @@ public interface IProductService {
 	Product getById(Integer id);
 	List<Product> findBytrademarkContaining(String trademark);
 	List<Product> findByratingContaining(Integer rating);
+
+	List<Product> findByStore(Store store);
+
+	
+	Integer avgRating(Product product);
+	
+	List<Product> findTop13ByOrderBySoldDesc();
+	
+	List<Product> findTop10ByOrderByCreateatDesc();
 }

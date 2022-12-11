@@ -237,6 +237,8 @@ jQuery(document).ready(function($)
 			{
 				var x = parseInt(value.text());
 				value.text(x + 1);
+				document.getElementById('soluong').value = x + 1;
+				
 			});
 
 			minus.on('click', function()
@@ -245,6 +247,8 @@ jQuery(document).ready(function($)
 				if(x > 1)
 				{
 					value.text(x - 1);
+					document.getElementById('soluong').value = x - 1;
+					
 				}
 			});
 		}

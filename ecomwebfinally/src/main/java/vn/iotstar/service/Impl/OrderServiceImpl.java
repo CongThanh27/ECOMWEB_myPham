@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import vn.iotstar.Repository.OrderRepository;
 import vn.iotstar.entity.Order;
+import vn.iotstar.entity.Store;
 import vn.iotstar.service.IOrderService;
 @Service
 public class OrderServiceImpl implements IOrderService {
@@ -92,6 +93,11 @@ public class OrderServiceImpl implements IOrderService {
 	@Override
 	public void deleteAll() {
 		orderRepository.deleteAll();
+	}
+	
+	@Override
+	public List<Order> findAllByStore(Store store) {
+		return orderRepository.findAllByStore(store);
 	}
 	
 }
