@@ -70,6 +70,8 @@ public class CartItemController {
 	IDeliveryService deliveryService;
 	@Autowired
 	ServletContext application;
+	@Autowired
+	HttpSession session;
 	
 	int userid=1;
 	@GetMapping("hi")
@@ -79,6 +81,8 @@ public class CartItemController {
 	}
 	@GetMapping("Order")
 	public ModelAndView ListOrder(ModelMap model, HttpSession sesson) {
+		//User users= (User)session.getAttribute("user");
+		//users.getId()
 		Optional<User> user = userService.findById(userid);
 		User users = user.get();
 		List<Order> listorder = users.getOrders();		

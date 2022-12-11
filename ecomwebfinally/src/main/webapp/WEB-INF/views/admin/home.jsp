@@ -852,7 +852,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3>${DKMUStore}</h3>
 
                 <p>New Store</p>
               </div>
@@ -867,7 +867,7 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>${DKMOrder}<!-- <sup style="font-size: 20px">%</sup> --></h3>
 
                 <p>New Order</p>
               </div>
@@ -882,7 +882,7 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
+                <h3>${DKMUser}</h3>
 
                 <p>User Registrations</p>
               </div>
@@ -897,7 +897,7 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>65</h3>
+                <h3>$${Doanhthu}</h3>
 
                 <p>Danh thu</p>
               </div>
@@ -943,7 +943,7 @@
                 <div class="row">
                   <div class="col-md-8">
                     <p class="text-center">
-                      <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
+                      <strong>Sales: 1 Jan, 2022 - 30 Jul, 2022</strong>
                     </p>
 
                     <div class="chart">
@@ -959,7 +959,7 @@
                     </p>
 
                     <div class="progress-group">
-                      Add Products to Cart
+                     Thêm sản phẩm vào giỏ hàng
                       <span class="float-right"><b>160</b>/200</span>
                       <div class="progress progress-sm">
                         <div class="progress-bar bg-primary" style="width: 80%"></div>
