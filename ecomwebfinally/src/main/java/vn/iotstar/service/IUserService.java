@@ -42,6 +42,8 @@ public interface IUserService {
 	
 	Boolean checkLogin(String username, String password);
 
-	Optional<User> findByEmail(String name);
+	User findByEmail(String name);
+	
+	Boolean checkRecover(String email);
 
 }

@@ -8,12 +8,15 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a>
+      <a href="/" class="h1"><b>Admin</b>LTE</a>
     </div>
+    <!-- <div class="logo_container">
+		<a href="/"><span>t2k</span>Shop</a>
+	</div>> -->
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
-
-      <form action="checkLogin" method="post" enctype="multipart/form-data">
+		<p>${message }</p>
+      <form action="/" method="post" enctype="multipart/form-data">
         <div class="input-group mb-3">
           <input type="email" class="form-control" placeholder="Email" name="email">
           <div class="input-group-append">
@@ -39,7 +42,7 @@
               </label>
             </div>
           </div>
-          <p style="color: red" th:text="${error}"></p>
+          <%-- <p style="color: red" th:text="${error}"></p> --%>
           <!-- /.col -->
           <div class="col-4">
             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
@@ -59,10 +62,10 @@
       <!-- /.social-auth-links -->
 
       <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
+        <a href="forgotpassword">I forgot my password</a>
       </p>
       <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
+        <a href="register" class="text-center">Register a new membership</a>
       </p>
     </div>
     <!-- /.card-body -->
