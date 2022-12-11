@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.ServletContext;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +27,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.BeanUtils;
 
+import vn.iotstar.entity.Cart;
+import vn.iotstar.entity.CartItem;
 import vn.iotstar.entity.Category;
 import vn.iotstar.entity.Product;
 import vn.iotstar.entity.Review;
 import vn.iotstar.entity.Store;
 import vn.iotstar.entity.User;
+import vn.iotstar.model.CartItemModel;
+import vn.iotstar.model.CartModel;
 import vn.iotstar.model.CategoryModel;
 import vn.iotstar.model.ProductModel;
 import vn.iotstar.model.ReviewModel;
+import vn.iotstar.service.ICartItemService;
+import vn.iotstar.service.ICartService;
 import vn.iotstar.service.ICategoryService;
 import vn.iotstar.service.IProductService;
 import vn.iotstar.service.IReviewService;
@@ -55,8 +62,70 @@ public class ProductController {
 	IUserService userService;
 	@Autowired
 	IReviewService reviewService;
+	@Autowired
+	ICartService cartService;
+	@Autowired
+	ICartItemService cartItemService;
+	
+
+	
+public Cart CreateCart(int Storeid, int Userid) { 
+	Optional<User> user = userService.findById(Userid);
+	User users = user.get();
+	Optional<Store> store = storeService.findById(Storeid);
+	Store stores = store.get();
+	if (cartService.findByStore(stores).isEmpty()&& cartService.findByUser(users).isEmpty()) {
+		//gọi hàm tạo item
+		Cart entity = new Cart();
+		entity.setUser(users);
+		entity.setStore(stores);
+		Date getDate = new Date();
+		entity.setCreateat(getDate);
+		entity.setUpdateat(getDate);
+		cartService.save(entity);
+		return entity;
+		
+	}
+	else {
+		// tạo CreateCart
+		Optional<Cart> cart = cartService.findByStore(stores);
+		Cart carts = cart.get();
+		return carts;
+		
+		}
 	
 	
+	}
+
+@PostMapping("AddCart")
+public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartModel cart,
+		@Valid @ModelAttribute("cartit") CartItemModel cartit, BindingResult result) {
+		Cart cartid = CreateCart(cart.getStoreid(),cart.getUserid());
+		CartItem entity = new CartItem();
+		BeanUtils.copyProperties(cartit, entity);
+		entity.setProduct(productService.getById(cartit.getProductid()));
+		entity.setCart(cartid);
+		Date getDate = new Date();
+		entity.setCreateat(getDate);
+		entity.setUpdateat(getDate);
+		cartItemService.save(entity);
+		String message = "";
+		message ="Đã thêm vào giỏ hàng";
+		model.addAttribute("message", message); 
+		String a ="redirect:/product/user/list/"+cartit.getProductid();
+	return new ModelAndView(a, model);
+}
+
+ public void TBDanhGia() { 
+	List<Product> pro = productService.findAll();
+	  for(Product item : pro) 
+	  { 
+		  if(!item.getReviews().isEmpty())
+			  item.setRating(productService.avgRating(item));
+		  productService.save(item);
+	  }
+	  }
+	 
 	@GetMapping("")
 	public String list(ModelMap model) {
 		List<Product> page = productService.findAll();
@@ -66,9 +135,10 @@ public class ProductController {
 
 	@GetMapping("user")
 	public String UserList(ModelMap model) {
+		
 		List<Product> page = productService.findAll();
 		List<Category> cate = categoryService.findAll();
-		model.addAttribute("product", page);
+		model.addAttribute("product", page); 
 		model.addAttribute("category", cate);
 		return "user/product/list";
 	}
@@ -89,7 +159,7 @@ public class ProductController {
 			Product entity = opt.get();
 			BeanUtils.copyProperties(entity, product);
 			product.setCategoryid(entity.getCategory().getId());
-			//product.setStoreid(entity.getStore().getId());
+			product.setStoreid(entity.getStore().getId());
 			product.setIsEdit(true);
 			model.addAttribute("product", product);
 			return new ModelAndView("product/addOrEdit", model);
@@ -102,6 +172,7 @@ public class ProductController {
 	
 	@GetMapping("user/list/{id}")
 	public ModelAndView ChiTiet(ModelMap model, @PathVariable("id") int id) throws IOException {
+		
 		Optional<Product> opt = productService.findById(id);
 		List<Review> list = null;
 		
@@ -121,10 +192,11 @@ public class ProductController {
 	        }
 	        
 	       
-			
+	        TBDanhGia();
+	        model.addAttribute("Storeid", entity.getStore().getId());
 	        model.addAttribute("product", product);
 			model.addAttribute("review", listkq);
-			model.addAttribute("slreview", reviewService.count());
+			model.addAttribute("slreview", list.size());
 			return new ModelAndView("user/product/productDetails", model);
 		}
 		model.addAttribute("error", "Product không tồn tại");
@@ -180,10 +252,10 @@ public class ProductController {
 			}
 		}
 		Optional<Category> opt = categoryService.findById(product.getCategoryid());	
-		//Optional<Store> store = storeService.findById(product.getStoreid());	
+		Optional<Store> store = storeService.findById(product.getStoreid());	
 		BeanUtils.copyProperties(product, entity);
 		entity.setCategory(opt.get());
-		//entity.setStore(store.get());
+		entity.setStore(store.get());
 		productService.save(entity);
 		return new ModelAndView("redirect:/product", model);
 	}

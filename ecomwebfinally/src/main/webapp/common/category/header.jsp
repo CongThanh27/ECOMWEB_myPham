@@ -60,7 +60,50 @@
 			</div>
 		</div>
 
+<<<<<<< HEAD
 		<!-- Main Navigation -->
+=======
+            <!-- Main Navigation -->
+
+            <div class="main_nav_container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 text-right">
+                            <div class="logo_container">
+                                <a href="/">t2k<span>Shop</span></a>
+                            </div>
+                            <nav class="navbar">
+                                <ul class="navbar_menu">
+                                    <li><a href="/">home</a></li>
+                                    <li><a href="/product/user">shop</a></li>
+                                    <li><a href="#">promotion</a></li>
+                                    <li><a href="#">Notify</a></li>
+                                    <li><a href="/">contact</a></li>
+                                </ul>
+                                <ul class="navbar_user">
+                                    <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+                                    <!--Cate -->
+                                    <li class="checkout">
+                                        <a href="/user/cart/List">
+                                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                            <span id="checkout_items" class="checkout_items">10</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="hamburger_container">
+                                    <i class="fa fa-bars" aria-hidden="true"></i>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+        
+        
+>>>>>>> 211983fc71b54e83a53ae7286d3f13bdf26a4de9
 
 		<div class="main_nav_container">
 			<div class="container">
