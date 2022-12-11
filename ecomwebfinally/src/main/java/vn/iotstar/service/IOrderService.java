@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import vn.iotstar.entity.Order;
+import vn.iotstar.entity.Store;
 
 public interface IOrderService {
 
@@ -39,5 +40,7 @@ public interface IOrderService {
 	<S extends Order> Optional<S> findOne(Example<S> example);
 
 	<S extends Order> S save(S entity);
+	
+	List<Order> findAllByStore(Store store);
 
 }

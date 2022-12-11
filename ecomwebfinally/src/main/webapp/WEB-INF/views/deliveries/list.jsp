@@ -100,7 +100,7 @@
                       <c:url value="/images/${orderitem.product.listimage}" var="imgUrl"></c:url>
 						<img width="100px" height="100px" src="${imgUrl}" alt="">
                       </td>
-                      <td width="639px">${orderitem.product.name}</td>
+                      <td width="639px"><a href="/product/user/list/${orderitem.product.id}">${orderitem.product.name}</a></td>
                       <td width="233px">
                        <c:if test="${order.giaohang==0}">
                          <div class="progress progress-xs">

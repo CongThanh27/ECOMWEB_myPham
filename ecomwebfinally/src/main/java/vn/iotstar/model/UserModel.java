@@ -2,6 +2,8 @@ package vn.iotstar.model;
 
 import java.util.Date;
 
+import javax.persistence.Transient;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
@@ -29,5 +31,7 @@ public class UserModel {
 	private Date updateat;
 	private Boolean isActive;
 	private Boolean isEdit = false;
+	private String confirmPassword;
+	private String newPassword;
 
 }
