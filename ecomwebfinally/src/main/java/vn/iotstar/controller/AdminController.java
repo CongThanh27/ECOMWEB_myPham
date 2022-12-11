@@ -350,11 +350,12 @@ public class AdminController {
 		 return listkq;
 	}
 	
-	public List<CartItem> ListOrder(int co) {
-		List<Order> listorder = orderService.findAll();	
-		
-		return listorder;
-	}
+	/*
+	 * public List<CartItem> ListOrder(int co) { List<Order> listorder =
+	 * orderService.findAll();
+	 * 
+	 * return listorder; }
+	 */
 	@GetMapping("ThongKe/{co}")
 	public ModelAndView ThongKe(ModelMap model,@PathVariable("co") int co, HttpSession sesson) {	
 		//số lượng đăng ký mới
