@@ -225,7 +225,7 @@
 											</div>
 										</div>
 										<div class="red_button add_to_cart_button">
-											<a href="#">add to cart</a>
+											<a href="/product/user/list/${product.id}">add to cart</a>
 										</div>
 									</div>
 									

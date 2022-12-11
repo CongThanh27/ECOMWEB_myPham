@@ -1,144 +1,244 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ include file="/common/taglib.jsp"%>
-
-<!doctype html>
-<html lang="en">
-<head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- Bootstrap CSS -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-	integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-	crossorigin="anonymous" referrerpolicy="no-referrer" />
-<title>Hello, world!</title>
-</head>
-<body>
-
-	<section class="row">
-
-		<div class="col mt-4">
-
-			<div class="card">
-
-				<div class="card-header">List cart</div>
-
-				<div class="card-body">
-
-					<!-- Hiển thông báo -->
-
-					<c:if test="${message != null}">
-
-						<div class="alert alert-primary" role="alert">
-
-							<i>${message}</i>
-
-						</div>
-
-					</c:if>
-
-					<!-- Hêt thông báo -->
-
-					<table class="table table-striped table-responsive">
-
-						<thead class="thead-inverse">
-
-							<tr>
-								<th>Cart ID</th>
-								<th>User Name</th>
-								<th>Store Name</th>
-								<th>Date Create At</th>
-								<th>Date Update At</th>
-								<th>Action</th>
+<div class="container product_section_container">
+<!-- Shopping Cart -->
+	<div class="shopping-cart section">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<!-- Shopping Summery -->
+					<table class="table shopping-summery">
+						<thead>
+							<tr class="main-hading">
+								<th>PRODUCT</th>
+								<th>NAME</th>
+								<th class="text-center">UNIT PRICE</th>
+								<th class="text-center">QUANTITY</th>
+								<th class="text-center">TOTAL</th> 
+								<th class="text-center"><i class="ti-trash remove-icon"></i></th>
 							</tr>
-
 						</thead>
-
 						<tbody>
-
-							<c:forEach items="${carts}" var="cart">
-
-									<tr>
-							
-									<td>${cart.id}</td>
-									<td>${cart.user.lastName}</td>
-									<td>${cart.store.name}</td>
-									<td>${cart.createat}</td>
-									<td>${cart.updateat}</td>
-
-									<td><a href="/admin/carts/view/${cart.id}"
-										class="btn btn-outline-info"><i class="fa fa-info"></i></a> <a
-										href="/admin/carts/edit/${cart.id}"
-										class="btn btn-outline-warning"><i class="fa fa-edit"></i></a>
-
-										<a data-id="${cart.id}" data-name="${cart.id}"
-										onclick="showconfirmation(this.getAttribute('data-id'),this.getAttribute('data-name'))"
-										class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
-
-								</tr>
-
+							<c:forEach items="${cartitem}" var="cartitem">
+							<tr>
+							 <c:url value="/images/${cartitem.product.listimage}" var="imgUrl"></c:url>
+								<td class="image" data-title="No"><img width="100px" height="100px" src="${imgUrl}" alt="#"></td>
+								<td class="product-des" data-title="Description">
+									<p class="product-name"><a href="#">${cartitem.product.name}</a></p>
+									<p class="product-des">${cartitem.product.name}</p>
+								</td>
+								<td class="price" data-title="Price"><span>$${cartitem.product.promotionaprice} </span></td>
+								<td class="qty" data-title="Qty"><!-- Input Order -->
+									<div class="input-group">
+										<div class="button minus">
+											<button type="button" class="btn btn-primary btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+												<i class="ti-minus"></i>
+											</button>
+										</div>
+										<input type="text" name="count" class="input-number"  data-min="1" data-max="100" value="${cartitem.count}">
+										
+										<div class="button plus">
+											<button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[1]">
+												<i class="ti-plus"></i>
+											</button>
+										</div>
+									</div>
+									<!--/ End Input Order -->
+								</td>
+								<td class="total-amount" data-title="Total"><span>${cartitem.product.promotionaprice*cartitem.count}</span></td>
+								<td class="action" data-title="Remove"><a href="/user/cart/delete/${cartitem.id}"><i class="ti-trash remove-icon"></i></a></td>
+							</tr>
 							</c:forEach>
-
 						</tbody>
-
-
-
 					</table>
-
-					<script type="text/javascript">
-						function showconfirmation(id, name) {
-							$('#id').text(name);
-							$('#yesOption').attr('href',
-									'/admin/carts/delete/' + id);
-							$('#confirmationId').modal('show');
-						}
-					</script>
-
-					<!-- Modal -->
-					<div class="modal fade" tabindex="-1" id="confirmationId"
-						aria-labelledby="confirmationlabel" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="confirmationLabel">Confirmation</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal"
-										aria-label="Close"></button>
+					<!--/ End Shopping Summery -->
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<!-- Total Amount -->
+					<div class="total-amount">
+						<div class="row">
+							<div class="col-lg-8 col-md-5 col-12">
+								<div class="left">
+									<div class="coupon">
+										<form action="#" target="_blank">
+											<input name="Coupon" placeholder="Enter Your Coupon">
+											<button class="btn">Apply</button>
+										</form>
+									</div>
+									<div class="checkbox">
+										<label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox"> Shipping (+10$)</label>
+									</div>
 								</div>
-								<div class="modal-body">
-									Bạn có muốn xóa "<span id="title"></span>"?
-								</div>
-								<div class="modal-footer">
-									<a id="yesOption" class="btn btn-primary">Yes</a>
-									<button type="button" class="btn btn-secondary"
-										data-bs-dismiss="modal">Close</button>
+							</div>
+							<div class="col-lg-4 col-md-7 col-12">
+								<div class="right">
+									<ul>
+										<li>Cart Subtotal<span>$${sum}</span></li>
+										<li>Shipping<span>Free</span></li>
+										<li>You Save<span>$0</span></li>
+										<li class="last">You Pay<span>$${sum}</span></li>
+									</ul>
+									<div class="button5">
+										<a href="/user/cart/AddThongTin" class="btn">Tiến hành mua hàng</a>
+										<a href="/product/user" class="btn">Tiếp tục mua sắm</a>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<!-- Modal -->
-
+					<!--/ End Total Amount -->
 				</div>
-
 			</div>
-
 		</div>
+	</div>
+	<!--/ End Shopping Cart -->
+	</div>
+<!-- Benefit -->
 
-	</section>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-		crossorigin="anonymous"></script>
+<div class="benefit">
+	<div class="container">
+		<div class="row benefit_row">
+			<div class="col-lg-3 benefit_col">
+				<div class="benefit_item d-flex flex-row align-items-center">
+					<div class="benefit_icon">
+						<i class="fa fa-truck" aria-hidden="true"></i>
+					</div>
+					<div class="benefit_content">
+						<h6>free shipping</h6>
+						<p>Suffered Alteration in Some Form</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 benefit_col">
+				<div class="benefit_item d-flex flex-row align-items-center">
+					<div class="benefit_icon">
+						<i class="fa fa-money" aria-hidden="true"></i>
+					</div>
+					<div class="benefit_content">
+						<h6>cach on delivery</h6>
+						<p>The Internet Tend To Repeat</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 benefit_col">
+				<div class="benefit_item d-flex flex-row align-items-center">
+					<div class="benefit_icon">
+						<i class="fa fa-undo" aria-hidden="true"></i>
+					</div>
+					<div class="benefit_content">
+						<h6>45 days return</h6>
+						<p>Making it Look Like Readable</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 benefit_col">
+				<div class="benefit_item d-flex flex-row align-items-center">
+					<div class="benefit_icon">
+						<i class="fa fa-clock-o" aria-hidden="true"></i>
+					</div>
+					<div class="benefit_content">
+						<h6>opening all week</h6>
+						<p>8AM - 09PM</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
-</body>
-</html>
+<!-- Newsletter -->
+
+<div class="newsletter">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6">
+				<div
+					class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center text-center">
+					<h4>Newsletter</h4>
+					<p>Subscribe to our newsletter and get 20% off your first
+						purchase</p>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div
+					class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
+					<input id="newsletter_email" type="email" placeholder="Your email"
+						required="required" data-error="Valid email is required.">
+					<button id="newsletter_submit" type="submit"
+						class="newsletter_submit_btn trans_300" value="Submit">subscribe</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

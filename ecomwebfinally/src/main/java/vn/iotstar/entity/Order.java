@@ -39,13 +39,15 @@ public class Order {
 	@JoinColumn(name = "storeid")
 	private Store store;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "deliveryid")
 	private Delivery delivery;
 
 	private String address;
 	private Integer phone;
 	private String status; // Trang thai don hang
+	private int trangthai;
+	private int giaohang;
 	private Float price;
 
 	@Temporal(TemporalType.DATE)

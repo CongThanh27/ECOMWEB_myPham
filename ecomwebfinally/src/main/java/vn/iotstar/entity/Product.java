@@ -67,14 +67,14 @@ public class Product {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	private Date updateat;
-
-	@OneToOne(mappedBy = "product")
-	OrderItem orderItem;
+///chú ý
+	@OneToMany(mappedBy = "product")
+	List<OrderItem> orderItems;
 
 	@OneToMany(mappedBy = "product")
 	List<Review> reviews;
 
-	@OneToOne(mappedBy = "product")
-	private CartItem cartItem;
+	@OneToMany(mappedBy = "product")
+	List<CartItem> cartItems;
 
 }

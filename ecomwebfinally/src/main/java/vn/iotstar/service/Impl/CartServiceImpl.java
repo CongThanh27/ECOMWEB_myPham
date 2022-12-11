@@ -12,6 +12,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import vn.iotstar.entity.Cart;
+import vn.iotstar.entity.Store;
+import vn.iotstar.entity.User;
 import vn.iotstar.Repository.CartRepository;
 import vn.iotstar.service.ICartService;
 
@@ -89,6 +91,18 @@ public class CartServiceImpl implements ICartService {
 	@Override
 	public void deleteAll() {
 		CartRepository.deleteAll();
+	}
+
+	
+	public Optional<Cart> findByStore(Store store) {
+		// TODO Auto-generated method stub
+		return CartRepository.findByStore(store);
+	}
+
+	
+	public Optional<Cart> findByUser(User user) {
+		// TODO Auto-generated method stub
+		return CartRepository.findByUser(user);
 	}
 
 }

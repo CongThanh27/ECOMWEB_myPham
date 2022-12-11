@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import vn.iotstar.Repository.ProductRepository;
 import vn.iotstar.entity.Product;
+import vn.iotstar.entity.Review;
 import vn.iotstar.service.IProductService;
 import org.springframework.util.StringUtils;
 @Service
@@ -145,7 +146,21 @@ public class ProductServiceImpl implements IProductService{
 		// TODO Auto-generated method stub
 		return productRepository.findByratingContaining(rating);
 	}
-	
-	
-	
+
+
+
+	@Override
+	public Integer avgRating(Product product) {
+		
+		List<Review> reviews = product.getReviews();
+		Integer rating = 1;
+		for (Review review : reviews) {
+			
+			rating += review.getRating();
+		}
+		rating=rating /reviews.size() ;
+		if (rating<1) rating = 1;
+		
+		return rating;
+	}
 }
