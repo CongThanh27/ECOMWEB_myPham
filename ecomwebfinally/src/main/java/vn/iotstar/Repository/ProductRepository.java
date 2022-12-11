@@ -15,4 +15,7 @@ public interface ProductRepository extends JpaRepository <Product,Integer>{
 	List<Product> findBytrademarkContaining(String trademark);
 	List<Product> findByratingContaining(int rating);
 	List<Product> findByStore(Store store);
+
+	List<Product> findTop13ByOrderBySoldDesc();
+	List<Product> findTop10ByOrderByCreateatDesc();
 }

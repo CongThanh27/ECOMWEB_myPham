@@ -28,7 +28,7 @@ import vn.iotstar.model.UserModel;
 import vn.iotstar.service.IUserService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
 	@Autowired

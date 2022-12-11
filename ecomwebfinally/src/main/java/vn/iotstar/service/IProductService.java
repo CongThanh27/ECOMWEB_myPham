@@ -42,4 +42,8 @@ public interface IProductService {
 
 	
 	Integer avgRating(Product product);
+	
+	List<Product> findTop13ByOrderBySoldDesc();
+	
+	List<Product> findTop10ByOrderByCreateatDesc();
 }

@@ -3,6 +3,7 @@ package vn.iotstar.controller;
 import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.ServletContext;
@@ -22,8 +23,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import vn.iotstar.entity.Category;
+import vn.iotstar.entity.Product;
 import vn.iotstar.entity.User;
 import vn.iotstar.model.UserModel;
+import vn.iotstar.service.ICategoryService;
+import vn.iotstar.service.IProductService;
 import vn.iotstar.service.IUserService;
 
 @Controller
@@ -37,18 +42,16 @@ public class LoginController {
 	HttpSession session;
 	@Autowired
 	ServletContext application;
+	@Autowired
+	ICategoryService categoryService;
+	
+	@Autowired
+	IProductService productService;
 
 	@RequestMapping("/login")
 	public String showLogin() {
 		session.removeAttribute("message");
 		return "/login";
-	}
-
-	@RequestMapping("/")
-	public String showHome() {
-		session.getAttribute("user");
-		
-		return "index";
 	}
 
 	@PostMapping("/")
@@ -58,7 +61,15 @@ public class LoginController {
 			User user = userService.findByEmail(email);
 			session.setAttribute("user", user);
 			model.addAttribute("user", user);
-
+			
+			List<Category> cate = categoryService.findTop3ByOrderByIdAsc();		
+			model.addAttribute("category", cate);
+			
+			List<Product> list = productService.findTop10ByOrderByCreateatDesc();
+			model.addAttribute("product", list);
+			
+			List<Product> listBest = productService.findTop13ByOrderBySoldDesc();
+			model.addAttribute("productb", listBest);
 			return "index";
 		} else {
 			System.out.println("Login that bai");
@@ -123,6 +134,14 @@ public class LoginController {
 	public String showHome(ModelMap model) {
 		User user = (User) session.getAttribute("user");
 		model.addAttribute("user", user);
+		List<Category> cate = categoryService.findTop3ByOrderByIdAsc();		
+		model.addAttribute("category", cate);
+		
+		List<Product> list = productService.findTop10ByOrderByCreateatDesc();
+		model.addAttribute("product", list);
+		
+		List<Product> listBest = productService.findTop13ByOrderBySoldDesc();
+		model.addAttribute("productb", listBest);
 		return "index";
 	}
 

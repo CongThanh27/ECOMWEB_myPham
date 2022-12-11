@@ -3,6 +3,7 @@ package vn.iotstar.entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.ManyToAny;
+import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
@@ -34,9 +36,14 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String trademark;
+	
+	@Column(columnDefinition = "nvarchar(MAX)")
 	private String name;
+	@Column(columnDefinition = "nvarchar(MAX)")
 	private String desciption;
+	@Column(columnDefinition = "nvarchar(MAX)")
 	private String desciption1;
+	@Column(columnDefinition = "nvarchar(MAX)")
 	private String desciption2;
 	private Double price;
 	private Double promotionaprice;

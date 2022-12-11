@@ -3,6 +3,7 @@ package vn.iotstar.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -13,10 +14,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.jms.JmsProperties.DeliveryMode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import vn.iotstar.entity.Cart;
-
 import vn.iotstar.entity.CartItem;
 import vn.iotstar.entity.Delivery;
 import vn.iotstar.entity.Order;
@@ -40,7 +38,6 @@ import vn.iotstar.model.CartModel;
 import vn.iotstar.model.OrderModel;
 import vn.iotstar.model.ProductModel;
 import vn.iotstar.model.UserModel;
-import vn.iotstar.model.DeliveryModel;
 import vn.iotstar.service.ICartItemService;
 import vn.iotstar.service.ICartService;
 import vn.iotstar.service.IDeliveryService;

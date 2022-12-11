@@ -3,6 +3,7 @@ package vn.iotstar.entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -42,9 +43,10 @@ public class Order {
 	@ManyToOne
 	@JoinColumn(name = "deliveryid")
 	private Delivery delivery;
-
+	@Column(columnDefinition = "nvarchar(MAX)")
 	private String address;
 	private Integer phone;
+	@Column(columnDefinition = "nvarchar(MAX)")
 	private String status; // Trang thai don hang
 	private int trangthai;
 	private int giaohang;

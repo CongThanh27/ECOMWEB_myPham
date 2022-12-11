@@ -3,6 +3,7 @@ package vn.iotstar.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,7 +39,7 @@ public class Review {
 	@ManyToOne
 	@JoinColumn(name = "productid")
 	private Product product;
-
+	@Column(columnDefinition = "nvarchar(300)")
 	private String content;
 	private Integer rating;
 

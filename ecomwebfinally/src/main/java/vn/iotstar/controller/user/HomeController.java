@@ -1,5 +1,6 @@
 package vn.iotstar.controller.user;
 
+
 import java.nio.file.Path;
 import java.sql.Date;
 import java.util.Optional;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,10 +26,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import vn.iotstar.entity.User;
 import vn.iotstar.model.UserModel;
+import vn.iotstar.entity.Category;
+import vn.iotstar.entity.Product;
 import vn.iotstar.service.ICategoryService;
 import vn.iotstar.service.IProductService;
 import vn.iotstar.service.IUserService;
-import vn.iotstar.service.Impl.UserServiceImpl;
 
 @Controller
 @RequestMapping("/user")
@@ -57,7 +61,7 @@ public class HomeController {
 		model.addAttribute("user", userModel);
 		return "/user/profile";
 	}
-	
+
 	@GetMapping("/logout")
 	public String logout() {
 		session.removeAttribute("user");
