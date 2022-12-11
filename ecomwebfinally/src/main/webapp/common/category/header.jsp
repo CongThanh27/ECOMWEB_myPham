@@ -60,9 +60,9 @@
 			</div>
 		</div>
 
-<<<<<<< HEAD
+
 		<!-- Main Navigation -->
-=======
+
             <!-- Main Navigation -->
 
             <div class="main_nav_container">
@@ -103,7 +103,7 @@
         </header>
         
         
->>>>>>> 211983fc71b54e83a53ae7286d3f13bdf26a4de9
+
 
 		<div class="main_nav_container">
 			<div class="container">
