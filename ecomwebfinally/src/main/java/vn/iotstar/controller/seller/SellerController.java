@@ -57,19 +57,23 @@ public class SellerController {
 		Store store = storeService.findByUser(user);
 		List<Order> allOrder = orderService.findAllByStore(store);
 		Integer orderCount = allOrder.size();
-		Integer deliveryCount = 0;
+		Integer notProcessCount = 0;
+		Integer shippedCount = 0;
 		double salesFigure = 0;
 		for (Order order : allOrder) {
-			if (order.getDelivery() == null) {
-				deliveryCount++;
-			} else {
+			if (order.getGiaohang() == 1) {
+				notProcessCount++;
+			} else if (order.getGiaohang() == 2) {
+				shippedCount++;
+			}
+			else {
 				salesFigure += order.getPrice();
 			}
 		}
-		model.addAttribute("choxacnhan", orderCount - deliveryCount);
+		model.addAttribute("choxacnhan", notProcessCount);
 		
 		//Lay don da xu ly
-		model.addAttribute("daxuly", deliveryCount);
+		model.addAttribute("daxuly", shippedCount);
 		
 		//Lay so san pham da het hang
 		List<Product> allProduct = productService.findByStore(store);
