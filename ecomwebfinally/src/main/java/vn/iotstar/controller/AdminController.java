@@ -246,19 +246,27 @@ public class AdminController {
 		if(co==1)
 			 for(Order item : listorder) 
 			 { 			 	
-				 if (item.getCreateat().getDay()==Day()&&item.getCreateat().getYear()==Year()&&item.getCreateat().getMonth()==Month()) danhthu+=item.getPrice();			 
+				 if (item.getCreateat().getDay()==Day()
+						 &&item.getCreateat().getYear()==Year()
+						 &&item.getCreateat().getMonth()==Month()
+						 &&item.getGiaohang()==4
+						 ) danhthu+=item.getPrice();	
+				 System.out.print("$"+danhthu+"$");;
 			 }
 			else if(co==2)
 			 for(Order item : listorder) 
 			 { 
-				 if (item.getCreateat().getMonth()==Month()&&item.getCreateat().getYear()==Year())danhthu+=item.getPrice();
+				 if (item.getCreateat().getMonth()==Month()&&item.getCreateat().getYear()==Year() 
+						 &&item.getGiaohang()==4)danhthu+=item.getPrice();
+				 System.out.print("$"+danhthu+"$");
 			 }
 			else
 			 for(Order item : listorder) 
 			 { 
-				if (item.getCreateat().getYear()==Year()) danhthu+=item.getPrice();	
+				if (item.getCreateat().getYear()==Year() &&item.getGiaohang()==4) danhthu+=item.getPrice();	
+				System.out.print("$"+danhthu+"$");
 			 }
-		System.out.print(danhthu);
+		System.out.print("$last"+danhthu+"$");
 		 return danhthu;
 	}
 	//list những sản phẩm
@@ -341,6 +349,12 @@ public class AdminController {
 		
 		 return listkq;
 	}
+	
+	public List<CartItem> ListOrder(int co) {
+		List<Order> listorder = orderService.findAll();	
+		
+		return listorder;
+	}
 	@GetMapping("ThongKe/{co}")
 	public ModelAndView ThongKe(ModelMap model,@PathVariable("co") int co, HttpSession sesson) {	
 		//số lượng đăng ký mới
@@ -350,7 +364,7 @@ public class AdminController {
 		//Danh thu
 			model.addAttribute("Doanhthu", Doanhthu(co)); 
 		//Thêm vào giỏ hàng
-			model.addAttribute("Doanhthu", ThemSanPhamVaoGioHang1(co).size()); 
+			model.addAttribute("tsp", ThemSanPhamVaoGioHang1(co).size()); 
 		//set tiêu chí thêm vào giỏ hàng
 			if(co==1) model.addAttribute("chitieu", 50); 
 			else if(co==2) model.addAttribute("chitieu", 500); 
