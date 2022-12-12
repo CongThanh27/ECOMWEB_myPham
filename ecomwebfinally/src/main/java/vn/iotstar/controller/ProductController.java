@@ -28,6 +28,7 @@ import org.springframework.beans.BeanUtils;
 import vn.iotstar.entity.Cart;
 import vn.iotstar.entity.CartItem;
 import vn.iotstar.entity.Category;
+import vn.iotstar.entity.Order;
 import vn.iotstar.entity.Product;
 import vn.iotstar.entity.Review;
 import vn.iotstar.entity.Store;
@@ -70,37 +71,28 @@ public class ProductController {
 	//User User= (User)session.getAttribute("user");
 public Cart CreateCart(int Storeid) { 
 	User User= (User)session.getAttribute("user");
-	Optional<User> user = userService.findById(User.getId());
-	User users = user.get();
 	Optional<Store> store = storeService.findById(Storeid);
 	Store stores = store.get();
-	if (cartService.findByStore(stores).isEmpty()&& cartService.findByUser(users).isEmpty()) {
-		//gọi hàm tạo item
+	List<Cart> cart1 =cartService.findByStoreList(stores);
+	List<Cart> cart2 =cartService.findByUserList(User);
+	  for(Cart item : cart1) 
+		  for(Cart item2 : cart2) {
+			  if (item.getId()==item2.getId())
+				  return item;
+	  }
 		Cart entity = new Cart();
-		entity.setUser(users);
+		entity.setUser(User);
 		entity.setStore(stores);
 		Date getDate = new Date();
 		entity.setCreateat(getDate);
 		entity.setUpdateat(getDate);
 		cartService.save(entity);
-		return entity;
-		
-	}
-	else {
-		// tạo CreateCart
-		Optional<Cart> cart = cartService.findByStore(stores);
-		Cart carts = cart.get();
-		return carts;
-		
-		}
-	
-	
+		return entity;	
 	}
 
 @PostMapping("AddCart")
 public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartModel cart,
 		@Valid @ModelAttribute("cartit") CartItemModel cartit, BindingResult result) {
-	
 		Cart cartid = CreateCart(cart.getStoreid());
 		CartItem entity = new CartItem();
 		BeanUtils.copyProperties(cartit, entity);

@@ -137,6 +137,8 @@
                   </tbody>
                 </table>
                  <span  class="badge bg-danger"> Tổng:$${order.price}</span>
+                 <span  class="badge bg-primary"> <a href="/admin/orderdetail/${order.id}">Chi tiết</a></span>
+                 
                 </c:forEach>
               </div>
               <!-- /.card-body -->

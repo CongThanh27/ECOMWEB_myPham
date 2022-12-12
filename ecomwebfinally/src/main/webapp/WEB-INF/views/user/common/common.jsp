@@ -46,15 +46,12 @@
 								</div>
 								<div class="col-lg-6 col-md-6 col-12">
 									<div class="form-group">
-										<label>Đơn vị vận chuyển giao hàng<span>*</span></label> <select
-											 id="delivery"
-											onchange="deliveryChanged(this)">
+										<label>Đơn vị vận chuyển giao hàng<span>*</span></label> 
+										<select id="delivery" onchange="deliveryChanged(this)">
 											<option>--Vui lòng chọn hình thức giao hàng--</option>
 											<c:forEach items="${delivery}" var="delivery">
-												<option value="${delivery.price},${delivery.id}">${delivery.name},
-													${delivery.desciption}</option>
+												<option value="${delivery.price},${delivery.id}">${delivery.name},${delivery.desciption}</option>
 											</c:forEach>
-
 										</select>
 									<input hidden="hidden" readonly="readonly" value="1" id="deliveryid" name="delivereid">
 

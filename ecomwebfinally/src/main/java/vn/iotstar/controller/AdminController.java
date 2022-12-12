@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -77,7 +78,7 @@ public class AdminController {
 	@GetMapping("hi")
 	public String list(ModelMap model) {
 		
-		return "admin/user/info";
+		return "admin/orderdetail";
 	}
 	//trong ngày=1,tháng=2,năm=3
 	//lấy ngày tháng, năm hiện tại
@@ -392,9 +393,36 @@ public class AdminController {
 		
 		 return listkq;
 	}
+	@GetMapping("orderitem")
+	public ModelAndView ListOrderitem(ModelMap model, HttpSession sesson) {
+		
+		  List<Order> listorder = orderService.findAll();
+		  List<Order> order =new ArrayList<Order>();
+		    if(cos==1)
+			for(Order itemcartitem : listorder) 
+			{ 			 	
+				if (itemcartitem.getCreateat().getDay()==Day()
+						&& itemcartitem.getCreateat().getMonth()==Month()
+						&&itemcartitem.getCreateat().getYear()==Year()
+						&&itemcartitem.getGiaohang()==4) order.add(itemcartitem);		 
+			}
+			else if(cos==2)
+			for(Order itemcartitem : listorder) 
+			{ 
+				if (itemcartitem.getCreateat().getMonth()==Month()&& itemcartitem.getCreateat().getYear()==Year()&&itemcartitem.getGiaohang()==4)order.add(itemcartitem);	
+			}
+			else
+			for(Order itemcartitem : listorder) 
+			{ 
+				if (itemcartitem.getCreateat().getYear()==Year()&&itemcartitem.getGiaohang()==4) order.add(itemcartitem);	
+				
+			}	
+		    
+			model.addAttribute("order", order);
+			return new ModelAndView("admin/orderitem", model);
+	  }
 	
-	
-	@GetMapping("ortheritem")
+	@GetMapping("order")
 	public ModelAndView ListOrder(ModelMap model, HttpSession sesson) {
 		
 		  List<Order> listorder = orderService.findAll();
@@ -404,22 +432,34 @@ public class AdminController {
 			{ 			 	
 				if (itemcartitem.getCreateat().getDay()==Day()
 						&& itemcartitem.getCreateat().getMonth()==Month()
-						&&itemcartitem.getCreateat().getYear()==Year()) order.add(itemcartitem);		 
+						&&itemcartitem.getCreateat().getYear()==Year()
+						&&itemcartitem.getGiaohang()==4) order.add(itemcartitem);		 
 			}
 			else if(cos==2)
 			for(Order itemcartitem : listorder) 
 			{ 
-				if (itemcartitem.getCreateat().getMonth()==Month()&& itemcartitem.getCreateat().getYear()==Year())order.add(itemcartitem);	
+				if (itemcartitem.getCreateat().getMonth()==Month()&& itemcartitem.getCreateat().getYear()==Year()&&itemcartitem.getGiaohang()==4)order.add(itemcartitem);	
 			}
 			else
 			for(Order itemcartitem : listorder) 
 			{ 
-				if (itemcartitem.getCreateat().getYear()==Year()) order.add(itemcartitem);	
+				if (itemcartitem.getCreateat().getYear()==Year()&&itemcartitem.getGiaohang()==4) order.add(itemcartitem);	
 				
 			}	
 		    
 			model.addAttribute("order", order);
-			return new ModelAndView("admin/orderitem", model);
+			return new ModelAndView("admin/order", model);
+	  }
+	@GetMapping("orderdetail/{id}")
+	public ModelAndView Orderdetail(ModelMap model,@PathVariable("id")Integer id ) {
+		Optional<Order> order = orderService.findById(id);
+		Order entity = order.get();
+		Date date = new Date();
+		Random generator = new Random();
+		model.addAttribute("random", generator.nextInt());
+		model.addAttribute("date", date);
+		model.addAttribute("order", entity);
+			return new ModelAndView("admin/orderdetail", model);
 	  }
 	//Xem sửa thông tin nhân viên
 	@GetMapping("/profile/{id}")
