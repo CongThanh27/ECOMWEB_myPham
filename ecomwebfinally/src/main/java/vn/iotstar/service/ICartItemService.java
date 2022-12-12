@@ -42,4 +42,5 @@ public interface ICartItemService {
 
 	<S extends CartItem> S save(S entity);
 	long countByCart(Cart cart);
+	List<CartItem> findTop10ByOrderByCreateatDesc();
 }

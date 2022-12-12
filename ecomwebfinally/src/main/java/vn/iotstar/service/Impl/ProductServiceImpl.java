@@ -185,4 +185,28 @@ public class ProductServiceImpl implements IProductService{
 		// TODO Auto-generated method stub
 		return productRepository.findTop10ByOrderByCreateatDesc();
 	}
+
+
+
+	
+	public List<Product> findTop1ByOrderBySoldDesc() {
+		// TODO Auto-generated method stub
+		return productRepository.findTop1ByOrderBySoldDesc();
+	}
+
+
+
+	@Override
+	public List<Product> findTop1ByOrderBySoldAsc() {
+		// TODO Auto-generated method stub
+		return productRepository.findTop1ByOrderBySoldAsc();
+	}
+
+
+
+	@Override
+	public List<Product> findTop10ByOrderBySoldAsc() {
+		// TODO Auto-generated method stub
+		return productRepository.findTop10ByOrderBySoldAsc();
+	}
 }

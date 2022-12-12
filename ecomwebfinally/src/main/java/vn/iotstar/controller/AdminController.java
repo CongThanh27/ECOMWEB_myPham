@@ -32,6 +32,7 @@ import vn.iotstar.entity.CartItem;
 import vn.iotstar.entity.Category;
 import vn.iotstar.entity.Order;
 import vn.iotstar.entity.OrderItem;
+import vn.iotstar.entity.Product;
 import vn.iotstar.entity.Store;
 import vn.iotstar.entity.User;
 import vn.iotstar.model.OrderModel;
@@ -73,6 +74,9 @@ public class AdminController {
 	IDeliveryService deliveryService;
 	@Autowired
 	ICartItemService cartItemService;
+
+	@Autowired
+	HttpSession session;
 	
 	int cos=1;
 	int userid=1;
@@ -131,6 +135,7 @@ public class AdminController {
 	@SuppressWarnings("deprecation")
 	@GetMapping("ListNewUser")
 	public ModelAndView ListNewUser(ModelMap model) {
+		User usersession= (User)session.getAttribute("user");
 		List<User> listuser = userService.findAll();
 		List<User> user = new ArrayList<User>();
 		List<UserModel> usermodel = new ArrayList<UserModel>();
@@ -183,7 +188,8 @@ public class AdminController {
 			 }
 		
 		model.addAttribute("danhthutoong", Doanhthu(cos)); 
-		model.addAttribute("user", user); 
+		model.addAttribute("user", user);
+		model.addAttribute("usersession", usersession); 
 		model.addAttribute("usermodel", usermodel); 
 		return new ModelAndView("admin/user/list", model);
 	}
@@ -214,7 +220,8 @@ public class AdminController {
 	//List hóa dơn
 	@SuppressWarnings("deprecation")
 	@GetMapping("ListNewOrder/{co}")
-	public ModelAndView ListNewOrder(ModelMap model,@PathVariable("co") int co, HttpSession sesson) {		
+	public ModelAndView ListNewOrder(ModelMap model,@PathVariable("co") int co, HttpSession sesson) {	
+		User usersession= (User)session.getAttribute("user");
 		List<Order> listorder = orderService.findAll();
 		List<Order> order = new ArrayList<Order>();
 		if(co==1)
@@ -233,6 +240,7 @@ public class AdminController {
 				if (item.getCreateat().getYear()==Year()) order.add(item);		
 			 }
 		model.addAttribute("order", order); 
+		model.addAttribute("usersession", usersession); 
 		return new ModelAndView("admin/order/list", model);
 	}
 	//Số cửa hàng mới
@@ -281,6 +289,8 @@ public class AdminController {
 			 { 
 				if (item.getCreateat().getYear()==Year()) store.add(item);	
 			 }	
+		User usersession= (User)session.getAttribute("user");
+		model.addAttribute("usersession", usersession); 
 		model.addAttribute("store", store); 
 		return new ModelAndView("admin/store/list", model);
 	}
@@ -336,6 +346,8 @@ public class AdminController {
 			 { 
 				if (item.getCreateat().getYear()==Year()) orderitem.add(item);		
 			 }
+		User usersession= (User)session.getAttribute("user");
+		model.addAttribute("usersession", usersession); 
 		model.addAttribute("orderitem", orderitem); 
 		return new ModelAndView("admin/orderitem/list", model);
 	}
@@ -420,7 +432,8 @@ public class AdminController {
 				if (itemcartitem.getCreateat().getYear()==Year()&&itemcartitem.getGiaohang()==4) order.add(itemcartitem);	
 				
 			}	
-		    
+		    User usersession= (User)session.getAttribute("user");
+		    model.addAttribute("usersession", usersession); 
 			model.addAttribute("order", order);
 			return new ModelAndView("admin/orderitem", model);
 	  }
@@ -449,7 +462,8 @@ public class AdminController {
 				if (itemcartitem.getCreateat().getYear()==Year()&&itemcartitem.getGiaohang()==4) order.add(itemcartitem);	
 				
 			}	
-		    
+		    User usersession= (User)session.getAttribute("user");
+		    model.addAttribute("usersession", usersession); 
 			model.addAttribute("order", order);
 			return new ModelAndView("admin/order", model);
 	  }
@@ -463,6 +477,8 @@ public class AdminController {
 		model.addAttribute("random", generator.nextInt());
 		model.addAttribute("date", date);
 		model.addAttribute("order", entity);
+		User usersession= (User)session.getAttribute("user");
+		model.addAttribute("usersession", usersession); 
 			return new ModelAndView("admin/orderdetail", model);
 	  }
 	//Sửa thông tin nhân viên
@@ -473,6 +489,8 @@ public class AdminController {
 		UserModel userModel = new UserModel();
 		BeanUtils.copyProperties(user.get(), userModel);
 		model.addAttribute("user", userModel);
+		User usersession= (User)session.getAttribute("user");
+		model.addAttribute("usersession", usersession); 
 		return "admin/user/profile";
 	}
 	//xem thông tin nhân viên
@@ -483,15 +501,61 @@ public class AdminController {
 		model.addAttribute("user", entity);
 		model.addAttribute("sumdonhang", entity.getOrders().size());
 		model.addAttribute("sumdanhgia", entity.getReviews().size());
-		
+		User usersession= (User)session.getAttribute("user");
+		model.addAttribute("usersession", usersession); 
 		return "admin/user/info";
 	}
-
+	//top sản phẩm bán chạy
+	@GetMapping("/spbanchay")
+	public String Spbanchay(ModelMap model) {
+		List<Product> listproduct = productService.findTop13ByOrderBySoldDesc();
+		User usersession= (User)session.getAttribute("user");
+		model.addAttribute("usersession", usersession); 
+		model.addAttribute("product", listproduct);
+		return "admin/viewsp";
+	}
+	//top sản phẩm bán chậm
+	@GetMapping("/spbancham")
+	public String Spbancham(ModelMap model) {
+		List<Product> listproduct = productService.findTop10ByOrderBySoldAsc();
+		model.addAttribute("product", listproduct);
+		User usersession= (User)session.getAttribute("user");
+		model.addAttribute("usersession", usersession); 
+		return "admin/viewsp";
+	}
+	//tất cả sản phẩm
+	@GetMapping("/allsp")
+	public String allsp(ModelMap model) {
+		List<Product> listproduct = productService.findAll();
+		model.addAttribute("product", listproduct);
+		User usersession= (User)session.getAttribute("user");
+		model.addAttribute("usersession", usersession); 
+		return "admin/viewsp";
+	}
+	//tất cả sản phẩm
+	@GetMapping("/allorder")
+	public String allorder(ModelMap model) {
+		List<Order> Order = orderService.findAll();
+		model.addAttribute("orderall", Order);
+		User usersession= (User)session.getAttribute("user");
+		model.addAttribute("usersession", usersession); 
+		return "admin/allorder";
+	}
+	//tất cả user
+	@GetMapping("/alluser")
+	public String alluser(ModelMap model) {
+		List<User> users = userService.findAll();
+		model.addAttribute("user", users);
+		User usersession= (User)session.getAttribute("user");
+		model.addAttribute("usersession", usersession); 
+		return "admin/user/list";
+	}
 	@SuppressWarnings("deprecation")
 	@GetMapping("ThongKe/{co}")
 	public ModelAndView ThongKe(ModelMap model,@PathVariable("co") int co, HttpSession sesson) {	
 			cos=co;
-		
+			User usersession= (User)session.getAttribute("user");
+			model.addAttribute("usersession", usersession); 
 		//số lượng đăng ký mới
 			model.addAttribute("DKMUser", NewUser(co));
 			model.addAttribute("DKMUStore", NewStore(co)); 
@@ -515,7 +579,63 @@ public class AdminController {
 			}
 			model.addAttribute("hoangtatthanhtoan", hoangtatthanhtoan); 
 			model.addAttribute("hoangtatmuahang", hoangtatmuahang); 
-			
+		// Hàng trong kho
+			List<Product> listproduct = productService.findAll();
+			model.addAttribute("slproduct", listproduct.size()); 
+		//Top 1 bán chạy
+			List<Product> listprotop1 = productService.findTop1ByOrderBySoldDesc();
+			Product top1= new Product();
+			for(Product i : listprotop1) 
+			{ 
+				top1 = i;
+			}
+			model.addAttribute("top1", top1);
+			//Top 1 bán ế
+			List<Product> listprotop1e = productService.findTop1ByOrderBySoldAsc();
+			Product tope= new Product();
+			for(Product i : listprotop1e) 
+			{ 
+				tope = i;
+			}
+			model.addAttribute("tope", tope);
+			//sản phẩm được quan tâm nhiều nhất
+			for (int j = 5; j>=1 ; j--) 	
+				for(Product i : productService.findTop13ByOrderBySoldDesc()) 
+				{ 
+					if(i.getRating()==j){
+					model.addAttribute("toptotnhat", i); 
+					break;}
+					
+				}
+			//Khách hàng nổi bật 
+			int count = 0;
+			int count1 = 0;
+			int count2 = 0;
+			for(User i : userService.findAll()) 
+			{ 
+				if(orderService.countByUser(i)>count) 
+				{
+					count2=count1;
+					count1=count;
+					count = orderService.countByUser(i);
+				}			
+			}
+	
+			List<User> listuser = new ArrayList<User>();
+			for(User i : userService.findAll()) 
+			{ 
+				
+				if(orderService.countByUser(i)==count ||orderService.countByUser(i)==count1||orderService.countByUser(i)==count2 ) 
+				{
+					listuser.add(i);
+				}
+			}
+			model.addAttribute("listusernoibat", listuser); 
+			model.addAttribute("sllistusernoibat", listuser.size()); 
+			//Những đơn hàng gần đây
+			model.addAttribute("orderganday", orderService.findTop10ByOrderByCreateatDesc()); 
+			//Những sản phẩm được thêm vào giỏ hàng gần đây
+			model.addAttribute("spduocthemganday", cartItemService.findTop10ByOrderByCreateatDesc()); 
 		return new ModelAndView("admin/home", model);
 	}
 	//sửa, xóa nhân viên
@@ -554,6 +674,8 @@ public class AdminController {
 		}
 
 		userService.save(entity);
+		User usersession= (User)session.getAttribute("user");
+		model.addAttribute("usersession", usersession); 
 		return new ModelAndView("redirect:/admin/profile/" + user.getId(), model);
 
 	}
@@ -564,6 +686,7 @@ public class AdminController {
 		@RequestParam String confirmPassword,
 		@Valid @ModelAttribute("user") UserModel user,
 		BindingResult result) {
+		User usersession= (User)session.getAttribute("user");
 		User entity = new User();
 		long millis = System.currentTimeMillis();
 		Date date = new Date(millis);
@@ -574,6 +697,8 @@ public class AdminController {
 				entity.setUpdateat(date);
 				userService.save(entity);
 				System.out.println("Update complete");
+				
+				model.addAttribute("usersession", usersession); 
 				return new ModelAndView("redirect:/admin/profile/" + user.getId(), model);
 			}else {
 				System.out.print("New pass does match with Retype new pass");
@@ -581,6 +706,7 @@ public class AdminController {
 		}else {
 			System.out.println("Current pass is not correct");
 		}
+		model.addAttribute("usersession", usersession); 
 		return new ModelAndView("redirect:/admin/profile/" + user.getId(), model);
 	}
 	
