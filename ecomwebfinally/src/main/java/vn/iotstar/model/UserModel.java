@@ -16,22 +16,24 @@ import lombok.NoArgsConstructor;
 
 public class UserModel {
 
-	private Integer id;
+	private Integer id=1;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String phone;
 	private String hashedpassword;// mật khẩu mã hóa
-	private Boolean role;// mặt định là user, là admin hoặc user của 1 shop tạo ra
+	private Boolean role = false;// mặt định là user, là admin hoặc user của 1 shop tạo ra
 	private String address;
 	private String avatar;
-	private Boolean isSeller;
+	private Boolean isSeller = false;
 	private MultipartFile avatarFile;
 	private Date createat;
 	private Date updateat;
-	private Boolean isActive;
+	private Boolean isActive = false;
 	private Boolean isEdit = false;
 	private String confirmPassword;
 	private String newPassword;
+	private float sum=0;
+	
 
 }

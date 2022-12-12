@@ -2,14 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 <c:url value="/resources/" var="URL"></c:url>
+<c:url value="/resources/fe/" var="URL2"></c:url>
+<c:url value="/resources/css/" var="URL1"></c:url>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin</title>
-
-  <!-- Google Font: Source Sans Pro -->
+   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="${URL}plugins/fontawesome-free/css/all.min.css">
@@ -20,6 +21,11 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Tempusdominus Bootstrap 4 -->
+
+
+
+
+ 
 </head>
 <body>
 
@@ -63,6 +69,6 @@
 <script src="${URL}dist/js/pages/dashboard2.js"></script>
 
 
-    
+
 </body>
 </html>
