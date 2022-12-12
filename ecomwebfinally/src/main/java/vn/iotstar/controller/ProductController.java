@@ -187,8 +187,6 @@ public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartM
 	        	review.setImgages(item.getUser().getAvatar());
 	        	listkq.add(review);
 	        }
-	        
-	       
 	        TBDanhGia();
 	        model.addAttribute("Storeid", entity.getStore().getId());
 	        model.addAttribute("product", product);

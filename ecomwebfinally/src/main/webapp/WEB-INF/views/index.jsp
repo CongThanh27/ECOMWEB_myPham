@@ -106,7 +106,13 @@
 								</div>
 							</div>
 							<div class="red_button add_to_cart_button">
-								<a href="#">add to cart</a>
+								<c:if test="${user == null}">
+									<a href="/login">add to cart</a>
+								</c:if>
+								<c:if test="${user != null}">
+									<a href="/product/user/list/${product.id}">add to cart</a>
+								</c:if>
+
 							</div>
 						</div>
 					</c:forEach>

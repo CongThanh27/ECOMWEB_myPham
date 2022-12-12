@@ -86,6 +86,7 @@
 						<span id="quantity_value">1</span> <span class="plus"><i
 							class="fa fa-plus" aria-hidden="true"></i></span>
 					</div>
+					
 					<form id="review_form" action=<c:url value = "/product/AddCart"/>
 						method="POST" enctype="multipart/form-data">
 						<input hidden="hidden" type="text" name="count" value="1"
