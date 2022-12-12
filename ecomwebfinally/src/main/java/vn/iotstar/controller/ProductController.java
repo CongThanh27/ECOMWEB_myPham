@@ -28,6 +28,7 @@ import org.springframework.beans.BeanUtils;
 import vn.iotstar.entity.Cart;
 import vn.iotstar.entity.CartItem;
 import vn.iotstar.entity.Category;
+import vn.iotstar.entity.Order;
 import vn.iotstar.entity.Product;
 import vn.iotstar.entity.Review;
 import vn.iotstar.entity.Store;
@@ -63,36 +64,35 @@ public class ProductController {
 	ICartService cartService;
 	@Autowired
 	ICartItemService iCartItemService;
-	
+
 	@Autowired
 	HttpSession session;
-	
-	//User User= (User)session.getAttribute("user");
-	public Cart CreateCart(int Storeid) { 
-		User User= (User)session.getAttribute("user");
+
+	// User User= (User)session.getAttribute("user");
+	public Cart CreateCart(int Storeid) {
+		User User = (User) session.getAttribute("user");
 		Optional<Store> store = storeService.findById(Storeid);
 		Store stores = store.get();
-		List<Cart> cart1 =cartService.findByStoreList(stores);
-		List<Cart> cart2 =cartService.findByUserList(User);
-		  for(Cart item : cart1) 
-			  for(Cart item2 : cart2) {
-				  if (item.getId()==item2.getId())
-					  return item;
-		  }
-			Cart entity = new Cart();
-			entity.setUser(User);
-			entity.setStore(stores);
-			Date getDate = new Date();
-			entity.setCreateat(getDate);
-			entity.setUpdateat(getDate);
-			cartService.save(entity);
-			return entity;	
-		}
+		List<Cart> cart1 = cartService.findByStoreList(stores);
+		List<Cart> cart2 = cartService.findByUserList(User);
+		for (Cart item : cart1)
+			for (Cart item2 : cart2) {
+				if (item.getId() == item2.getId())
+					return item;
+			}
+		Cart entity = new Cart();
+		entity.setUser(User);
+		entity.setStore(stores);
+		Date getDate = new Date();
+		entity.setCreateat(getDate);
+		entity.setUpdateat(getDate);
+		cartService.save(entity);
+		return entity;
+	}
 
-@PostMapping("AddCart")
-public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartModel cart,
-		@Valid @ModelAttribute("cartit") CartItemModel cartit, BindingResult result) {
-	
+	@PostMapping("AddCart")
+	public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartModel cart,
+			@Valid @ModelAttribute("cartit") CartItemModel cartit, BindingResult result) {
 		Cart cartid = CreateCart(cart.getStoreid());
 		CartItem entity = new CartItem();
 		BeanUtils.copyProperties(cartit, entity);
@@ -103,22 +103,21 @@ public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartM
 		entity.setUpdateat(getDate);
 		iCartItemService.save(entity);
 		String message = "";
-		message ="Đã thêm vào giỏ hàng";
-		model.addAttribute("message", message); 
-		String a ="redirect:/product/user/list/"+cartit.getProductid();
-	return new ModelAndView(a, model);
-}
+		message = "Đã thêm vào giỏ hàng";
+		model.addAttribute("message", message);
+		String a = "redirect:/product/user/list/" + cartit.getProductid();
+		return new ModelAndView(a, model);
+	}
 
- public void TBDanhGia() { 
-	List<Product> pro = productService.findAll();
-	  for(Product item : pro) 
-	  { 
-		  if(!item.getReviews().isEmpty())
-			  item.setRating(productService.avgRating(item));
-		  productService.save(item);
-	  }
-	  }
-	 
+	public void TBDanhGia() {
+		List<Product> pro = productService.findAll();
+		for (Product item : pro) {
+			if (!item.getReviews().isEmpty())
+				item.setRating(productService.avgRating(item));
+			productService.save(item);
+		}
+	}
+
 	@GetMapping("")
 	public String list(ModelMap model) {
 		List<Product> page = productService.findAll();
@@ -132,9 +131,9 @@ public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartM
 		model.addAttribute("user", user);
 		List<Product> page = productService.findAll();
 		List<Category> cate = categoryService.findAll();
-		model.addAttribute("product", page); 
+		model.addAttribute("product", page);
 		model.addAttribute("category", cate);
-		
+
 		long soSanPhamTrongGio = 0;
 		if (user != null) {
 			for (Cart cart : user.getCarts()) {
@@ -148,6 +147,7 @@ public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartM
 		model.addAttribute("count", soSanPhamTrongGio);
 		return "user/product/list";
 	}
+
 	@GetMapping("add")
 	public String add(ModelMap model) {
 		ProductModel product = new ProductModel();
@@ -155,11 +155,11 @@ public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartM
 		model.addAttribute("product", product);
 		return "product/addOrEdit";
 	}
-	
+
 	@GetMapping("edit/{id}")
 	public ModelAndView edit(ModelMap model, @PathVariable("id") int id) throws IOException {
 		Optional<Product> opt = productService.findById(id);
-		
+
 		ProductModel product = new ProductModel();
 		if (opt.isPresent()) {
 			Product entity = opt.get();
@@ -174,36 +174,36 @@ public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartM
 		return new ModelAndView("forward:/product", model);
 
 	}
-	
-	
+
 	@GetMapping("user/list/{id}")
 	public ModelAndView ChiTiet(ModelMap model, @PathVariable("id") int id) throws IOException {
-		
+
 		Optional<Product> opt = productService.findById(id);
 		List<Review> list = null;
 		User user = (User) session.getAttribute("user");
 		model.addAttribute("user", user);
 		ProductModel product = new ProductModel();
 		if (opt.isPresent()) {
-			
+
 			Product entity = opt.get();
 			BeanUtils.copyProperties(entity, product);
-			list=entity.getReviews();	
-			List<ReviewModel> listkq= new ArrayList<ReviewModel>();;
-	        for(Review item : list) {
-	        	ReviewModel review = new ReviewModel();
-	        	BeanUtils.copyProperties(item, review);
-	        	review.setLastname(item.getUser().getLastName());
-	        	review.setFistname(item.getUser().getFirstName());
-	        	review.setImgages(item.getUser().getAvatar());
-	        	listkq.add(review);
-	        }
-	        TBDanhGia();
-	        model.addAttribute("Storeid", entity.getStore().getId());
-	        model.addAttribute("product", product);
+			list = entity.getReviews();
+			List<ReviewModel> listkq = new ArrayList<ReviewModel>();
+			;
+			for (Review item : list) {
+				ReviewModel review = new ReviewModel();
+				BeanUtils.copyProperties(item, review);
+				review.setLastname(item.getUser().getLastName());
+				review.setFistname(item.getUser().getFirstName());
+				review.setImgages(item.getUser().getAvatar());
+				listkq.add(review);
+			}
+			TBDanhGia();
+			model.addAttribute("Storeid", entity.getStore().getId());
+			model.addAttribute("product", product);
 			model.addAttribute("review", listkq);
 			model.addAttribute("slreview", list.size());
-			
+
 			long soSanPhamTrongGio = 0;
 			if (user != null) {
 				for (Cart cart : user.getCarts()) {
@@ -212,16 +212,14 @@ public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartM
 				}
 			}
 			model.addAttribute("count", soSanPhamTrongGio);
-			
+
 			return new ModelAndView("user/product/productDetails", model);
 		}
 		model.addAttribute("error", "Product không tồn tại");
 		return new ModelAndView("forward:/product/user", model);
 
 	}
-	
 
-	
 	@PostMapping("saveofUpdate")
 	public ModelAndView saveOrUpdate(ModelMap model, @Valid @ModelAttribute("product") ProductModel product,
 			BindingResult result) {
@@ -230,7 +228,7 @@ public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartM
 		/*
 		 * if (result.hasErrors()) { return new ModelAndView("product/addOrEdit"); }
 		 */
-		
+
 		if (!product.getListImageFile().isEmpty()) {
 			String path = application.getRealPath("/");
 
@@ -238,7 +236,7 @@ public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartM
 				product.setListimage(product.getListImageFile().getOriginalFilename());
 				String filePath = path + "/resources/images/" + product.getListimage();
 				product.getListImageFile().transferTo(Path.of(filePath));
-				product.setListImageFile(null);				
+				product.setListImageFile(null);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -250,7 +248,7 @@ public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartM
 				product.setListimage1(product.getListImageFile1().getOriginalFilename());
 				String filePath1 = path1 + "/resources/images/" + product.getListimage1();
 				product.getListImageFile1().transferTo(Path.of(filePath1));
-				product.setListImageFile1(null);				
+				product.setListImageFile1(null);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -262,24 +260,25 @@ public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartM
 				product.setListimage2(product.getListImageFile2().getOriginalFilename());
 				String filePath2 = path2 + "/resources/images/" + product.getListimage2();
 				product.getListImageFile2().transferTo(Path.of(filePath2));
-				product.setListImageFile2(null);				
+				product.setListImageFile2(null);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		Optional<Category> opt = categoryService.findById(product.getCategoryid());	
-		Optional<Store> store = storeService.findById(product.getStoreid());	
+		Optional<Category> opt = categoryService.findById(product.getCategoryid());
+		Optional<Store> store = storeService.findById(product.getStoreid());
 		BeanUtils.copyProperties(product, entity);
 		entity.setCategory(opt.get());
 		entity.setStore(store.get());
 		productService.save(entity);
 		return new ModelAndView("redirect:/product", model);
 	}
+
 	@PostMapping("saveofUpdateRating")
 	public ModelAndView saveOrUpdateRating(ModelMap model, @Valid @ModelAttribute("review") ReviewModel review,
 			BindingResult result) {
 		Review entity = new Review();
-		User User= (User)session.getAttribute("user");
+		User User = (User) session.getAttribute("user");
 
 		/*
 		 * if (result.hasErrors()) { return new ModelAndView("product/addOrEdit"); }
@@ -291,10 +290,10 @@ public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartM
 		entity.setProduct(productService.getById(review.getProductid()));
 		entity.setUser(userService.getById(User.getId()));
 		reviewService.save(entity);
-		String a ="redirect:/product/user/list/"+review.getProductid();
+		String a = "redirect:/product/user/list/" + review.getProductid();
 		return new ModelAndView(a, model);
 	}
-	
+
 	@GetMapping("delete/{id}")
 	public ModelAndView delete(ModelMap model, @PathVariable("id") int id) {
 		productService.deleteById(id);
@@ -302,35 +301,37 @@ public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartM
 		return new ModelAndView("forward:/product", model);
 
 	}
-	
+
 	@GetMapping("Search")
-	public String search(ModelMap model, @RequestParam(name="name",required=false) String name) {
+	public String search(ModelMap model, @RequestParam(name = "name", required = false) String name) {
 		List<Product> list = null;
-		if(StringUtils.hasText(name)) {
+		if (StringUtils.hasText(name)) {
 			list = productService.findBynameContaining(name);
 		} else {
 			list = productService.findAll();
 		}
-		model.addAttribute("product",list);
-		
+		model.addAttribute("product", list);
+
 		return "product/list";
 	}
+
 	@GetMapping("SearchTrademark/{trademark}")
 	public String trademark(ModelMap model, @PathVariable("trademark") String trademark) {
 		List<Product> list = null;
-		if(StringUtils.hasText(trademark)) {
+		if (StringUtils.hasText(trademark)) {
 			list = productService.findBytrademarkContaining(trademark);
 			System.out.print(1);
 		} else {
 			list = productService.findAll();
 			System.out.print(2);
 		}
-		
-		model.addAttribute("product",list);
-		List<Category> cate = categoryService.findAll();		
+
+		model.addAttribute("product", list);
+		List<Category> cate = categoryService.findAll();
 		model.addAttribute("category", cate);
 		return "user/product/list";
 	}
+
 	@GetMapping("search/{id}")
 	public ModelAndView searchidcate(ModelMap model, @PathVariable("id") int id) throws IOException {
 		Optional<Category> opt = categoryService.findById(id);
@@ -338,9 +339,9 @@ public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartM
 		if (opt.isPresent()) {
 			Category entity = opt.get();
 			System.out.print(entity.getName());
-			list=entity.getProducts();
+			list = entity.getProducts();
 			model.addAttribute("product", list);
-			List<Category> cate = categoryService.findAll();		
+			List<Category> cate = categoryService.findAll();
 			model.addAttribute("category", cate);
 			return new ModelAndView("user/product/list", model);
 		}
@@ -348,6 +349,5 @@ public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartM
 		return new ModelAndView("forward:/product/user/list", model);
 
 	}
-	
-	
+
 }

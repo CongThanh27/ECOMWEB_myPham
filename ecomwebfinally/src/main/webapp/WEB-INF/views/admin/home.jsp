@@ -80,7 +80,7 @@
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="/admin/order" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -110,7 +110,7 @@
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
               </div>
-              <a href="/admin/ortheritem" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="/admin/orderitem" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -174,7 +174,7 @@
                     <!-- /.progress-group -->
 
                     <div class="progress-group">
-                      Complete Purchase
+                      Hoàn tất mua hàng
                       <span class="float-right"><b>310</b>/400</span>
                       <div class="progress progress-sm">
                         <div class="progress-bar bg-danger" style="width: 75%"></div>
@@ -183,7 +183,7 @@
 
                     <!-- /.progress-group -->
                     <div class="progress-group">
-                      <span class="progress-text">Visit Premium Page</span>
+                      <span class="progress-text">Hoàn tất thanh toán</span>
                       <span class="float-right"><b>480</b>/800</span>
                       <div class="progress progress-sm">
                         <div class="progress-bar bg-success" style="width: 60%"></div>
