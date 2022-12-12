@@ -155,7 +155,7 @@ public class CartItemController {
 	@PostMapping("SaveOrder")
 	public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("order") OrderModel order,
 			@Valid @ModelAttribute("cartit") CartItemModel cartit, BindingResult result) {
-		User User= (User)session.getAttribute("user");
+			User User= (User)session.getAttribute("user");
 			Optional<User> user = userService.findById(User.getId());
 			User users = user.get();
 			List<Cart> listcart = users.getCarts();
