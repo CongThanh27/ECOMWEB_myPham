@@ -1,11 +1,13 @@
 package vn.iotstar.controller.seller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.junit.experimental.categories.Categories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,11 +15,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import vn.iotstar.entity.Category;
 import vn.iotstar.entity.Order;
 import vn.iotstar.entity.Product;
 import vn.iotstar.entity.Store;
 import vn.iotstar.entity.User;
 import vn.iotstar.model.UserModel;
+import vn.iotstar.service.ICategoryService;
 import vn.iotstar.service.IDeliveryService;
 import vn.iotstar.service.IOrderService;
 import vn.iotstar.service.IProductService;
@@ -42,6 +46,9 @@ public class SellerController {
 	
 	@Autowired
 	IStoreService storeService;
+	
+	@Autowired
+	ICategoryService cateService;
 	
 	@Autowired
 	HttpSession session;
@@ -88,5 +95,24 @@ public class SellerController {
 		//Tinh doanh thu
 		model.addAttribute("doanhthu", salesFigure);
 		return "/seller/home";
+	}
+	
+	@GetMapping("/product")
+	public String productList(ModelMap model) {
+		User user = (User) session.getAttribute("user");
+		Store store = storeService.findByUser(user);
+		List<Product> product = productService.findByStore(store);
+		List<Category> cate = new ArrayList<>();
+		for (Product prod : product) {
+			Category obj = prod.getCategory();
+			if (cate.contains(obj)) {
+				continue;
+			} else {
+				cate.add(obj);
+			}
+		}
+		model.addAttribute("product", product);
+		model.addAttribute("category", cate);
+		return "/seller/product/list";
 	}
 }

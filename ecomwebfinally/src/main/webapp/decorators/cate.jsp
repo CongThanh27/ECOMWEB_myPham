@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 <c:url value="/resources/fe/" var="URL"></c:url>
+<c:url value="/resources/" var="URL1"></c:url>
 
 <!DOCTYPE html>
 <html lang="fr">

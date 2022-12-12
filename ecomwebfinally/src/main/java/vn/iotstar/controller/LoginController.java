@@ -25,10 +25,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import vn.iotstar.entity.Category;
 import vn.iotstar.entity.Product;
+import vn.iotstar.entity.Store;
 import vn.iotstar.entity.User;
+import vn.iotstar.model.StoreModel;
 import vn.iotstar.model.UserModel;
 import vn.iotstar.service.ICategoryService;
 import vn.iotstar.service.IProductService;
+import vn.iotstar.service.IStoreService;
 import vn.iotstar.service.IUserService;
 
 @Controller
@@ -47,6 +50,9 @@ public class LoginController {
 	
 	@Autowired
 	IProductService productService;
+	
+	@Autowired
+	IStoreService storeService;
 
 	@RequestMapping("/login")
 	public String showLogin() {
@@ -170,5 +176,36 @@ public class LoginController {
 		}
 		return "redirect:/forgotpassword";
 
+	}
+	@RequestMapping("/sellerRegister")
+	public String showFormSellerRegister(ModelMap model) {
+		StoreModel store = new StoreModel();
+		model.addAttribute("store", store);
+		return "/seller/register";
+	}
+	
+	@PostMapping("/sellerRegister")
+	public String sellerRegisterProcess(Model model, @Valid @ModelAttribute("store") StoreModel store) {
+		User user = (User) session.getAttribute("user");
+		String message = null;
+		Store entity = new Store();
+		long millis = System.currentTimeMillis();
+		java.sql.Date date = new java.sql.Date(millis);
+		try {
+			BeanUtils.copyProperties(entity, store);
+			entity.setCreateat(date);
+			entity.setIsactive(true);
+			entity.setRating(0);
+			entity.setUser(user);
+			user.setIsSeller(true);
+			storeService.save(entity);
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "redirect:/seller";
 	}
 }
