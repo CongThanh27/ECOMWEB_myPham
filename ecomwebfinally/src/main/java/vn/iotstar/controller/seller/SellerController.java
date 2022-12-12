@@ -89,4 +89,6 @@ public class SellerController {
 		model.addAttribute("doanhthu", salesFigure);
 		return "/seller/home";
 	}
+	
+	
 }
