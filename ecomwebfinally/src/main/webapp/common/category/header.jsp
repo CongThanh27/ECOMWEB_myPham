@@ -30,9 +30,9 @@
 											Guest <i class="fa fa-angle-down"></i>
 									</a>
 										<ul class="account_selection">
-											<li><a href="login"><i class="fa fa-sign-in"
+											<li><a href="/login"><i class="fa fa-sign-in"
 													aria-hidden="true"></i>Đăng nhập</a></li>
-											<li><a href="register"><i class="fa fa-user-plus"
+											<li><a href="/register"><i class="fa fa-user-plus"
 													aria-hidden="true"></i>Đăng ký</a></li>
 										</ul>
 								</c:if>
@@ -45,7 +45,7 @@
 													aria-hidden="true"></i>Tài khoản của tôi</a></li>
 											<li><a href="/seller"><i class= "fa fa-shopping-bag"
 													aria-hidden="true"></i>Kênh bán hàng</a></li>
-											<li><a href="/user/order/${user.id }"><i class="fa fa-shopping-cart"
+											<li><a href="/user/cart/Order"><i class="fa fa-shopping-cart"
 													aria-hidden="true"></i>Đơn mua</a></li>
 											<li><a href="/user/logout"><i class="fa fa-user-plus"
 													aria-hidden="true"></i>Đăng xuất</a></li>

@@ -288,8 +288,8 @@
 						<i class="fa fa-truck" aria-hidden="true"></i>
 					</div>
 					<div class="benefit_content">
-						<h6>free shipping</h6>
-						<p>Suffered Alteration in Some Form</p>
+						<h6>Miễn phí vận chuyển</h6>
+						<p>Trong Một Số Hình Thức</p>
 					</div>
 				</div>
 			</div>
@@ -299,8 +299,8 @@
 						<i class="fa fa-money" aria-hidden="true"></i>
 					</div>
 					<div class="benefit_content">
-						<h6>cach on delivery</h6>
-						<p>The Internet Tend To Repeat</p>
+						<h6>Thanh toán COD</h6>
+						<p>Được Kiểm Tra Hàng Trước</p>
 					</div>
 				</div>
 			</div>
@@ -310,8 +310,8 @@
 						<i class="fa fa-undo" aria-hidden="true"></i>
 					</div>
 					<div class="benefit_content">
-						<h6>45 days return</h6>
-						<p>Making it Look Like Readable</p>
+						<h6>45 ngày hoàn hàng</h6>
+						<p>Nếu Sản Phẩm Có Vấn Đề</p>
 					</div>
 				</div>
 			</div>
@@ -321,8 +321,8 @@
 						<i class="fa fa-clock-o" aria-hidden="true"></i>
 					</div>
 					<div class="benefit_content">
-						<h6>opening all week</h6>
-						<p>8AM - 09PM</p>
+						<h6>Mở của cả tuần</h6>
+						<p>9h Sáng - 10h Tối</p>
 					</div>
 				</div>
 			</div>

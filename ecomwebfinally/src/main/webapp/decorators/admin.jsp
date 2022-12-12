@@ -27,7 +27,7 @@
 
 	
 
-
+	<%@ include file="/common/admin/header.jsp"%>
 	<!-- body -->
 	<sitemesh:write property='body'></sitemesh:write>
 	<!-- body -->
@@ -35,7 +35,7 @@
 	<!--=== Footer v4 ===-->
 	
  
-
+<jsp:include page="/common/admin/footer.jsp"></jsp:include> 
 	<!--=== End Footer v4 ===-->
    
     <!-- ./wrapper -->

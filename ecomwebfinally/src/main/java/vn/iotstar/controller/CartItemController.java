@@ -69,7 +69,7 @@ public class CartItemController {
 	ServletContext application;
 	@Autowired
 	HttpSession session;
-	
+	//User User= (User)session.getAttribute("user");
 	int userid=1;
 	@GetMapping("hi")
 	public String list(ModelMap model) {
@@ -78,9 +78,9 @@ public class CartItemController {
 	}
 	@GetMapping("Order")
 	public ModelAndView ListOrder(ModelMap model, HttpSession sesson) {
-		//User users= (User)session.getAttribute("user");
 		//users.getId()
-		Optional<User> user = userService.findById(userid);
+		User User= (User)session.getAttribute("user");
+		Optional<User> user = userService.findById(User.getId());
 		User users = user.get();
 		List<Order> listorder = users.getOrders();		
 		model.addAttribute("order", listorder);
@@ -89,7 +89,8 @@ public class CartItemController {
 	@GetMapping("List")
 	public ModelAndView ListC(ModelMap model, HttpSession sesson) {
 		float sum=0;
-		Optional<User> user = userService.findById(userid);
+		User User= (User)session.getAttribute("user");
+		Optional<User> user = userService.findById(User.getId());
 		User users = user.get();
 		List<Cart> listcart = users.getCarts();
 		List<CartItem> listcartitem = new ArrayList<CartItem>();
@@ -105,7 +106,7 @@ public class CartItemController {
 			  sum= (float) (sum + (item.getProduct().getPromotionaprice())*item.getCount());
 			  
 		  }
-		model.addAttribute("userid", userid); 
+		model.addAttribute("userid", User.getId()); 
 		
 		model.addAttribute("sum", sum);
 		model.addAttribute("cartitem", listcartitem);
@@ -115,7 +116,8 @@ public class CartItemController {
 	
 	@GetMapping("AddThongTin")
 	public ModelAndView test(ModelMap model) {
-		Optional<User> opt = userService.findById(userid);
+		User User= (User)session.getAttribute("user");
+		Optional<User> opt = userService.findById(User.getId());
 		List<Delivery> deli = deliveryService.findAll();
 		UserModel user = new UserModel();	
 		float sum=0;
@@ -153,7 +155,8 @@ public class CartItemController {
 	@PostMapping("SaveOrder")
 	public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("order") OrderModel order,
 			@Valid @ModelAttribute("cartit") CartItemModel cartit, BindingResult result) {
-			Optional<User> user = userService.findById(userid);
+		User User= (User)session.getAttribute("user");
+			Optional<User> user = userService.findById(User.getId());
 			User users = user.get();
 			List<Cart> listcart = users.getCarts();
 			//số store người đó mua
@@ -190,7 +193,7 @@ public class CartItemController {
 					 entity.setPrice(sum);
 					 orderService.save(entity);		
 					 
-					 Optional<User> user1 = userService.findById(userid);
+					 Optional<User> user1 = userService.findById(User.getId());
 					 User user2 = user1.get();
 					  // nhưng giỏ hàng của user
 					  List<Order> listorder =user2.getOrders();
