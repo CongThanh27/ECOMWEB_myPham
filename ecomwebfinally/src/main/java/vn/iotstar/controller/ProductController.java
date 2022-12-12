@@ -71,10 +71,8 @@ public class ProductController {
 	//User User= (User)session.getAttribute("user");
 public Cart CreateCart(int Storeid) { 
 	User User= (User)session.getAttribute("user");
-	Optional<Store> store = storeService.findById(Storeid);
-	Store stores = store.get();
-	List<Cart> cart1 =cartService.findByStoreList(stores);
-	List<Cart> cart2 =cartService.findByUserList(User);
+	List<Cart> cart1 =cartService.findByStore(Storeid);
+	List<Cart> cart2 =cartService.findByUser(User.getId());
 	  for(Cart item : cart1) 
 		  for(Cart item2 : cart2) {
 			  if (item.getId()==item2.getId())
@@ -82,7 +80,7 @@ public Cart CreateCart(int Storeid) {
 	  }
 		Cart entity = new Cart();
 		entity.setUser(User);
-		entity.setStore(stores);
+		entity.setStore(storeService.getById(Storeid));
 		Date getDate = new Date();
 		entity.setCreateat(getDate);
 		entity.setUpdateat(getDate);
