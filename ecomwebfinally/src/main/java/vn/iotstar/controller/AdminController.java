@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -283,6 +284,7 @@ public class AdminController {
 		model.addAttribute("store", store); 
 		return new ModelAndView("admin/store/list", model);
 	}
+	//Doanh thu
 	@SuppressWarnings("deprecation")
 	public float Doanhthu(int co) {
 		List<Order> listorder = orderService.findAll();
@@ -337,6 +339,7 @@ public class AdminController {
 		model.addAttribute("orderitem", orderitem); 
 		return new ModelAndView("admin/orderitem/list", model);
 	}
+	//Chỉ tiêu thêm sản phẩm vào giỏ hàng
 	@SuppressWarnings("deprecation")
 	public List<CartItem> ThemSanPhamVaoGioHang(int co) {
 		List<User> listuser = userService.findAll();
@@ -421,7 +424,7 @@ public class AdminController {
 			model.addAttribute("order", order);
 			return new ModelAndView("admin/orderitem", model);
 	  }
-	
+	//đơn hàng
 	@GetMapping("order")
 	public ModelAndView ListOrder(ModelMap model, HttpSession sesson) {
 		
@@ -450,6 +453,7 @@ public class AdminController {
 			model.addAttribute("order", order);
 			return new ModelAndView("admin/order", model);
 	  }
+	// ci tiết của đơn hàng
 	@GetMapping("orderdetail/{id}")
 	public ModelAndView Orderdetail(ModelMap model,@PathVariable("id")Integer id ) {
 		Optional<Order> order = orderService.findById(id);
@@ -461,7 +465,7 @@ public class AdminController {
 		model.addAttribute("order", entity);
 			return new ModelAndView("admin/orderdetail", model);
 	  }
-	//Xem sửa thông tin nhân viên
+	//Sửa thông tin nhân viên
 	@GetMapping("/profile/{id}")
 	public String edit(ModelMap model, @PathVariable("id")Integer id) {
 		Optional<User> user = userService.findById(id);
@@ -500,7 +504,17 @@ public class AdminController {
 			if(co==1) model.addAttribute("chitieu", 50); 
 			else if(co==2) model.addAttribute("chitieu", 500); 
 			else model.addAttribute("chitieu", 3600); 
-			
+		//chỉ tiêu đặt hàng
+			int hoangtatmuahang=0;
+			int hoangtatthanhtoan=0;
+			List<Order> list = orderService.findAll();
+			for(Order i : list) 
+			{ 
+				if (i.getGiaohang()==4)hoangtatthanhtoan++;
+				if (i.getGiaohang()==1)hoangtatmuahang++;
+			}
+			model.addAttribute("hoangtatthanhtoan", hoangtatthanhtoan); 
+			model.addAttribute("hoangtatmuahang", hoangtatmuahang); 
 			
 		return new ModelAndView("admin/home", model);
 	}

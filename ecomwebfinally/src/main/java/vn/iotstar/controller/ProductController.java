@@ -70,27 +70,68 @@ public class ProductController {
 
 	
 	//User User= (User)session.getAttribute("user");
-	/*
-	 * public Cart CreateCart(int Storeid) { User User=
-	 * (User)session.getAttribute("user"); List<Cart> cart1
-	 * =cartService.findByStore(Storeid); List<Cart> cart2
-	 * =cartService.findByUser(User.getId()); Optional<Store> store =
-	 * storeService.findById(Storeid); Store stores = store.get(); for(Cart item :
-	 * cart1) for(Cart item2 : cart2) { if (item.getId()==item2.getId()) return
-	 * item; } Cart entity = new Cart(); entity.setUser(User);
-	 * entity.setStore(stores); Date getDate = new Date();
-	 * entity.setCreateat(getDate); entity.setUpdateat(getDate);
-	 * cartService.save(entity); return entity; }
-	 */
 	
-	public Cart CreateCart(int Storeid) { 
+	  public Cart CreateCart1(Integer Storeid) { 
+		  User User=(User)session.getAttribute("user"); 
+		  List<Cart> cart1=cartService.findByStore(Storeid); 
+		  List<Cart> cart2=cartService.findByUser(User.getId()); 
+		  Optional<Store> store =storeService.findById(Storeid);
+		  Store stores = store.get(); 
+		  if(!cart1.isEmpty()&&!cart2.isEmpty()) {
+		  for(Cart item :cart1) 
+			  for(Cart item2 : cart2) { 
+				  if (item.getId()==item2.getId()) 
+					  return item; 
+				  } }
+		  Cart entity = new Cart(); 
+		  entity.setUser(User);
+		  entity.setStore(stores); 
+		  Date getDate = new Date();
+		  entity.setCreateat(getDate); 
+		  entity.setUpdateat(getDate);
+		  cartService.save(entity); 
+		  return entity; 
+		  }
+	 
+	
+	public Cart CreateCart2(int Storeid) { 
 		User User=(User)session.getAttribute("user");
 		Optional<Store> store = storeService.findById(Storeid);
+		List<Cart> cart1=cartService.findByStore(Storeid); 
+		List<Cart> cart2=cartService.findByUser(User.getId()); 
+		 Cart entity1 = new Cart(); 
 		Store stores = store.get();
-		if (cartService.findByStore(stores).isEmpty()&& cartService.findByUser(User).isEmpty()) {
+		if ( cartService.findByUser(User).isEmpty()) {
 			//gọi hàm tạo item
 			Cart entity = new Cart();
 			entity.setUser(User);
+			entity.setStore(stores);
+			Date getDate = new Date();
+			entity.setCreateat(getDate);
+			entity.setUpdateat(getDate);
+			cartService.save(entity);
+			return entity;			
+		}
+		else {	 
+			  if(!cart1.isEmpty()&&!cart2.isEmpty()) {
+			  for(Cart item :cart1) 
+				  for(Cart item2 : cart2) { 
+					  if (item.getId()==item2.getId()) 
+						  return item; 
+					  } }			
+			}
+		return entity1;
+		
+		
+		}
+	public Cart CreateCart(int Storeid) { 
+		User user=(User)session.getAttribute("user");
+		Optional<Store> store = storeService.findById(Storeid);
+		Store stores = store.get();
+		if (cartService.findByStore(stores).isEmpty()&& cartService.findByUser(user).isEmpty()) {
+			//gọi hàm tạo item
+			Cart entity = new Cart();
+			entity.setUser(user);
 			entity.setStore(stores);
 			Date getDate = new Date();
 			entity.setCreateat(getDate);
@@ -101,8 +142,8 @@ public class ProductController {
 		}
 		else {
 			// tạo CreateCart
-			Optional<Cart> cart = cartService.findByStore(stores);
-			Cart carts = cart.get();
+			Optional<Cart> cart = cartService.findByUser(user);
+			Cart carts = cart.get();;
 			return carts;
 			
 			}
@@ -208,7 +249,7 @@ public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartM
 			BeanUtils.copyProperties(entity, product);
 			list = entity.getReviews();
 			List<ReviewModel> listkq = new ArrayList<ReviewModel>();
-			;
+			if(!list.isEmpty()) {
 			for (Review item : list) {
 				ReviewModel review = new ReviewModel();
 				BeanUtils.copyProperties(item, review);
@@ -217,10 +258,12 @@ public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartM
 				review.setImgages(item.getUser().getAvatar());
 				listkq.add(review);
 			}
+			model.addAttribute("review", listkq);
+			}
 			TBDanhGia();
 			model.addAttribute("Storeid", entity.getStore().getId());
 			model.addAttribute("product", product);
-			model.addAttribute("review", listkq);
+			
 			model.addAttribute("slreview", list.size());
 
 			long soSanPhamTrongGio = 0;

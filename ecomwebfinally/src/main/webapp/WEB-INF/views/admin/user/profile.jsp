@@ -210,6 +210,7 @@
 											<input type="text" class="form-control" name="address"
 												value="${user.address }" style="width: 135%;">
 										</div>
+											<input type="hidden" name="hashedpassword" value="${user.hashedpassword }">
 										<div class="col-8 mb-3">
 											<select name = "isSeller" aria-describedby="isSeller" id = "isSeller">						
 												<option ${product.isSeller == true ? 'selected':'' } value = "true">Seller</option>

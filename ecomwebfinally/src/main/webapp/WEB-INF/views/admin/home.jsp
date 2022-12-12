@@ -166,7 +166,7 @@
 
                     <div class="progress-group">
                      Thêm sản phẩm vào giỏ hàng
-                      <span class="float-right"><b> ${tsp}</b>/${chitieu}</span>
+                      <span class="float-right"><b> ${tsp}</b>/${chitieu*0.9}</span>
                       <div class="progress progress-sm">
                         <div class="progress-bar bg-primary" style="width: ${(tsp/chitieu)*100}%"></div>
                       </div>
@@ -175,27 +175,27 @@
 
                     <div class="progress-group">
                       Hoàn tất mua hàng
-                      <span class="float-right"><b>310</b>/400</span>
+                      <span class="float-right"><b>${hoangtatmuahang}</b>/${chitieu*0.8}</span>
                       <div class="progress progress-sm">
-                        <div class="progress-bar bg-danger" style="width: 75%"></div>
+                        <div class="progress-bar bg-danger" style="width: ${(hoangtatmuahang/chitieu)*100}%"></div>
                       </div>
                     </div>
 
                     <!-- /.progress-group -->
                     <div class="progress-group">
                       <span class="progress-text">Hoàn tất thanh toán</span>
-                      <span class="float-right"><b>480</b>/800</span>
+                      <span class="float-right"><b>${hoangtatthanhtoan}</b>/${chitieu*0.6}</span>
                       <div class="progress progress-sm">
-                        <div class="progress-bar bg-success" style="width: 60%"></div>
+                        <div class="progress-bar bg-success" style="width: ${(hoangtatthanhtoan/chitieu)*100}%"></div>
                       </div>
                     </div>
 
                     <!-- /.progress-group -->
                     <div class="progress-group">
-                      Send Inquiries
-                      <span class="float-right"><b>250</b>/500</span>
+                      User đăng ký mới
+                      <span class="float-right"><b>${DKMUser}</b>/${chitieu*0.5}</span>
                       <div class="progress progress-sm">
-                        <div class="progress-bar bg-warning" style="width: 50%"></div>
+                        <div class="progress-bar bg-warning" style="width: ${(DKMUser/chitieu)*100}%"></div>
                       </div>
                     </div>
                     <!-- /.progress-group -->
@@ -210,8 +210,8 @@
                   <div class="col-sm-3 col-6">
                     <div class="description-block border-right">
                       <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 17%</span>
-                      <h5 class="description-header">$35,210.43</h5>
-                      <span class="description-text">TOTAL REVENUE</span>
+                      <h5 class="description-header">$${Doanhthu}</h5>
+                      <span class="description-text">Tổng Danh Thu</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
@@ -219,8 +219,8 @@
                   <div class="col-sm-3 col-6">
                     <div class="description-block border-right">
                       <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 0%</span>
-                      <h5 class="description-header">$10,390.90</h5>
-                      <span class="description-text">TOTAL COST</span>
+                      <h5 class="description-header">${DKMUStore}</h5>
+                      <span class="description-text">Tổng Cửa Hàng</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
@@ -228,8 +228,8 @@
                   <div class="col-sm-3 col-6">
                     <div class="description-block border-right">
                       <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span>
-                      <h5 class="description-header">$24,813.53</h5>
-                      <span class="description-text">TOTAL PROFIT</span>
+                      <h5 class="description-header">${DKMUser}</h5>
+                      <span class="description-text">Tổng người đăng ký</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
@@ -237,8 +237,8 @@
                   <div class="col-sm-3 col-6">
                     <div class="description-block">
                       <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> 18%</span>
-                      <h5 class="description-header">1200</h5>
-                      <span class="description-text">GOAL COMPLETIONS</span>
+                      <h5 class="description-header">${DKMOrder}</h5>
+                      <span class="description-text">Tổng hóa đơn</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
