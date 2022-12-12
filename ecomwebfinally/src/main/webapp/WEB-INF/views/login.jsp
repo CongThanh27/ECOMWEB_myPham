@@ -8,7 +8,7 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="/" class="h1"><b>Admin</b>LTE</a>
+      <a href="/" class="h1"><b>T2K</b>Shop</a>
     </div>
     <!-- <div class="logo_container">
 		<a href="/"><span>t2k</span>Shop</a>

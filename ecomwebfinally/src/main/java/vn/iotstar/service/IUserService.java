@@ -45,5 +45,7 @@ public interface IUserService {
 	User findByEmail(String name);
 	
 	Boolean checkRecover(String email);
+	
+	User findByPhone(String phone);
 
 }

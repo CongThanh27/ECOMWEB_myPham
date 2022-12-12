@@ -11,4 +11,6 @@ import vn.iotstar.entity.Store;
 public interface OrderRepository extends JpaRepository< Order, Integer >{
 
 	List<Order> findAllByStore(Store store);
+	
+	
 }

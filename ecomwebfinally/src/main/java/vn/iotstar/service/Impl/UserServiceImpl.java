@@ -119,5 +119,10 @@ public class UserServiceImpl implements IUserService {
 		}
 		return false;
 	}
+	
+	@Override
+	public User findByPhone(String phone) {
+		return UserRepository.findByPhone(phone);
+	}
 
 }
