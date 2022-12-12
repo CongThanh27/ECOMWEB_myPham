@@ -191,12 +191,8 @@
 											<input type="text" class="form-control" name="address"
 												value="${user.address }" style="width: 135%;">
 										</div>
-<<<<<<< HEAD
 										<input type="hidden" name="hashedpassword"
 											value="${user.hashedpassword }">
-=======
-										<input type="hidden" name="hashedpassword" value="${user.hashedpassword }">
->>>>>>> b8cde3bb955a4554c590b12659f7c1823971a23e
 										<div class="col-9 mb-3">
 											<input type="hidden" name="id" value="${user.id }">
 											<button type="submit" class="btn btn-primary btn-sm">

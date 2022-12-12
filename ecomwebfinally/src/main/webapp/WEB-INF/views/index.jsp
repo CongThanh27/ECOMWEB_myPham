@@ -34,7 +34,7 @@
 			<c:forEach items="${category}" var="category">
 				<div class="col-md-4">
 					<div class="banner_item align-items-center"
-						style="background-image: url(images/skincare.jpg)">
+						style="background-image: url(/images/${category.image})">
 						<div class="banner_category">
 							<a href="/product/search/${category.id}">${category.name}</a>
 						</div>

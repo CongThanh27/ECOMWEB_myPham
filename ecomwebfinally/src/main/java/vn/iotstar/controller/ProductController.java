@@ -71,10 +71,10 @@ public class ProductController {
 	// User User= (User)session.getAttribute("user");
 	public Cart CreateCart(int Storeid) {
 		User User = (User) session.getAttribute("user");
+		List<Cart> cart1 = cartService.findByStore(Storeid);
+		List<Cart> cart2 = cartService.findByUser(User.getId());
 		Optional<Store> store = storeService.findById(Storeid);
 		Store stores = store.get();
-		List<Cart> cart1 = cartService.findByStoreList(stores);
-		List<Cart> cart2 = cartService.findByUserList(User);
 		for (Cart item : cart1)
 			for (Cart item2 : cart2) {
 				if (item.getId() == item2.getId())

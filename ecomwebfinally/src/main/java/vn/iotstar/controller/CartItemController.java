@@ -84,6 +84,17 @@ public class CartItemController {
 		User users = user.get();
 		List<Order> listorder = users.getOrders();		
 		model.addAttribute("order", listorder);
+		
+		User userss = (User) session.getAttribute("user");
+		long soSanPhamTrongGio = 0;
+		if (user != null) {
+			for (Cart cart : userss.getCarts()) {
+				Cart cartn = cart;
+				soSanPhamTrongGio += iCartItemService.countByCart(cartn);
+			}
+		}
+		model.addAttribute("count", soSanPhamTrongGio);
+		
 		return new ModelAndView("deliveries/list", model);
 	}
 	@GetMapping("List")
@@ -130,7 +141,19 @@ public class CartItemController {
 		User User= (User)session.getAttribute("user");
 		Optional<User> opt = userService.findById(User.getId());
 		List<Delivery> deli = deliveryService.findAll();
-		UserModel user = new UserModel();	
+		UserModel user = new UserModel();
+		
+		User userss = (User) session.getAttribute("user");
+		long soSanPhamTrongGio = 0;
+		if (user != null) {
+			for (Cart cart : userss.getCarts()) {
+				Cart cartn = cart;
+				soSanPhamTrongGio += iCartItemService.countByCart(cartn);
+			}
+		}
+
+		model.addAttribute("count", soSanPhamTrongGio);
+		
 		float sum=0;
 		if (opt.isPresent() ) {
 			User entity = opt.get();
@@ -157,6 +180,7 @@ public class CartItemController {
 			model.addAttribute("sum", sum);			
 			model.addAttribute("user", user);
 			model.addAttribute("delivery", deli);
+			
 			return new ModelAndView("user/common/common", model);
 		}
 		model.addAttribute("error", "Product không tồn tại");
