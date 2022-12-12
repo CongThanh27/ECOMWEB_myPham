@@ -60,7 +60,7 @@
 
 	<!--=== Footer v4 ===-->
 	
- <%-- 	<jsp:include page="/common/category/footer.jsp"></jsp:include>  --%>
+ 	<jsp:include page="/common/category/footer.jsp"></jsp:include> 
 
 	<!--=== End Footer v4 ===-->
    

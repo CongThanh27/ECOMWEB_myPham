@@ -17,7 +17,7 @@
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" style="width: 250px;">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <%-- <div class="image">
@@ -63,26 +63,6 @@
                 
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./index.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v3</p>
-                </a>
-              </li>
-            </ul>
           </li><li class="nav-item menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -95,25 +75,20 @@
               <li class="nav-item">
                 <a href="./index.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
+                  <p>Tất cả đơn hàng</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="./index2.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
+                  <p>Đơn đã huỷ</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v3</p>
-                </a>
-              </li>
+              
             </ul>
           </li>
             <li class="nav-item menu-open">
-            <a href="#" class="nav-link">
+            <a href="/seller/product" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Quản lý sản phẩm
@@ -128,7 +103,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/seller/addProduct" class="nav-link">
+                <a href="/seller/addOrEdit" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Thêm sản phẩm</p>
                 </a>
@@ -144,7 +119,7 @@
     <!-- /.sidebar -->
   </aside>
 
-<div class="content-wrapper">
+<div class="content-wrapper" style="top: -20px">
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
@@ -163,17 +138,17 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content">
+    <section class="content" style="top: -150px">
       <div class="container product_section_container">
 	<div class="row">
-		<div class="col product_section clearfix">
+		<div class="col product_section clearfix" style="left: -55px">
 
 			<!-- Breadcrumbs -->
 
 			<div class="breadcrumbs d-flex flex-row align-items-center">
 				<ul>
-					<li><a href="index.html">Home</a></li>
-					<li class="active"><a href="/product/user"><i
+					<li><a href="/seller">Home</a></li>
+					<li class="active"><a href="/seller/product"><i
 							class="fa fa-angle-right" aria-hidden="true"></i>Product</a></li>
 				</ul>
 			</div>
@@ -387,7 +362,7 @@
 											</div>
 										</div>
 										<div class="red_button add_to_cart_button">
-											<a href="/product/user/list/${product.id}">add to cart</a>
+											<a href="/seller/edit/${product.id}">Edit</a>
 										</div>
 									</div>
 									
@@ -439,84 +414,8 @@
 	</div>
 </div>
 
-<!-- Benefit -->
 
-<div class="benefit">
-	<div class="container">
-		<div class="row benefit_row">
-			<div class="col-lg-3 benefit_col">
-				<div class="benefit_item d-flex flex-row align-items-center">
-					<div class="benefit_icon">
-						<i class="fa fa-truck" aria-hidden="true"></i>
-					</div>
-					<div class="benefit_content">
-						<h6>free shipping</h6>
-						<p>Suffered Alteration in Some Form</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 benefit_col">
-				<div class="benefit_item d-flex flex-row align-items-center">
-					<div class="benefit_icon">
-						<i class="fa fa-money" aria-hidden="true"></i>
-					</div>
-					<div class="benefit_content">
-						<h6>cach on delivery</h6>
-						<p>The Internet Tend To Repeat</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 benefit_col">
-				<div class="benefit_item d-flex flex-row align-items-center">
-					<div class="benefit_icon">
-						<i class="fa fa-undo" aria-hidden="true"></i>
-					</div>
-					<div class="benefit_content">
-						<h6>45 days return</h6>
-						<p>Making it Look Like Readable</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 benefit_col">
-				<div class="benefit_item d-flex flex-row align-items-center">
-					<div class="benefit_icon">
-						<i class="fa fa-clock-o" aria-hidden="true"></i>
-					</div>
-					<div class="benefit_content">
-						<h6>opening all week</h6>
-						<p>8AM - 09PM</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 
-<!-- Newsletter -->
-
-<div class="newsletter">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-6">
-				<div
-					class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center text-center">
-					<h4>Newsletter</h4>
-					<p>Subscribe to our newsletter and get 20% off your first
-						purchase</p>
-				</div>
-			</div>
-			<div class="col-lg-6">
-				<div
-					class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
-					<input id="newsletter_email" type="email" placeholder="Your email"
-						required="required" data-error="Valid email is required.">
-					<button id="newsletter_submit" type="submit"
-						class="newsletter_submit_btn trans_300" value="Submit">subscribe</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
       
     </section>
     <!-- /.content -->
