@@ -13,7 +13,7 @@
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
       <%-- <img src="${URL}dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> --%>
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">T2K Shop</span>
     </a>
 
     <!-- Sidebar -->
@@ -24,7 +24,7 @@
           <img src="${URL}dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div> --%>
         <div class="info">
-          <a href="/seller" class="d-block">Alexander Pierce</a>
+          <a href="/seller" class="d-block">Nhóm 18</a>
           <a>${user.id } Id</a>
         </div>
       </div>

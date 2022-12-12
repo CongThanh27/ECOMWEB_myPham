@@ -98,7 +98,7 @@ public class LoginController {
 		User entity = new User();
 		long millis = System.currentTimeMillis();
 		java.sql.Date date = new java.sql.Date(millis);
-		if (userService.findByEmail(user.getEmail()) == null) {
+		if (userService.findByEmail(user.getEmail()) == null && userService.findByPhone(user.getPhone()) == null) {
 			if (user.getHashedpassword().equals(user.getConfirmPassword())) {
 				try {
 					BeanUtils.copyProperties(entity, user);
