@@ -11,7 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import vn.iotstar.entity.Cart;
 import vn.iotstar.entity.CartItem;
+import vn.iotstar.entity.User;
 import vn.iotstar.Repository.CartItemRepository;
 import vn.iotstar.service.ICartItemService;
 
@@ -90,5 +92,12 @@ public class CartItemServiceImpl implements ICartItemService {
 	public void deleteAll() {
 		CartItemRepository.deleteAll();
 	}
+
+	@Override
+	public long countByCart(Cart cart) {
+		// TODO Auto-generated method stub
+		return CartItemRepository.countByCart(cart);
+	}
+
 
 }

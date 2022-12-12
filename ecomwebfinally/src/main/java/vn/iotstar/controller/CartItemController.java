@@ -52,7 +52,7 @@ import vn.iotstar.service.IUserService;
 public class CartItemController {
 
 	@Autowired
-	ICartItemService cartItemService;
+	ICartItemService iCartItemService;
 	@Autowired
 	IUserService userService;
 	@Autowired
@@ -110,6 +110,17 @@ public class CartItemController {
 		
 		model.addAttribute("sum", sum);
 		model.addAttribute("cartitem", listcartitem);
+		
+		long soSanPhamTrongGio = 0;
+		if (User != null) {
+			for (Cart cart : User.getCarts()) {
+				Cart cartn = cart;
+				soSanPhamTrongGio += iCartItemService.countByCart(cartn);
+			}
+		}
+
+		model.addAttribute("count", soSanPhamTrongGio);
+		
 		return new ModelAndView("carts/list", model);
 	}
 
@@ -214,7 +225,7 @@ public class CartItemController {
 									 itemorder.setCount(item2.getCount());
 									 itemorder.setProduct(item2.getProduct());
 									 orderItemService.save(itemorder);	
-									 cartItemService.deleteById(item2.getId());
+									 iCartItemService.deleteById(item2.getId());
 								 } 	
 						  }  
 						  
@@ -233,7 +244,7 @@ public class CartItemController {
 	@GetMapping("")
 	public ModelAndView List(ModelMap model, HttpSession sesson) {
 
-		List<CartItem> CartItems = cartItemService.findAll();
+		List<CartItem> CartItems = iCartItemService.findAll();
 		model.addAttribute("CartItems", CartItems);
 		return new ModelAndView("user/cartItem/list", model);
 	}
@@ -249,7 +260,7 @@ public class CartItemController {
 
 	@GetMapping("edit/{id}")
 	public ModelAndView edit(ModelMap model, @PathVariable("id") Integer id) throws IOException {
-		Optional<CartItem> opt = cartItemService.findById(id);
+		Optional<CartItem> opt = iCartItemService.findById(id);
 		CartItemModel CartItem = new CartItemModel();
 		if (opt.isPresent()) {
 			CartItem entity = opt.get();
@@ -266,7 +277,7 @@ public class CartItemController {
 	}
 	@GetMapping("delete/{id}")
 	public ModelAndView delete(ModelMap model, @PathVariable("id") int id) {
-		cartItemService.deleteById(id);
+		iCartItemService.deleteById(id);
 		model.addAttribute("message", "Delete Succesfull !!!");
 		return new ModelAndView("redirect:/user/cart/List", model);
 

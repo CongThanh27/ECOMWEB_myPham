@@ -23,10 +23,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import vn.iotstar.entity.Cart;
+import vn.iotstar.entity.CartItem;
 import vn.iotstar.entity.Category;
 import vn.iotstar.entity.Product;
 import vn.iotstar.entity.User;
 import vn.iotstar.model.UserModel;
+import vn.iotstar.service.ICartItemService;
 import vn.iotstar.service.ICategoryService;
 import vn.iotstar.service.IProductService;
 import vn.iotstar.service.IUserService;
@@ -44,9 +47,11 @@ public class LoginController {
 	ServletContext application;
 	@Autowired
 	ICategoryService categoryService;
-	
+
 	@Autowired
 	IProductService productService;
+	@Autowired
+	ICartItemService iCartItemService;
 
 	@RequestMapping("/login")
 	public String showLogin() {
@@ -61,15 +66,26 @@ public class LoginController {
 			User user = userService.findByEmail(email);
 			session.setAttribute("user", user);
 			model.addAttribute("user", user);
-			
-			List<Category> cate = categoryService.findTop3ByOrderByIdAsc();		
+
+			List<Category> cate = categoryService.findTop3ByOrderByIdAsc();
 			model.addAttribute("category", cate);
-			
+
 			List<Product> list = productService.findTop10ByOrderByCreateatDesc();
 			model.addAttribute("product", list);
-			
+
 			List<Product> listBest = productService.findTop13ByOrderBySoldDesc();
 			model.addAttribute("productb", listBest);
+
+			long soSanPhamTrongGio = 0;
+			if (user != null) {
+				for (Cart cart : user.getCarts()) {
+					Cart cartn = cart;
+					soSanPhamTrongGio += iCartItemService.countByCart(cartn);
+				}
+			}
+
+			model.addAttribute("count", soSanPhamTrongGio);
+
 			return "index";
 		} else {
 			System.out.println("Login that bai");
@@ -134,14 +150,23 @@ public class LoginController {
 	public String showHome(ModelMap model) {
 		User user = (User) session.getAttribute("user");
 		model.addAttribute("user", user);
-		List<Category> cate = categoryService.findTop3ByOrderByIdAsc();		
+		List<Category> cate = categoryService.findTop3ByOrderByIdAsc();
 		model.addAttribute("category", cate);
-		
+
 		List<Product> list = productService.findTop10ByOrderByCreateatDesc();
 		model.addAttribute("product", list);
-		
+
 		List<Product> listBest = productService.findTop13ByOrderBySoldDesc();
 		model.addAttribute("productb", listBest);
+
+		long soSanPhamTrongGio = 0;
+		if (user != null) {
+			for (Cart cart : user.getCarts()) {
+				Cart cartn = cart;
+				soSanPhamTrongGio += iCartItemService.countByCart(cartn);
+			}
+		}
+		model.addAttribute("count", soSanPhamTrongGio);
 		return "index";
 	}
 
