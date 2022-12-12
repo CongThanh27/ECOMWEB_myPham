@@ -3,7 +3,52 @@
 <%@ include file="/common/taglib.jsp"%>
 <c:url value="/resources/" var="URL"></c:url>
 
+ <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Dashboard</h1>
+            
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+          
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/admin/ThongKe/1">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+          </div><!-- /.col -->	
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <div class="card-body">
+                <div id="actions" class="row">
+                  <div class="col-lg-6" style="margin: auto; width:100% ">
+                    <div class="btn-group w-100">
+                      <a href="/admin/ThongKe/1" class="btn btn-success col fileinput-button dz-clickable">
+                        <i class="fas fa-day"></i>
+                        <span>Ngày</span>
+                      </a>
+                      <a href="/admin/ThongKe/2" type="submit" class="btn btn-primary col start">
+                        <i class="fas fa-month"></i>
+                        <span>Tháng</span>
+                      </a>
+                      <a href="/admin/ThongKe/3" type="reset" class="btn btn-warning col cancel">
+                        <i class="fas fa-year"></i>
+                        <span>Năm</span>
+                        
+                      </a>
+                    </div>
+                  </div>
 
+                </div>
+                <div class="table table-striped files" id="previews">
+                  
+                </div>
+              </div>
+    <!-- /.content-header -->
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -50,7 +95,7 @@
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="/admin/ListNewUser" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -65,7 +110,7 @@
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="/admin/ortheritem" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -121,9 +166,9 @@
 
                     <div class="progress-group">
                      Thêm sản phẩm vào giỏ hàng
-                      <span class="float-right"><b>160</b>/200</span>
+                      <span class="float-right"><b> ${tsp}</b>/${chitieu}</span>
                       <div class="progress progress-sm">
-                        <div class="progress-bar bg-primary" style="width: 80%"></div>
+                        <div class="progress-bar bg-primary" style="width: ${(tsp/chitieu)*100}%"></div>
                       </div>
                     </div>
                     <!-- /.progress-group -->

@@ -1,5 +1,6 @@
 package vn.iotstar.controller;
 
+import java.nio.file.Path;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,15 +9,20 @@ import java.util.Optional;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import vn.iotstar.entity.Cart;
@@ -66,12 +72,12 @@ public class AdminController {
 	@Autowired
 	ICartItemService cartItemService;
 	
-	
+	int cos=1;
 	int userid=1;
 	@GetMapping("hi")
 	public String list(ModelMap model) {
 		
-		return "admin/home";
+		return "admin/user/info";
 	}
 	//trong ngày=1,tháng=2,năm=3
 	//lấy ngày tháng, năm hiện tại
@@ -119,29 +125,64 @@ public class AdminController {
 		
 	}
 	//Danh sách user đăng ký mới
-	@Test
+	
 	@SuppressWarnings("deprecation")
-	@GetMapping("ListNewUser/{co}")
-	public ModelAndView ListNewUser(ModelMap model,  @PathVariable("co") int co ,HttpSession sesson) {
+	@GetMapping("ListNewUser")
+	public ModelAndView ListNewUser(ModelMap model) {
 		List<User> listuser = userService.findAll();
 		List<User> user = new ArrayList<User>();
-		if(co==1)
+		List<UserModel> usermodel = new ArrayList<UserModel>();
+		if(cos==1)
 			 for(User item : listuser) 
 			 { 			 	
-				 if (item.getCreateat().getDay()==Day()&&item.getCreateat().getYear()==Year()&&item.getCreateat().getMonth()==Month()) user.add(item);			 
+				 if (item.getCreateat().getDay()==Day()&&item.getCreateat().getYear()==Year()&&item.getCreateat().getMonth()==Month()) user.add(item);	
+				 UserModel modeluser = new UserModel();
+				 BeanUtils.copyProperties(item, modeluser);
+				 modeluser.setId(item.getId());
+				 float sum=0;
+				 List<Order> ListOrder = item.getOrders();
+				 for(Order itemorder : ListOrder) 
+				 {
+					 sum+=itemorder.getPrice();
+				 }
+				 modeluser.setSum(sum);
+				 usermodel.add(modeluser);
 			 }
-			else if(co==2)
+			else if(cos==2)
 			 for(User item : listuser) 
 			 { 
 				 if (item.getCreateat().getMonth()==Month()&&item.getCreateat().getYear()==Year())user.add(item);
+				 UserModel modeluser = new UserModel();
+				 modeluser.setId(item.getId());
+				 float sum=0;
+				 List<Order> ListOrder = item.getOrders();
+				 for(Order itemorder : ListOrder) 
+				 {
+					 sum+=itemorder.getPrice();
+				 }
+				 modeluser.setSum(sum);
+				 usermodel.add(modeluser);
 			 }
 			else
 			 for(User item : listuser) 
 			 { 
-				if (item.getCreateat().getYear()==Year()) user.add(item);	
+				if (item.getCreateat().getYear()==Year()) user.add(item);
+				 UserModel modeluser = new UserModel();
+				 modeluser.setId(item.getId());
+				 float sum=0;
+				 List<Order> ListOrder = item.getOrders();
+				 for(Order itemorder : ListOrder) 
+				 {
+					 sum+=itemorder.getPrice();
+				 }
+				 modeluser.setSum(sum);
+				 usermodel.add(modeluser);
+				
 			 }
-	
+		
+		model.addAttribute("danhthutoong", Doanhthu(cos)); 
 		model.addAttribute("user", user); 
+		model.addAttribute("usermodel", usermodel); 
 		return new ModelAndView("admin/user/list", model);
 	}
 	
@@ -200,17 +241,19 @@ public class AdminController {
 		if(co==1)
 			 for(Store item : liststore) 
 			 { 			 	
-				 if (item.getCreateat().getDay()==Day()&&item.getCreateat().getYear()==Year()&&item.getCreateat().getMonth()==Month()) newStore++;			 
+				 if (item.getCreateat().getDay()==Day()
+						 &&item.getCreateat().getYear()==Year()
+						 &&item.getCreateat().getMonth()==Month()&& item.getIsactive()==true ) newStore++;			 
 			 }
 			else if(co==2)
 			 for(Store item : liststore) 
 			 { 
-				 if(item.getCreateat().getMonth()==Month()&&item.getCreateat().getYear()==Year())newStore++;
+				 if(item.getCreateat().getMonth()==Month()&&item.getCreateat().getYear()==Year()&& item.getIsactive()==true)newStore++;
 			 }
 			else
 			 for(Store item : liststore) 
 			 { 
-				if (item.getCreateat().getYear()==Year()) newStore++;	
+				if (item.getCreateat().getYear()==Year()&&item.getIsactive()==true) newStore++;	
 			 }
 		System.out.print(newStore);
 		 return newStore;
@@ -350,14 +393,61 @@ public class AdminController {
 		 return listkq;
 	}
 	
-	/*
-	 * public List<CartItem> ListOrder(int co) { List<Order> listorder =
-	 * orderService.findAll();
-	 * 
-	 * return listorder; }
-	 */
+	
+	@GetMapping("ortheritem")
+	public ModelAndView ListOrder(ModelMap model, HttpSession sesson) {
+		
+		  List<Order> listorder = orderService.findAll();
+		  List<Order> order =new ArrayList<Order>();
+		    if(cos==1)
+			for(Order itemcartitem : listorder) 
+			{ 			 	
+				if (itemcartitem.getCreateat().getDay()==Day()
+						&& itemcartitem.getCreateat().getMonth()==Month()
+						&&itemcartitem.getCreateat().getYear()==Year()) order.add(itemcartitem);		 
+			}
+			else if(cos==2)
+			for(Order itemcartitem : listorder) 
+			{ 
+				if (itemcartitem.getCreateat().getMonth()==Month()&& itemcartitem.getCreateat().getYear()==Year())order.add(itemcartitem);	
+			}
+			else
+			for(Order itemcartitem : listorder) 
+			{ 
+				if (itemcartitem.getCreateat().getYear()==Year()) order.add(itemcartitem);	
+				
+			}	
+		    
+			model.addAttribute("order", order);
+			return new ModelAndView("admin/orderitem", model);
+	  }
+	//Xem sửa thông tin nhân viên
+	@GetMapping("/profile/{id}")
+	public String edit(ModelMap model, @PathVariable("id")Integer id) {
+		Optional<User> user = userService.findById(id);
+		
+		UserModel userModel = new UserModel();
+		BeanUtils.copyProperties(user.get(), userModel);
+		model.addAttribute("user", userModel);
+		return "admin/user/profile";
+	}
+	//xem thông tin nhân viên
+	@GetMapping("/profileuser/{id}")
+	public String showProfileuser(ModelMap model, @PathVariable("id")Integer id) {
+		Optional<User> user = userService.findById(id);	
+		User entity = user.get();
+		model.addAttribute("user", entity);
+		model.addAttribute("sumdonhang", entity.getOrders().size());
+		model.addAttribute("sumdanhgia", entity.getReviews().size());
+		
+		return "admin/user/info";
+	}
+
+	@SuppressWarnings("deprecation")
 	@GetMapping("ThongKe/{co}")
 	public ModelAndView ThongKe(ModelMap model,@PathVariable("co") int co, HttpSession sesson) {	
+			cos=co;
+		
 		//số lượng đăng ký mới
 			model.addAttribute("DKMUser", NewUser(co));
 			model.addAttribute("DKMUStore", NewStore(co)); 
@@ -374,6 +464,72 @@ public class AdminController {
 			
 		return new ModelAndView("admin/home", model);
 	}
+	//sửa, xóa nhân viên
+	@PostMapping("/saveProfile")
+	public ModelAndView saveOrUpdate(ModelMap model, @Valid @ModelAttribute("user") UserModel user,
+			BindingResult result) {
+		User entity = new User();
+
+		/*
+		 * if (result.hasErrors()) { model.addAttribute("message", "Có lỗi"); return new
+		 * ModelAndView("redirect:/user", model); }
+		 */
+
+		if (!user.getAvatarFile().isEmpty()) {
+			String path = application.getRealPath("/");
+
+			try {
+				user.setAvatar(user.getAvatarFile().getOriginalFilename());
+				String filePath = path + "/resources/images/user/" + user.getAvatar();
+				user.getAvatarFile().transferTo(Path.of(filePath));
+				user.setAvatarFile(null);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		BeanUtils.copyProperties(user, entity);
+		//long millis = System.currentTimeMillis();
+		Date date = new Date();
+
+		if (user.getIsEdit()) {
+			entity.setUpdateat(date);
+		} 
+		else {
+			entity.setCreateat(date);
+			entity.setUpdateat(date);
+		}
+
+		userService.save(entity);
+		return new ModelAndView("redirect:/admin/profile/" + user.getId(), model);
+
+	}
+	//thay dổi mật khẩu nhân viên
+	@PostMapping("/changePassword")
+	public ModelAndView changePasswordProcess(ModelMap model, @RequestParam String hashedpassword,
+		@RequestParam String newPassword,
+		@RequestParam String confirmPassword,
+		@Valid @ModelAttribute("user") UserModel user,
+		BindingResult result) {
+		User entity = new User();
+		long millis = System.currentTimeMillis();
+		Date date = new Date(millis);
+		BeanUtils.copyProperties(user, entity);
+		if(hashedpassword.equals(user.getHashedpassword())) {
+			if (newPassword.equals(confirmPassword)) {
+				entity.setHashedpassword(newPassword);
+				entity.setUpdateat(date);
+				userService.save(entity);
+				System.out.println("Update complete");
+				return new ModelAndView("redirect:/admin/profile/" + user.getId(), model);
+			}else {
+				System.out.print("New pass does match with Retype new pass");
+			}
+		}else {
+			System.out.println("Current pass is not correct");
+		}
+		return new ModelAndView("redirect:/admin/profile/" + user.getId(), model);
+	}
+	
 	
 
 }

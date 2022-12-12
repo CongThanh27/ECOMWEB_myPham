@@ -2,7 +2,24 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 <c:url value="/resources/fe/" var="URL"></c:url>
-
+ <!-- Content Wrapper. Contains page content -->
+  <!-- Content Wrapper. Contains page content -->
+ <div class="content-wrapper">
+  	    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Quản lý tài khoản </h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/admin/ThongKe/1">Home</a></li>
+              <li class="breadcrumb-item active"> Quản lý User</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
 	aria-orientation="vertical" style="margin: auto; margin-top: 150px">
 	<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill"
@@ -14,6 +31,7 @@
 
 <div class="tab-content" id="v-pills-tabContent"
 	style="margin: auto; margin-top: 10px">
+
 	<div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
 		aria-labelledby="v-pills-profile-tab">
 
@@ -21,7 +39,7 @@
 			class="row d-flex justify-content-center align-items-center h-100">
 			<div class="col col-lg-6 mb-4 mb-lg-0">
 				<div class="card mb-3" style="border-radius: .5rem;">
-					<form action="/user/changePassword" method="post"
+					<form action="/admin/changePassword" method="post"
 						enctype="multipart/form-data">
 						<div class="row g-0">
 
@@ -63,7 +81,8 @@
 											type="text" class="form-control" name="email"
 											value="${user.email }" hidden="true"> <input
 											type="text" class="form-control" name="phone"
-											value="${user.phone }" hidden="true"> <input
+											value="${user.phone }" hidden="true"> 
+											<input
 											type="text" class="form-control" name="address"
 											value="${user.address }" hidden="true">
 
@@ -117,7 +136,7 @@
 			class="row d-flex justify-content-center align-items-center h-100">
 			<div class="col col-lg-6 mb-4 mb-lg-0">
 				<div class="card mb-3" style="border-radius: .5rem;">
-					<form action="/user/saveProfile" method="post"
+					<form action="/admin/saveProfile" method="post"
 						enctype="multipart/form-data">
 						<div class="row g-0">
 
@@ -191,7 +210,19 @@
 											<input type="text" class="form-control" name="address"
 												value="${user.address }" style="width: 135%;">
 										</div>
-										<input type="hidden" name="hashedpassword" value="${user.hashedpassword }">
+										<div class="col-8 mb-3">
+											<select name = "isSeller" aria-describedby="isSeller" id = "isSeller">						
+												<option ${product.isSeller == true ? 'selected':'' } value = "true">Seller</option>
+												<option ${product.isSeller == false ? 'selected':'' } value = "false" >Hủy tài khoản seller</option>
+											</select>
+											
+											<select name = "role" aria-describedby="role" id = "role">						
+												<option ${product.role == true ? 'selected':'' } value = "true">Admin</option>
+												<option ${product.role == false ? 'selected':'' } value = "false" >Hủy Admin</option>
+											</select>
+											
+										</div>
+
 										<div class="col-9 mb-3">
 											<input type="hidden" name="id" value="${user.id }">
 											<button type="submit" class="btn btn-primary btn-sm">
@@ -214,4 +245,5 @@
 		</div>
 	</div>
 </div>
+
 

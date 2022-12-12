@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.ServletContext;
-
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,10 +64,13 @@ public class ProductController {
 	@Autowired
 	ICartItemService cartItemService;
 	
-
+	@Autowired
+	HttpSession session;
 	
-public Cart CreateCart(int Storeid, int Userid) { 
-	Optional<User> user = userService.findById(Userid);
+	//User User= (User)session.getAttribute("user");
+public Cart CreateCart(int Storeid) { 
+	User User= (User)session.getAttribute("user");
+	Optional<User> user = userService.findById(User.getId());
 	User users = user.get();
 	Optional<Store> store = storeService.findById(Storeid);
 	Store stores = store.get();
@@ -97,7 +100,8 @@ public Cart CreateCart(int Storeid, int Userid) {
 @PostMapping("AddCart")
 public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartModel cart,
 		@Valid @ModelAttribute("cartit") CartItemModel cartit, BindingResult result) {
-		Cart cartid = CreateCart(cart.getStoreid(),cart.getUserid());
+	
+		Cart cartid = CreateCart(cart.getStoreid());
 		CartItem entity = new CartItem();
 		BeanUtils.copyProperties(cartit, entity);
 		entity.setProduct(productService.getById(cartit.getProductid()));
@@ -260,6 +264,7 @@ public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartM
 	public ModelAndView saveOrUpdateRating(ModelMap model, @Valid @ModelAttribute("review") ReviewModel review,
 			BindingResult result) {
 		Review entity = new Review();
+		User User= (User)session.getAttribute("user");
 
 		/*
 		 * if (result.hasErrors()) { return new ModelAndView("product/addOrEdit"); }
@@ -269,7 +274,7 @@ public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartM
 		entity.setCreateat(getDate);
 		entity.setUpdateat(getDate);
 		entity.setProduct(productService.getById(review.getProductid()));
-		entity.setUser(userService.getById(review.getUserid()));
+		entity.setUser(userService.getById(User.getId()));
 		reviewService.save(entity);
 		String a ="redirect:/product/user/list/"+review.getProductid();
 		return new ModelAndView(a, model);
