@@ -43,33 +43,33 @@ public class SellerController {
 
 	@Autowired
 	IUserService userService;
-	
+
 	@Autowired
 	IOrderService orderService;
-	
+
 	@Autowired
 	IDeliveryService deliveryService;
-	
+
 	@Autowired
 	IProductService productService;
-	
+
 	@Autowired
 	IStoreService storeService;
-	
+
 	@Autowired
 	ICategoryService cateService;
-	
+
 	@Autowired
 	HttpSession session;
-	
+
 	@Autowired
 	ServletContext application;
-	
+
 	@RequestMapping("")
 	public String sellerPage(ModelMap model) {
-		User user = (User)session.getAttribute("user");
+		User user = (User) session.getAttribute("user");
 		model.addAttribute("user", user);
-		//Lay don cho xac nhan va tinh doanh thu
+		// Lay don cho xac nhan va tinh doanh thu
 		Store store = storeService.findByUser(user);
 		List<Order> allOrder = orderService.findAllByStore(store);
 		Integer orderCount = allOrder.size();
@@ -81,17 +81,16 @@ public class SellerController {
 				notProcessCount++;
 			} else if (order.getGiaohang() == 2) {
 				shippedCount++;
-			}
-			else {
+			} else if (order.getGiaohang() == 4){
 				salesFigure += order.getPrice();
 			}
 		}
 		model.addAttribute("choxacnhan", notProcessCount);
-		
-		//Lay don da xu ly
+
+		// Lay don da xu ly
 		model.addAttribute("daxuly", shippedCount);
-		
-		//Lay so san pham da het hang
+
+		// Lay so san pham da het hang
 		List<Product> allProduct = productService.findByStore(store);
 		Integer productOOS = 0;
 		for (Product product : allProduct) {
@@ -100,12 +99,12 @@ public class SellerController {
 			}
 		}
 		model.addAttribute("sanphamhethang", productOOS);
-		
-		//Tinh doanh thu
+
+		// Tinh doanh thu
 		model.addAttribute("doanhthu", salesFigure);
 		return "/seller/home";
 	}
-	
+
 	@GetMapping("/product")
 	public String productList(ModelMap model) {
 		User user = (User) session.getAttribute("user");
@@ -124,7 +123,7 @@ public class SellerController {
 		model.addAttribute("category", cate);
 		return "/seller/product/list";
 	}
-	
+
 	@GetMapping("/addOrEdit")
 	public String showAddProduct(ModelMap model) {
 		ProductModel product = new ProductModel();
@@ -132,7 +131,7 @@ public class SellerController {
 		model.addAttribute("product", product);
 		return "seller/product/addOrEdit";
 	}
-	
+
 	@PostMapping("/saveOrUpdate")
 	public String saveOrUpdate(ModelMap model, @Valid @ModelAttribute("product") ProductModel product,
 			BindingResult result) {
@@ -141,7 +140,7 @@ public class SellerController {
 		/*
 		 * if (result.hasErrors()) { return new ModelAndView("product/addOrEdit"); }
 		 */
-		
+
 		if (!product.getListImageFile().isEmpty()) {
 			String path = application.getRealPath("/");
 
@@ -149,7 +148,7 @@ public class SellerController {
 				product.setListimage(product.getListImageFile().getOriginalFilename());
 				String filePath = path + "/resources/images/" + product.getListimage();
 				product.getListImageFile().transferTo(Path.of(filePath));
-				product.setListImageFile(null);				
+				product.setListImageFile(null);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -161,7 +160,7 @@ public class SellerController {
 				product.setListimage1(product.getListImageFile1().getOriginalFilename());
 				String filePath1 = path1 + "/resources/images/" + product.getListimage1();
 				product.getListImageFile1().transferTo(Path.of(filePath1));
-				product.setListImageFile1(null);				
+				product.setListImageFile1(null);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -173,12 +172,12 @@ public class SellerController {
 				product.setListimage2(product.getListImageFile2().getOriginalFilename());
 				String filePath2 = path2 + "/resources/images/" + product.getListimage2();
 				product.getListImageFile2().transferTo(Path.of(filePath2));
-				product.setListImageFile2(null);				
+				product.setListImageFile2(null);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}	
-		BeanUtils .copyProperties(product, entity);
+		}
+		BeanUtils.copyProperties(product, entity);
 		User user = (User) session.getAttribute("user");
 		Store store = storeService.findByUser(user);
 		Optional<Category> optCate = cateService.findById(product.getCategoryid());
@@ -192,11 +191,11 @@ public class SellerController {
 		productService.save(entity);
 		return "redirect:/seller/product";
 	}
-	
+
 	@GetMapping("/edit/{id}")
 	public ModelAndView edit(ModelMap model, @PathVariable("id") int id) throws IOException {
 		Optional<Product> opt = productService.findById(id);
-		
+
 		ProductModel product = new ProductModel();
 		if (opt.isPresent()) {
 			Product entity = opt.get();
@@ -209,5 +208,58 @@ public class SellerController {
 		}
 		model.addAttribute("message", "Product không tồn tại");
 		return new ModelAndView("redirect:/seller/product", model);
+	}
+
+	@GetMapping("/order")
+	public String showSellerOrder(ModelMap model) {
+		User user = (User) session.getAttribute("user");
+		Store store = storeService.findByUser(user);
+		List<Order> order = orderService.findAllByStore(store);
+		Integer choxacnhan = 0;
+		Integer dahuy = 0;
+		Integer danggiaohang = 0;
+		Integer danhanhang = 0;
+		for (Order obj : order) {
+			if (obj.getGiaohang() == 0) {
+				dahuy++;
+			} else if (obj.getGiaohang() == 1) {
+				choxacnhan++;
+			} else if (obj.getGiaohang() == 3) {
+				danggiaohang++;
+			} else if (obj.getGiaohang() == 4) {
+				danhanhang++;
+			}
+		}
+		model.addAttribute("choxacnhan", choxacnhan);
+		model.addAttribute("dahuy", dahuy);
+		model.addAttribute("danggiaohang", danggiaohang);
+		model.addAttribute("danhanhang", danhanhang);		
+		model.addAttribute("order", order);
+		return "/seller/order/list";
+	}
+	
+
+	
+	@GetMapping("/process/{id}")
+	public String orderProcess(ModelMap model, @PathVariable("id") int id) {
+		Order order = orderService.findById(id).get();
+		order.setGiaohang(2);
+		orderService.save(order);
+		return "redirect:/seller/order";
+	}
+	
+	@GetMapping("/ship/{id}")
+	public String shipProcess(@PathVariable("id") int id) {
+		Order order = orderService.findById(id).get();
+		order.setGiaohang(3);
+		orderService.save(order);
+		return "redirect:/seller/order";
+	}
+	
+	@GetMapping("/delete/{id}")
+	public String deleteOrder(@PathVariable("id") int id) {
+		orderService.deleteById(id);
+		return "redirect:/seller/order";
+		
 	}
 }

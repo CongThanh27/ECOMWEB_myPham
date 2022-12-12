@@ -47,7 +47,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="/seller" class="nav-link active">
+            <a href="/seller" class="nav-link ">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -55,40 +55,18 @@
             </a>
             
           </li>
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Quản lý vận chuyển
-                
-              </p>
-            </a>
-          </li><li class="nav-item menu-open">
-            <a href="#" class="nav-link">
+          <li class="nav-item ">
+            <a href="/seller/order" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Quản lý đơn hàng
                 
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./index.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Tất cả đơn hàng</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Đơn đã huỷ</p>
-                </a>
-              </li>
-              
-            </ul>
+            
           </li>
             <li class="nav-item menu-open">
-            <a href="/seller/product" class="nav-link">
+            <a href="/seller/product" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Quản lý sản phẩm
@@ -97,9 +75,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/seller/product" class="nav-link">
+                <a href="/seller/product" class="nav-link menu-open">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Quản lý sản phẩm</p>
+                  <p>Tất cả sản phẩm</p>
                 </a>
               </li>
               <li class="nav-item">
