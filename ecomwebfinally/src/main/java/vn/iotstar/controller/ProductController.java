@@ -68,6 +68,7 @@ public class ProductController {
 	@Autowired
 	HttpSession session;
 
+
 	
 	//User User= (User)session.getAttribute("user");
 	
@@ -96,11 +97,13 @@ public class ProductController {
 	
 	public Cart CreateCart2(int Storeid) { 
 		User User=(User)session.getAttribute("user");
+	
 		Optional<Store> store = storeService.findById(Storeid);
 		List<Cart> cart1=cartService.findByStore(Storeid); 
 		List<Cart> cart2=cartService.findByUser(User.getId()); 
 		 Cart entity1 = new Cart(); 
 		Store stores = store.get();
+
 		if ( cartService.findByUser(User).isEmpty()) {
 			//gọi hàm tạo item
 			Cart entity = new Cart();
@@ -153,6 +156,7 @@ public class ProductController {
 @PostMapping("AddCart")
 public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartModel cart,
 		@Valid @ModelAttribute("cartit") CartItemModel cartit, BindingResult result) {
+
 		Cart cartid = CreateCart(cart.getStoreid());
 		CartItem entity = new CartItem();
 		BeanUtils.copyProperties(cartit, entity);

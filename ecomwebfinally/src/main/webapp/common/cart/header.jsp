@@ -100,7 +100,7 @@
 								</c:if>
 
 							</ul>
-							
+
 							<div class="hamburger_container">
 								<i class="fa fa-bars" aria-hidden="true"></i>
 							</div>
