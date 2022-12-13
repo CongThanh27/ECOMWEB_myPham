@@ -26,8 +26,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import vn.iotstar.entity.User;
 import vn.iotstar.model.UserModel;
+import vn.iotstar.entity.Cart;
 import vn.iotstar.entity.Category;
 import vn.iotstar.entity.Product;
+import vn.iotstar.service.ICartItemService;
 import vn.iotstar.service.ICategoryService;
 import vn.iotstar.service.IProductService;
 import vn.iotstar.service.IUserService;
@@ -50,7 +52,8 @@ public class HomeController {
 	@Autowired
 	ServletContext application;
 	
-	
+	@Autowired
+	ICartItemService iCartItemService;
 	
 	@GetMapping("/profile/{id}")
 	public String showProfile(ModelMap model, @PathVariable("id")Integer id) {
@@ -59,6 +62,17 @@ public class HomeController {
 		UserModel userModel = new UserModel();
 		BeanUtils.copyProperties(user.get(), userModel);
 		model.addAttribute("user", userModel);
+		
+		User User = (User) session.getAttribute("user");
+		long soSanPhamTrongGio = 0;
+		if (user != null) {
+			for (Cart cart : User.getCarts()) {
+				Cart cartn = cart;
+				soSanPhamTrongGio += iCartItemService.countByCart(cartn);
+			}
+		}
+		model.addAttribute("count", soSanPhamTrongGio);
+		
 		return "/user/profile";
 	}
 

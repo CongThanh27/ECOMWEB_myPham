@@ -7,7 +7,7 @@
 <div class="login-box" style="margin: auto; margin-top: 100px">
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="/" class="h1"><b>Admin</b>LTE</a>
+      <a href="/" class="h1"><b>T2K</b>Shop</a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">You forgot your password? Here you can easily retrieve a new password.</p>

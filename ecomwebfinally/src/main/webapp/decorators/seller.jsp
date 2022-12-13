@@ -31,8 +31,10 @@
   <!-- summernote -->
   <link rel="stylesheet" href="${URL}plugins/summernote/summernote-bs4.min.css">
   
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+
+
 </head>
+
 
 <body>
 

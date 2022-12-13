@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import vn.iotstar.Repository.OrderRepository;
 import vn.iotstar.entity.Order;
 import vn.iotstar.entity.Store;
+import vn.iotstar.entity.User;
 import vn.iotstar.service.IOrderService;
 @Service
 public class OrderServiceImpl implements IOrderService {
@@ -98,6 +99,18 @@ public class OrderServiceImpl implements IOrderService {
 	@Override
 	public List<Order> findAllByStore(Store store) {
 		return orderRepository.findAllByStore(store);
+	}
+
+	@Override
+	public int countByUser(User user) {
+		// TODO Auto-generated method stub
+		return orderRepository.countByUser(user);
+	}
+
+	@Override
+	public List<Order> findTop10ByOrderByCreateatDesc() {
+		// TODO Auto-generated method stub
+		return orderRepository.findTop10ByOrderByCreateatDesc();
 	}
 	
 }

@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 
 import vn.iotstar.entity.Order;
 import vn.iotstar.entity.Store;
+import vn.iotstar.entity.User;
 
 public interface IOrderService {
 
@@ -42,5 +43,7 @@ public interface IOrderService {
 	<S extends Order> S save(S entity);
 	
 	List<Order> findAllByStore(Store store);
+	int countByUser(User user);
+	List<Order> findTop10ByOrderByCreateatDesc();
 
 }

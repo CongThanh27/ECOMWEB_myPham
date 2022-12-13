@@ -57,9 +57,12 @@ public class User {
 
 	@OneToMany(mappedBy = "user")
 	List<Order> orders;
+	@OneToMany(mappedBy = "user")
+	List<Store> stores;
 	
-	@OneToOne(mappedBy = "user")
-	private Store stores;
+	/*
+	 * @OneToOne(mappedBy = "user") private Store stores;
+	 */
 
 	@OneToMany(mappedBy = "user")
 	List<Cart> carts;

@@ -46,4 +46,8 @@ public interface IProductService {
 	List<Product> findTop13ByOrderBySoldDesc();
 	
 	List<Product> findTop10ByOrderByCreateatDesc();
+	List<Product> findTop1ByOrderBySoldDesc();
+
+	List<Product> findTop1ByOrderBySoldAsc();
+	List<Product> findTop10ByOrderBySoldAsc();
 }

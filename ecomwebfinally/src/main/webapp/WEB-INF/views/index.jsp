@@ -34,7 +34,7 @@
 			<c:forEach items="${category}" var="category">
 				<div class="col-md-4">
 					<div class="banner_item align-items-center"
-						style="background-image: url(images/skincare.jpg)">
+						style="background-image: url(/images/${category.image})">
 						<div class="banner_category">
 							<a href="/product/search/${category.id}">${category.name}</a>
 						</div>
@@ -106,7 +106,13 @@
 								</div>
 							</div>
 							<div class="red_button add_to_cart_button">
-								<a href="#">add to cart</a>
+								<c:if test="${user == null}">
+									<a href="/login">add to cart</a>
+								</c:if>
+								<c:if test="${user != null}">
+									<a href="/product/user/list/${product.id}">add to cart</a>
+								</c:if>
+
 							</div>
 						</div>
 					</c:forEach>
@@ -286,7 +292,7 @@
 		<div class="row">
 			<div class="col text-center">
 				<div class="section_title">
-					<h2>Latest Blogs</h2>
+					<h2>Latest</h2>
 				</div>
 			</div>
 		</div>

@@ -24,11 +24,11 @@
 						<h5>Product Category</h5>
 					</div>
 					<ul class="sidebar_categories">
-					<c:forEach items="${category}" var="category">
-						<li><a href="/product/search/${category.id}">${category.name}</a></li>
-					</c:forEach>
-						
-					<!-- 	<li class="active"><a href="#"><span><i
+						<c:forEach items="${category}" var="category">
+							<li><a href="/product/search/${category.id}">${category.name}</a></li>
+						</c:forEach>
+
+						<!-- 	<li class="active"><a href="#"><span><i
 									class="fa fa-angle-double-right" aria-hidden="true">
 						</i></span>Chăm sóc da mặt</a></li>
 						<li><a href="#">Tắm & chăm sóc cơ thể</a></li>
@@ -64,9 +64,9 @@
 						<h5>Thương hiệu</h5>
 					</div>
 					<ul class="checkboxes">
-					<c:forEach items="${product}" var="product">
-						<li><a href="/product/SearchTrademark/${product.trademark}">${product.trademark}</a></li>
-					</c:forEach>
+						<c:forEach items="${product}" var="product">
+							<li><a href="/product/SearchTrademark/${product.trademark}">${product.trademark}</a></li>
+						</c:forEach>
 						<!-- 
 						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>Cocoon</span></li>
 						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>Merzy</span></li>
@@ -78,7 +78,7 @@
 						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>BioAQUA</span></li>
 						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>FOCALLURE</span></li> -->
 						<li><a href="/product/user">Khác</a></li>
-					</ul>	
+					</ul>
 					<div class="show_more">
 						<span><span>+</span>Show More</span>
 					</div>
@@ -90,53 +90,37 @@
 						<h5>Đánh giá</h5>
 					</div>
 					<ul>
-						<li>
-						<a href="#"> 
-						<i class="fa fa-star" aria-hidden="true"></i>
-						<i class="fa fa-star" aria-hidden="true"></i>
-						<i class="fa fa-star" aria-hidden="true"></i>
-						<i class="fa fa-star" aria-hidden="true"></i>
-						<i class="fa fa-star" aria-hidden="true"></i>
-						</a>
-						</li>
-												<li>
-						<a href="#"> 
-						<i class="fa fa-star" aria-hidden="true"></i>
-						<i class="fa fa-star" aria-hidden="true"></i>
-						<i class="fa fa-star" aria-hidden="true"></i>
-						<i class="fa fa-star" aria-hidden="true"></i>
-						<i class="fa fa-star-o" aria-hidden="true"></i>
-						</a>
-						</li>
-												<li>
-						<a href="#"> 
-						<i class="fa fa-star" aria-hidden="true"></i>
-						<i class="fa fa-star" aria-hidden="true"></i>
-						<i class="fa fa-star" aria-hidden="true"></i>
-						<i class="fa fa-star-o" aria-hidden="true"></i>
-						<i class="fa fa-star-o" aria-hidden="true"></i>
-						</a>
-						</li>
-												<li>
-						<a href="#"> 
-						<i class="fa fa-star" aria-hidden="true"></i>
-						<i class="fa fa-star" aria-hidden="true"></i>
-						<i class="fa fa-star-o" aria-hidden="true"></i>
-						<i class="fa fa-star-o" aria-hidden="true"></i>
-						<i class="fa fa-star-o" aria-hidden="true"></i>
-						</a>
-						</li>
-												<li>
-						<a href="#"> 
-						<i class="fa fa-star" aria-hidden="true"></i>
-						<i class="fa fa-star-o" aria-hidden="true"></i>
-						<i class="fa fa-star-o" aria-hidden="true"></i>
-						<i class="fa fa-star-o" aria-hidden="true"></i>
-						<i class="fa fa-star-o" aria-hidden="true"></i>
-						</a>
-						</li>
-					</ul>	
-						
+						<li><a href="#"> <i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i> <i
+								class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star"
+								aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i>
+						</a></li>
+						<li><a href="#"> <i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i> <i
+								class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star"
+								aria-hidden="true"></i> <i class="fa fa-star-o"
+								aria-hidden="true"></i>
+						</a></li>
+						<li><a href="#"> <i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i> <i
+								class="fa fa-star" aria-hidden="true"></i> <i
+								class="fa fa-star-o" aria-hidden="true"></i> <i
+								class="fa fa-star-o" aria-hidden="true"></i>
+						</a></li>
+						<li><a href="#"> <i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i> <i
+								class="fa fa-star-o" aria-hidden="true"></i> <i
+								class="fa fa-star-o" aria-hidden="true"></i> <i
+								class="fa fa-star-o" aria-hidden="true"></i>
+						</a></li>
+						<li><a href="#"> <i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star-o" aria-hidden="true"></i> <i
+								class="fa fa-star-o" aria-hidden="true"></i> <i
+								class="fa fa-star-o" aria-hidden="true"></i> <i
+								class="fa fa-star-o" aria-hidden="true"></i>
+						</a></li>
+					</ul>
+
 				</div>
 
 			</div>
@@ -198,10 +182,10 @@
 
 							<!-- Product Grid -->
 
-							<div class="product-grid" >
-						
+							<div class="product-grid">
+
 								<c:forEach items="${product}" var="product">
-									
+
 									<div class="product-item men">
 										<div class="product discount product_filter">
 											<div class="product_image">
@@ -210,11 +194,12 @@
 											</div>
 											<div class="favorite favorite_left"></div>
 											<c:if test="${product.price - product.promotionaprice > 0}">
-											<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">						
-														<span>-$${product.price-product.promotionaprice}</span>	
-											</div>
+												<div
+													class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
+													<span>-$${product.price-product.promotionaprice}</span>
+												</div>
 											</c:if>
-											
+
 											<div class="product_info">
 												<h6 class="product_name">
 													<a href="/product/user/list/${product.id}">${product.name}</a>
@@ -225,13 +210,16 @@
 											</div>
 										</div>
 										<div class="red_button add_to_cart_button">
-											<a href="/product/user/list/${product.id}">add to cart</a>
+											<c:if test="${user == null}">
+												<a href="/login">add to cart</a>
+											</c:if>
+											<c:if test="${user != null}">
+												<a href="/product/user/list/${product.id}">add to cart</a>
+											</c:if>
 										</div>
 									</div>
-									
-									
 								</c:forEach>
-								
+
 							</div>
 
 							<!-- Product Sorting -->
@@ -288,8 +276,8 @@
 						<i class="fa fa-truck" aria-hidden="true"></i>
 					</div>
 					<div class="benefit_content">
-						<h6>free shipping</h6>
-						<p>Suffered Alteration in Some Form</p>
+						<h6>Miễn phí vận chuyển</h6>
+						<p>Trong Một Số Hình Thức</p>
 					</div>
 				</div>
 			</div>
@@ -299,8 +287,8 @@
 						<i class="fa fa-money" aria-hidden="true"></i>
 					</div>
 					<div class="benefit_content">
-						<h6>cach on delivery</h6>
-						<p>The Internet Tend To Repeat</p>
+						<h6>Thanh toán COD</h6>
+						<p>Được Kiểm Tra Hàng Trước</p>
 					</div>
 				</div>
 			</div>
@@ -310,8 +298,8 @@
 						<i class="fa fa-undo" aria-hidden="true"></i>
 					</div>
 					<div class="benefit_content">
-						<h6>45 days return</h6>
-						<p>Making it Look Like Readable</p>
+						<h6>45 ngày hoàn hàng</h6>
+						<p>Nếu Sản Phẩm Có Vấn Đề</p>
 					</div>
 				</div>
 			</div>
@@ -321,8 +309,8 @@
 						<i class="fa fa-clock-o" aria-hidden="true"></i>
 					</div>
 					<div class="benefit_content">
-						<h6>opening all week</h6>
-						<p>8AM - 09PM</p>
+						<h6>Mở của cả tuần</h6>
+						<p>9h Sáng - 10h Tối</p>
 					</div>
 				</div>
 			</div>

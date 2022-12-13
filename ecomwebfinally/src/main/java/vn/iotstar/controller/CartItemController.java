@@ -52,7 +52,7 @@ import vn.iotstar.service.IUserService;
 public class CartItemController {
 
 	@Autowired
-	ICartItemService cartItemService;
+	ICartItemService iCartItemService;
 	@Autowired
 	IUserService userService;
 	@Autowired
@@ -84,6 +84,17 @@ public class CartItemController {
 		User users = user.get();
 		List<Order> listorder = users.getOrders();		
 		model.addAttribute("order", listorder);
+		
+		User userss = (User) session.getAttribute("user");
+		long soSanPhamTrongGio = 0;
+		if (user != null) {
+			for (Cart cart : userss.getCarts()) {
+				Cart cartn = cart;
+				soSanPhamTrongGio += iCartItemService.countByCart(cartn);
+			}
+		}
+		model.addAttribute("count", soSanPhamTrongGio);
+		
 		return new ModelAndView("deliveries/list", model);
 	}
 	@GetMapping("List")
@@ -110,6 +121,17 @@ public class CartItemController {
 		
 		model.addAttribute("sum", sum);
 		model.addAttribute("cartitem", listcartitem);
+		
+		long soSanPhamTrongGio = 0;
+		if (User != null) {
+			for (Cart cart : User.getCarts()) {
+				Cart cartn = cart;
+				soSanPhamTrongGio += iCartItemService.countByCart(cartn);
+			}
+		}
+
+		model.addAttribute("count", soSanPhamTrongGio);
+		
 		return new ModelAndView("carts/list", model);
 	}
 
@@ -119,7 +141,19 @@ public class CartItemController {
 		User User= (User)session.getAttribute("user");
 		Optional<User> opt = userService.findById(User.getId());
 		List<Delivery> deli = deliveryService.findAll();
-		UserModel user = new UserModel();	
+		UserModel user = new UserModel();
+		
+		User userss = (User) session.getAttribute("user");
+		long soSanPhamTrongGio = 0;
+		if (user != null) {
+			for (Cart cart : userss.getCarts()) {
+				Cart cartn = cart;
+				soSanPhamTrongGio += iCartItemService.countByCart(cartn);
+			}
+		}
+
+		model.addAttribute("count", soSanPhamTrongGio);
+		
 		float sum=0;
 		if (opt.isPresent() ) {
 			User entity = opt.get();
@@ -146,6 +180,7 @@ public class CartItemController {
 			model.addAttribute("sum", sum);			
 			model.addAttribute("user", user);
 			model.addAttribute("delivery", deli);
+			
 			return new ModelAndView("user/common/common", model);
 		}
 		model.addAttribute("error", "Product không tồn tại");
@@ -155,7 +190,7 @@ public class CartItemController {
 	@PostMapping("SaveOrder")
 	public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("order") OrderModel order,
 			@Valid @ModelAttribute("cartit") CartItemModel cartit, BindingResult result) {
-		User User= (User)session.getAttribute("user");
+			User User= (User)session.getAttribute("user");
 			Optional<User> user = userService.findById(User.getId());
 			User users = user.get();
 			List<Cart> listcart = users.getCarts();
@@ -214,7 +249,7 @@ public class CartItemController {
 									 itemorder.setCount(item2.getCount());
 									 itemorder.setProduct(item2.getProduct());
 									 orderItemService.save(itemorder);	
-									 cartItemService.deleteById(item2.getId());
+									 iCartItemService.deleteById(item2.getId());
 								 } 	
 						  }  
 						  
@@ -233,7 +268,7 @@ public class CartItemController {
 	@GetMapping("")
 	public ModelAndView List(ModelMap model, HttpSession sesson) {
 
-		List<CartItem> CartItems = cartItemService.findAll();
+		List<CartItem> CartItems = iCartItemService.findAll();
 		model.addAttribute("CartItems", CartItems);
 		return new ModelAndView("user/cartItem/list", model);
 	}
@@ -249,7 +284,7 @@ public class CartItemController {
 
 	@GetMapping("edit/{id}")
 	public ModelAndView edit(ModelMap model, @PathVariable("id") Integer id) throws IOException {
-		Optional<CartItem> opt = cartItemService.findById(id);
+		Optional<CartItem> opt = iCartItemService.findById(id);
 		CartItemModel CartItem = new CartItemModel();
 		if (opt.isPresent()) {
 			CartItem entity = opt.get();
@@ -266,7 +301,7 @@ public class CartItemController {
 	}
 	@GetMapping("delete/{id}")
 	public ModelAndView delete(ModelMap model, @PathVariable("id") int id) {
-		cartItemService.deleteById(id);
+		iCartItemService.deleteById(id);
 		model.addAttribute("message", "Delete Succesfull !!!");
 		return new ModelAndView("redirect:/user/cart/List", model);
 

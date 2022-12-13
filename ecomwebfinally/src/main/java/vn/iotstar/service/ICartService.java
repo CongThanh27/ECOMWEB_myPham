@@ -43,5 +43,8 @@ public interface ICartService {
 	<S extends Cart> S save(S entity);
 	Optional<Cart> findByStore(Store store);
 	Optional<Cart> findByUser(User user);
+	List<Cart> findByStore(Integer Storeid);
+	List<Cart> findByUser(Integer id);
+	
 
 }
