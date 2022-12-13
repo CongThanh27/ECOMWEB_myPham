@@ -28,6 +28,7 @@ public class CustomSiteMeshFileter extends ConfigurableSiteMeshFilter {
 		.addDecoratorPath("/seller/product", "/decorators/seller/product.jsp")
 		.addDecoratorPath("/seller/addOrEdit", "/decorators/seller/product.jsp")
 		.addDecoratorPath("/seller/order", "/decorators/seller/order.jsp")
+		.addDecoratorPath("/seller/edit/*", "/decorators/seller/product.jsp")
 		
 		
 		

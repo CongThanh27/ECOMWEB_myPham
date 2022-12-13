@@ -223,17 +223,17 @@
 								<td width="233px"><c:if test="${order.giaohang==0}">
 										<div class="progress progress-xs">
 											<div class="progress-bar bg-danger" style="width: 10%"></div>
-											<a href="/seller/delete/${order.id }">Xoá đơn hàng</a>
+											<a href="/seller/delete/${order.id }" >Xoá đơn hàng</a>
 										</div>
 									</c:if> <c:if test="${order.giaohang==1}">
 										<div class="progress progress-xs">
 											<div class="progress-bar bg-warning" style="width: 20%"></div>
-											<a href="/seller/process/${order.id }">Xác nhận đơn hàng</a>
+											<div style="bottom: -8px"><a href="/seller/process/${order.id }">Xác nhận đơn hàng</a></div>
 										</div>
 									</c:if> <c:if test="${order.giaohang==2}">
 										<div class="progress progress-xs">
 											<div class="progress-bar bg-primary" style="width: 35%"></div>
-											<a href="/seller/ship/${order.id }">Giao hàng</a>
+											<div style="bottom: -8px"><a href="/seller/ship/${order.id }">Giao hàng</a></div>
 										</div>
 									</c:if> <c:if test="${order.giaohang==3}">
 										<div class="progress progress-xs">

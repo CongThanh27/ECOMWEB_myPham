@@ -25,7 +25,7 @@
         </div> --%>
         <div class="info">
           <a href="/seller" class="d-block">Nhóm 18</a>
-          <a>${user.id } Id</a>
+          
         </div>
       </div>
 
