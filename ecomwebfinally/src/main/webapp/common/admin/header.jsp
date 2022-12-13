@@ -149,9 +149,9 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="/" class="brand-link">
       <img src="/resources/z3955099459254_2ccf7ca1feba48d0591dc18cba3f5863.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminT2K</span>
+      <span class="brand-text font-weight-light">T2KShop</span>
     </a>
 
     <!-- Sidebar -->

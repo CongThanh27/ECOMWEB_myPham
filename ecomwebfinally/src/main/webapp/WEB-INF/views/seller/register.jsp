@@ -14,7 +14,7 @@
 
       <form action="/sellerRegister" method="post" enctype="multipart/form-data">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="First name" name="firstName" value="${store.name}">
+          <input type="text" class="form-control" placeholder="Store name" name="name" value="${store.name}">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -23,7 +23,7 @@
         </div>
         
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Last name" name="lastName" value="${store.bio }">
+          <input type="text" class="form-control" placeholder="Bio" name="bio" value="${store.bio }">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
