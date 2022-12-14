@@ -50,7 +50,7 @@
 										<select id="delivery" onchange="deliveryChanged(this)">
 											<option>--Vui lòng chọn hình thức giao hàng--</option>
 											<c:forEach items="${delivery}" var="delivery">
-												<option value="${delivery.price},${delivery.id}">${delivery.name},${delivery.desciption}</option>
+												<option value="${delivery.price},${delivery.id}">${delivery.name}</option>
 											</c:forEach>
 										</select>
 									<input hidden="hidden" readonly="readonly" value="1" id="deliveryid" name="delivereid">

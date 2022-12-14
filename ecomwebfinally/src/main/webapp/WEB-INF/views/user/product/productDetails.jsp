@@ -211,7 +211,7 @@
 
 							<!-- User Review -->
 							<c:forEach items="${review}" var="review">
-								<c:url value="/images/${review.imgages}" var="imgUser"></c:url>
+								<c:url value="/images/user/${review.imgages}" var="imgUser"></c:url>
 								<div
 									class="user_review_container d-flex flex-column flex-sm-row">
 									<div class="user">

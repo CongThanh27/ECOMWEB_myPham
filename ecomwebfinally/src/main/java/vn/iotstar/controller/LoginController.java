@@ -75,7 +75,7 @@ public class LoginController {
 			User user = userService.findByEmail(email);
 			session.setAttribute("user", user);
 			model.addAttribute("user", user);
-
+			
 			List<Category> cate = categoryService.findTop3ByOrderByIdAsc();
 			model.addAttribute("category", cate);
 
@@ -94,7 +94,9 @@ public class LoginController {
 			}
 
 			model.addAttribute("count", soSanPhamTrongGio);
-
+			if (user.getRole() == true) {
+				return "redirect:/admin/ThongKe/1";
+			}
 			return "index";
 		} else {
 			System.out.println("Login that bai");
