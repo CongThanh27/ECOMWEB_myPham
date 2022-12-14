@@ -1,4 +1,4 @@
-package vn.iotstar.controller;
+package vn.iotstar.controller.Common;
 
 import java.util.Date;
 import java.util.List;
