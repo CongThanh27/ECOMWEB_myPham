@@ -1,4 +1,4 @@
-package vn.iotstar.controller;
+package vn.iotstar.controller.Common;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -305,6 +305,20 @@ public class CartItemController {
 		model.addAttribute("message", "Delete Succesfull !!!");
 		return new ModelAndView("redirect:/user/cart/List", model);
 
+	}
+	
+	@GetMapping("/process/{id}")
+	public String process(ModelMap model, @PathVariable("id") int id) {
+		Order order = orderService.findById(id).get();
+		if (order.getGiaohang() == 1) {
+			order.setGiaohang(0);
+		}
+		else {
+			order.setGiaohang(4);
+		}
+		orderService.save(order);
+		
+		return "redirect:/user/cart/Order";
 	}
 	
 }

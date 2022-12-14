@@ -46,7 +46,7 @@ public class User {
 	private String address;
 	private String avatar;
 	private Boolean isSeller;
-	
+
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	private Date createat;
@@ -57,12 +57,12 @@ public class User {
 
 	@OneToMany(mappedBy = "user")
 	List<Order> orders;
-	@OneToMany(mappedBy = "user")
-	List<Store> stores;
-	
 	/*
-	 * @OneToOne(mappedBy = "user") private Store stores;
+	 * @OneToMany(mappedBy = "user") List<Store> stores;
 	 */
+
+	@OneToOne(mappedBy = "user")
+	private Store stores;
 
 	@OneToMany(mappedBy = "user")
 	List<Cart> carts;

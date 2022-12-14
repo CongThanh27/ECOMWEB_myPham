@@ -450,7 +450,7 @@
                     <ul class="users-list clearfix">
                      <c:forEach items="${listusernoibat}" var="listusernoibat">
                       <li>
-                      <c:url value="/images/${listusernoibat.avatar}" var="imgUrl"></c:url>
+                      <c:url value="/images/user/${listusernoibat.avatar}" var="imgUrl"></c:url>
                         <img src="${imgUrl}" alt="User Image">
                         <a class="users-list-name" href="/admin/profileuser/${listusernoibat.id}">${listusernoibat.firstName} ${listusernoibat.lastName}</a>
                         <span class="users-list-date">${listusernoibat.createat}</span>
@@ -504,9 +504,9 @@
                       <td>${orderganday.delivery.name}</td>
                       <td>
                       <c:if test="${orderganday.giaohang==1}"><span class="badge badge-warning">Chờ xác nhận</span></c:if>
-                      <c:if test="${orderganday.giaohang==0}"><span class="badge badge-badge-danger">Đã Hủy</span></c:if>
-                      <c:if test="${orderganday.giaohang==2}"><span class="badge badge-badge-info">Đang giao</span></c:if>
-                       <c:if test="${orderganday.giaohang==3}"><span class="badge badge-badge-info">Đang giao</span></c:if>
+                      <c:if test="${orderganday.giaohang==0}"><span class="badge badge-danger">Đã Hủy</span></c:if>
+                      <c:if test="${orderganday.giaohang==2}"><span class="badge badge-info">Đang giao</span></c:if>
+                       <c:if test="${orderganday.giaohang==3}"><span class="badge badge-info">Đang giao</span></c:if>
                       <c:if test="${orderganday.giaohang==4}"><span class="badge badge-success">Đã nhận</span></c:if>
                       </td>                      
                       <td>

@@ -106,19 +106,19 @@
 									href="/product/user/list/${orderitem.product.id}">${orderitem.product.name}</a></td>
 								<td width="233px"><c:if test="${order.giaohang==0}">
 										<div class="progress progress-xs">
-											<div class="progress-bar bg-danger" style="width: 10%"></div>
+											<div class="progress-bar bg-danger" style="width: 20%"></div>
 										</div>
 									</c:if> <c:if test="${order.giaohang==1}">
 										<div class="progress progress-xs">
-											<div class="progress-bar bg-warning" style="width: 10%"></div>
+											<div class="progress-bar bg-warning" style="width: 40%"></div>
 										</div>
 									</c:if> <c:if test="${order.giaohang==2}">
 										<div class="progress progress-xs">
-											<div class="progress-bar bg-primary" style="width: 35%"></div>
+											<div class="progress-bar bg-primary" style="width: 60%"></div>
 										</div>
 									</c:if> <c:if test="${order.giaohang==3}">
 										<div class="progress progress-xs">
-											<div class="progress-bar bg-primary" style="width: 75%"></div>
+											<div class="progress-bar bg-primary" style="width: 80%"></div>
 										</div>
 									</c:if> <c:if test="${order.giaohang==4}">
 										<div class="progress progress-xs">
@@ -136,6 +136,9 @@
 					</tbody>
 				</table>
 				<span class="badge bg-danger"> Tổng:$${order.price}</span>
+				<c:if test="${ order.giaohang == 1}"><a href="/user/cart/process/${order.id }"><span class="badge bg-danger">Hủy đơn</span></a></c:if>
+			<c:if test="${ order.giaohang == 3}"><a href="/user/cart/process/${order.id }"><span class="badge bg-success">Đã nhận</span></a></c:if>
+	
 			</c:forEach>
 		</div>
 		<!-- /.card-body -->
