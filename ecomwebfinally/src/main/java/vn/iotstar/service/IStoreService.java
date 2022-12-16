@@ -35,6 +35,6 @@ public interface IStoreService {
 
 	Store getById(Integer id);
 	
-	Store findByUser(User user);
+	Optional<Store> findByUser(User user);
 
 }

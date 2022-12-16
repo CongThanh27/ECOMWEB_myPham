@@ -223,20 +223,6 @@
 								<td width="233px">
 										<c:if test="${order.giaohang==0}">
 										<div class="progress progress-xs">
-<<<<<<< HEAD
-											<div class="progress-bar bg-danger" style="width: 10%"></div>
-											<a href="/seller/delete/${order.id }" >Xoá đơn hàng</a>
-										</div>
-									</c:if> <c:if test="${order.giaohang==1}">
-										<div class="progress progress-xs">
-											<div class="progress-bar bg-warning" style="width: 20%"></div>
-											<div style="bottom: -8px"><a href="/seller/process/${order.id }">Xác nhận đơn hàng</a></div>
-										</div>
-									</c:if> <c:if test="${order.giaohang==2}">
-										<div class="progress progress-xs">
-											<div class="progress-bar bg-primary" style="width: 35%"></div>
-											<div style="bottom: -8px"><a href="/seller/ship/${order.id }">Giao hàng</a></div>
-=======
 											<div class="progress-bar bg-danger" style="width: 20%"></div>
 										</div>
 									</c:if> <c:if test="${order.giaohang==1}">
@@ -246,7 +232,6 @@
 									</c:if> <c:if test="${order.giaohang==2}">
 										<div class="progress progress-xs">
 											<div class="progress-bar bg-primary" style="width: 60%"></div>
->>>>>>> 280b4619df0f7e99adcd2ca917ceb6162200139d
 										</div>
 									</c:if> <c:if test="${order.giaohang==3}">
 										<div class="progress progress-xs">
@@ -268,8 +253,8 @@
 					</tbody>
 				</table>
 				<span class="badge bg-danger"> Tổng:$${order.price}</span>
-				<c:if test="${ order.giaohang == 0}"><a href="/seller/ship/${order.id }"><span class="badge bg-danger">Xóa đơn hàng</span></a></c:if>
-				<c:if test="${ order.giaohang == 1}"><a href="/seller/ship/${order.id }"><span class="badge bg-danger">Xác nhận</span></a></c:if>
+				<c:if test="${ order.giaohang == 0}"><a href="/seller/delete/${order.id }"><span class="badge bg-danger">Xóa đơn hàng</span></a></c:if>
+				<c:if test="${ order.giaohang == 1}"><a href="/seller/process/${order.id }"><span class="badge bg-danger">Xác nhận</span></a></c:if>
 				<c:if test="${ order.giaohang == 2}"><a href="/seller/ship/${order.id }"><span class="badge bg-danger">Giao hàng</span></a></c:if>
 			</c:forEach>
 		</div>

@@ -243,7 +243,7 @@
 
 						<!-- Add Review -->
 
-						<div class="col-lg-6 add_review_col">
+						<%-- <div class="col-lg-6 add_review_col">
 
 							<div class="add_review">
 
@@ -268,12 +268,12 @@
 											<li><i class="fa fa-star" aria-hidden="true"></i></li>
 											<li><i class="fa fa-star" aria-hidden="true"></i></li>
 											<li><i class="fa fa-star" aria-hidden="true"></i></li>
-											<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+											<li><i class="fa fa-star" aria-hidden="true"></i></li>
 											<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 										</ul>
 
 										<input hidden="hidden" type="text" class="form-control"
-											readonly="readonly" name="rating" value=3 id="rating" />
+											readonly="readonly" name="rating" value="" id="rating" />
 										<textarea id="review_message" class="input_review"
 											name="content" placeholder="Your Review" rows="4" required
 											data-error="Please, leave us a review."></textarea>
@@ -288,7 +288,7 @@
 							</div>
 
 						</div>
-
+ --%>
 					</div>
 				</div>
 

@@ -23,11 +23,8 @@
           <img src="${URL}dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div> --%>
 				<div class="info">
-<<<<<<< HEAD
-					<a href="/seller" class="d-block">Nhóm 18</a> 
-=======
 					<a href="/seller" class="d-block">Nhóm 9</a> 
->>>>>>> 280b4619df0f7e99adcd2ca917ceb6162200139d
+
 				</div>
 			</div>
 
@@ -201,18 +198,16 @@
 								
 								
 
-<<<<<<< HEAD
+
 						</div>
 						<%-- <div class="input-group mb-3">
 							<label for="storeid" class="form-lablel"> Storeid:</label> <br>
 							<input type="hidden" value="${product.storeid}" name="storeid">
 						</div> --%>
 						<input type="hidden" value="${product.storeid}" name="storeid">
-=======
+
 						
-							<input type="hidden" value="${product.storeid}" name="storeid">
-						
->>>>>>> 280b4619df0f7e99adcd2ca917ceb6162200139d
+
 						<%-- <div class="input-group mb-3">
 							<label for="rating" class="form-lablel"> Rating:</label> <br>
 							<input type="text" value="${product.rating}" name="rating">

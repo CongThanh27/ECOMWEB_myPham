@@ -69,8 +69,7 @@ public class SellerController {
 	public String sellerPage(ModelMap model) {
 		User user = (User) session.getAttribute("user");
 		model.addAttribute("user", user);
-		// Lay don cho xac nhan va tinh doanh thu
-		Store store = storeService.findByUser(user);
+		Store store = user.getStores();
 		List<Order> allOrder = orderService.findAllByStore(store);
 		Integer orderCount = allOrder.size();
 		Integer notProcessCount = 0;
@@ -109,7 +108,9 @@ public class SellerController {
 	@GetMapping("/product")
 	public String productList(ModelMap model) {
 		User user = (User) session.getAttribute("user");
-		Store store = storeService.findByUser(user);
+		Store store = user.getStores();
+		System.out.println("User " + user.getId());
+		System.out.println("Store " + store.getId());
 		List<Product> product = productService.findByStore(store);
 		List<Category> cate = new ArrayList<>();
 		for (Product prod : product) {
@@ -180,11 +181,12 @@ public class SellerController {
 		}
 		BeanUtils.copyProperties(product, entity);
 		User user = (User) session.getAttribute("user");
-		Store store = storeService.findByUser(user);
+		Store store = user.getStores();
 		Optional<Category> optCate = cateService.findById(product.getCategoryid());
 		long millis = System.currentTimeMillis();
 		java.sql.Date date = new java.sql.Date(millis);
 		entity.setCategory(optCate.get());
+		System.out.println(store.getId());
 		entity.setStore(store);
 		entity.setCreateat(date);
 		entity.setSold(0);
@@ -214,7 +216,7 @@ public class SellerController {
 	@GetMapping("/order")
 	public String showSellerOrder(ModelMap model) {
 		User user = (User) session.getAttribute("user");
-		Store store = storeService.findByUser(user);
+		Store store = user.getStores();
 		List<Order> order = orderService.findAllByStore(store);
 		Integer choxacnhan = 0;
 		Integer dahuy = 0;

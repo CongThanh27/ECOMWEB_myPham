@@ -76,7 +76,7 @@ public class StoreServiceImpl  implements IStoreService{
 	}
 	
 	@Override
-	public Store findByUser(User user) {
+	public Optional<Store> findByUser(User user) {
 		return storerepository.findByUser(user);
 	}
 	
