@@ -211,7 +211,7 @@
 
 							<!-- User Review -->
 							<c:forEach items="${review}" var="review">
-								<c:url value="/images/${review.imgages}" var="imgUser"></c:url>
+								<c:url value="/images/user/${review.imgages}" var="imgUser"></c:url>
 								<div
 									class="user_review_container d-flex flex-column flex-sm-row">
 									<div class="user">
@@ -268,12 +268,12 @@
 											<li><i class="fa fa-star" aria-hidden="true"></i></li>
 											<li><i class="fa fa-star" aria-hidden="true"></i></li>
 											<li><i class="fa fa-star" aria-hidden="true"></i></li>
-											<li><i class="fa fa-star" aria-hidden="true"></i></li>
+											<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 											<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 										</ul>
 
 										<input hidden="hidden" type="text" class="form-control"
-											readonly="readonly" name="rating" value="" id="rating" />
+											readonly="readonly" name="rating" value=3 id="rating" />
 										<textarea id="review_message" class="input_review"
 											name="content" placeholder="Your Review" rows="4" required
 											data-error="Please, leave us a review."></textarea>

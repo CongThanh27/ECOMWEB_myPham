@@ -1,4 +1,4 @@
-package vn.iotstar.controller;
+package vn.iotstar.controller.Common;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -68,44 +68,42 @@ public class ProductController {
 	@Autowired
 	HttpSession session;
 
+	// User User= (User)session.getAttribute("user");
 
-	
-	//User User= (User)session.getAttribute("user");
-	
-	  public Cart CreateCart1(Integer Storeid) { 
-		  User User=(User)session.getAttribute("user"); 
-		  List<Cart> cart1=cartService.findByStore(Storeid); 
-		  List<Cart> cart2=cartService.findByUser(User.getId()); 
-		  Optional<Store> store =storeService.findById(Storeid);
-		  Store stores = store.get(); 
-		  if(!cart1.isEmpty()&&!cart2.isEmpty()) {
-		  for(Cart item :cart1) 
-			  for(Cart item2 : cart2) { 
-				  if (item.getId()==item2.getId()) 
-					  return item; 
-				  } }
-		  Cart entity = new Cart(); 
-		  entity.setUser(User);
-		  entity.setStore(stores); 
-		  Date getDate = new Date();
-		  entity.setCreateat(getDate); 
-		  entity.setUpdateat(getDate);
-		  cartService.save(entity); 
-		  return entity; 
-		  }
-	 
-	
-	public Cart CreateCart2(int Storeid) { 
-		User User=(User)session.getAttribute("user");
-	
+	public Cart CreateCart1(Integer Storeid) {
+		User User = (User) session.getAttribute("user");
+		List<Cart> cart1 = cartService.findByStore(Storeid);
+		List<Cart> cart2 = cartService.findByUser(User.getId());
 		Optional<Store> store = storeService.findById(Storeid);
-		List<Cart> cart1=cartService.findByStore(Storeid); 
-		List<Cart> cart2=cartService.findByUser(User.getId()); 
-		 Cart entity1 = new Cart(); 
+		Store stores = store.get();
+		if (!cart1.isEmpty() && !cart2.isEmpty()) {
+			for (Cart item : cart1)
+				for (Cart item2 : cart2) {
+					if (item.getId() == item2.getId())
+						return item;
+				}
+		}
+		Cart entity = new Cart();
+		entity.setUser(User);
+		entity.setStore(stores);
+		Date getDate = new Date();
+		entity.setCreateat(getDate);
+		entity.setUpdateat(getDate);
+		cartService.save(entity);
+		return entity;
+	}
+
+	public Cart CreateCart2(int Storeid) {
+		User User = (User) session.getAttribute("user");
+
+		Optional<Store> store = storeService.findById(Storeid);
+		List<Cart> cart1 = cartService.findByStore(Storeid);
+		List<Cart> cart2 = cartService.findByUser(User.getId());
+		Cart entity1 = new Cart();
 		Store stores = store.get();
 
-		if ( cartService.findByUser(User).isEmpty()) {
-			//gọi hàm tạo item
+		if (cartService.findByUser(User).isEmpty()) {
+			// gọi hàm tạo item
 			Cart entity = new Cart();
 			entity.setUser(User);
 			entity.setStore(stores);
@@ -113,49 +111,42 @@ public class ProductController {
 			entity.setCreateat(getDate);
 			entity.setUpdateat(getDate);
 			cartService.save(entity);
-			return entity;			
-		}
-		else {	 
-			  if(!cart1.isEmpty()&&!cart2.isEmpty()) {
-			  for(Cart item :cart1) 
-				  for(Cart item2 : cart2) { 
-					  if (item.getId()==item2.getId()) 
-						  return item; 
-					  } }			
-			}
-		return entity1;
-		
-		
-		}
-	public Cart CreateCart(int Storeid) { 
-		User user=(User)session.getAttribute("user");
-		Optional<Store> store = storeService.findById(Storeid);
-		Store stores = store.get();
-		if (cartService.findByStore(stores).isEmpty()&& cartService.findByUser(user).isEmpty()) {
-			//gọi hàm tạo item
-			Cart entity = new Cart();
-			entity.setUser(user);
-			entity.setStore(stores);
-			Date getDate = new Date();
-			entity.setCreateat(getDate);
-			entity.setUpdateat(getDate);
-			cartService.save(entity);
 			return entity;
-			
-		}
-		else {
-			// tạo CreateCart
-			Optional<Cart> cart = cartService.findByUser(user);
-			Cart carts = cart.get();;
-			return carts;
-			
+		} else {
+			if (!cart1.isEmpty() && !cart2.isEmpty()) {
+				for (Cart item : cart1)
+					for (Cart item2 : cart2) {
+						if (item.getId() == item2.getId())
+							return item;
+					}
 			}
-		
-		
 		}
-@PostMapping("AddCart")
-public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartModel cart,
-		@Valid @ModelAttribute("cartit") CartItemModel cartit, BindingResult result) {
+		return entity1;
+
+	}
+
+	public Cart CreateCart(int Storeid) {
+		User user = (User) session.getAttribute("user");
+		Optional<Store> optStore = storeService.findById(Storeid);
+		Store store = optStore.get();
+		Optional<Cart> cart = cartService.findByUserAndStore(user, store);
+		if (cart.isPresent()) {
+			return cart.get();
+		}
+		// gọi hàm tạo item
+		Cart entity = new Cart();
+		entity.setUser(user);
+		entity.setStore(store);
+		Date getDate = new Date();
+		entity.setCreateat(getDate);
+		entity.setUpdateat(getDate);
+		cartService.save(entity);
+		return entity;
+	}
+
+	@PostMapping("AddCart")
+	public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartModel cart,
+			@Valid @ModelAttribute("cartit") CartItemModel cartit, BindingResult result) {
 
 		Cart cartid = CreateCart(cart.getStoreid());
 		CartItem entity = new CartItem();
@@ -253,21 +244,68 @@ public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("cart") CartM
 			BeanUtils.copyProperties(entity, product);
 			list = entity.getReviews();
 			List<ReviewModel> listkq = new ArrayList<ReviewModel>();
-			if(!list.isEmpty()) {
-			for (Review item : list) {
-				ReviewModel review = new ReviewModel();
-				BeanUtils.copyProperties(item, review);
-				review.setLastname(item.getUser().getLastName());
-				review.setFistname(item.getUser().getFirstName());
-				review.setImgages(item.getUser().getAvatar());
-				listkq.add(review);
-			}
-			model.addAttribute("review", listkq);
+			if (!list.isEmpty()) {
+				for (Review item : list) {
+					ReviewModel review = new ReviewModel();
+					BeanUtils.copyProperties(item, review);
+					review.setLastname(item.getUser().getLastName());
+					review.setFistname(item.getUser().getFirstName());
+					review.setImgages(item.getUser().getAvatar());
+					listkq.add(review);
+				}
+				model.addAttribute("review", listkq);
 			}
 			TBDanhGia();
 			model.addAttribute("Storeid", entity.getStore().getId());
 			model.addAttribute("product", product);
-			
+
+			model.addAttribute("slreview", list.size());
+
+			long soSanPhamTrongGio = 0;
+			if (user != null) {
+				for (Cart cart : user.getCarts()) {
+					Cart cartn = cart;
+					soSanPhamTrongGio += iCartItemService.countByCart(cartn);
+				}
+			}
+			model.addAttribute("count", soSanPhamTrongGio);
+
+			return new ModelAndView("user/product/productDetailsWithoutComment", model);
+		}
+		model.addAttribute("error", "Product không tồn tại");
+		return new ModelAndView("forward:/product/user", model);
+
+	}
+	
+	@GetMapping("user/lists/{id}")
+	public ModelAndView ChiTietDanhGia(ModelMap model, @PathVariable("id") int id) throws IOException {
+
+		Optional<Product> opt = productService.findById(id);
+		List<Review> list = null;
+		User user = (User) session.getAttribute("user");
+		model.addAttribute("user", user);
+		ProductModel product = new ProductModel();
+		if (opt.isPresent()) {
+
+			Product entity = opt.get();
+			BeanUtils.copyProperties(entity, product);
+			list = entity.getReviews();
+			List<ReviewModel> listkq = new ArrayList<ReviewModel>();
+			if (!list.isEmpty()) {
+				for (Review item : list) {
+					ReviewModel review = new ReviewModel();
+					BeanUtils.copyProperties(item, review);
+					review.setLastname(item.getUser().getLastName());
+					review.setFistname(item.getUser().getFirstName());
+					review.setImgages(item.getUser().getAvatar());
+					listkq.add(review);
+				}
+				model.addAttribute("review", listkq);
+			}
+			TBDanhGia();
+			model.addAttribute("Storeid", entity.getStore().getId());
+			model.addAttribute("product", product);
+
 			model.addAttribute("slreview", list.size());
 
 			long soSanPhamTrongGio = 0;

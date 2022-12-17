@@ -26,7 +26,7 @@
           <img src="${URL}dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div> --%>
         <div class="info">
-          <a href="/seller" class="d-block">Nhóm 18</a>
+          <a href="/seller" class="d-block">Nhóm 9</a>
         </div>
       </div>
 
@@ -220,24 +220,22 @@
 								</td>
 								<td width="639px"><a
 									href="/product/user/list/${orderitem.product.id}">${orderitem.product.name}</a></td>
-								<td width="233px"><c:if test="${order.giaohang==0}">
+								<td width="233px">
+										<c:if test="${order.giaohang==0}">
 										<div class="progress progress-xs">
-											<div class="progress-bar bg-danger" style="width: 10%"></div>
-											<a href="/seller/delete/${order.id }">Xoá đơn hàng</a>
+											<div class="progress-bar bg-danger" style="width: 20%"></div>
 										</div>
 									</c:if> <c:if test="${order.giaohang==1}">
 										<div class="progress progress-xs">
-											<div class="progress-bar bg-warning" style="width: 20%"></div>
-											<a href="/seller/process/${order.id }">Xác nhận đơn hàng</a>
+											<div class="progress-bar bg-warning" style="width: 40%"></div>
 										</div>
 									</c:if> <c:if test="${order.giaohang==2}">
 										<div class="progress progress-xs">
-											<div class="progress-bar bg-primary" style="width: 35%"></div>
-											<a href="/seller/ship/${order.id }">Giao hàng</a>
+											<div class="progress-bar bg-primary" style="width: 60%"></div>
 										</div>
 									</c:if> <c:if test="${order.giaohang==3}">
 										<div class="progress progress-xs">
-											<div class="progress-bar bg-primary" style="width: 75%"></div>
+											<div class="progress-bar bg-primary" style="width: 80%"></div>
 										</div>
 									</c:if> <c:if test="${order.giaohang==4}">
 										<div class="progress progress-xs">
@@ -255,6 +253,9 @@
 					</tbody>
 				</table>
 				<span class="badge bg-danger"> Tổng:$${order.price}</span>
+				<c:if test="${ order.giaohang == 0}"><a href="/seller/delete/${order.id }"><span class="badge bg-danger">Xóa đơn hàng</span></a></c:if>
+				<c:if test="${ order.giaohang == 1}"><a href="/seller/process/${order.id }"><span class="badge bg-danger">Xác nhận</span></a></c:if>
+				<c:if test="${ order.giaohang == 2}"><a href="/seller/ship/${order.id }"><span class="badge bg-danger">Giao hàng</span></a></c:if>
 			</c:forEach>
 		</div>
 		<!-- /.card-body -->

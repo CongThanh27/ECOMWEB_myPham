@@ -260,7 +260,7 @@
             <!-- MAP & BOX PANE -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">US-Visitors Report</h3>
+                <h3 class="card-title">Các tỉnh thành mua nhiều nhất</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -277,29 +277,10 @@
                   <div class="p-1 flex-fill" style="overflow: hidden">
                     <!-- Map will be created here -->
                     <div id="world-map-markers" style="height: 325px; overflow: hidden">
-                      <div class="map"></div>
+                      <!-- <div class="map"></div> -->
                     </div>
                   </div>
-                  <div class="card-pane-right bg-success pt-2 pb-2 pl-4 pr-4">
-                    <div class="description-block mb-4">
-                      <div class="sparkbar pad" data-color="#fff">90,70,90,70,75,80,70</div>
-                      <h5 class="description-header">8390</h5>
-                      <span class="description-text">Visits</span>
-                    </div>
-                    <!-- /.description-block -->
-                    <div class="description-block mb-4">
-                      <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
-                      <h5 class="description-header">30%</h5>
-                      <span class="description-text">Referrals</span>
-                    </div>
-                    <!-- /.description-block -->
-                    <div class="description-block">
-                      <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
-                      <h5 class="description-header">70%</h5>
-                      <span class="description-text">Organic</span>
-                    </div>
-                    <!-- /.description-block -->
-                  </div><!-- /.card-pane-right -->
+ 
                 </div><!-- /.d-md-flex -->
               </div>
               <!-- /.card-body -->
@@ -313,7 +294,7 @@
                     <h3 class="card-title">Direct Chat</h3>
 
                     <div class="card-tools">
-                      <span title="3 New Messages" class="badge badge-warning">3</span>
+                      <span title="3 New Messages" class="badge badge-warning">0</span>
                       <button type="button" class="btn btn-tool" data-card-widget="collapse">
                         <i class="fas fa-minus"></i>
                       </button>
@@ -329,70 +310,7 @@
                   <div class="card-body">
                     <!-- Conversations are loaded here -->
                     <div class="direct-chat-messages">
-                      <!-- Message. Default to the left -->
-                      <div class="direct-chat-msg">
-                        <div class="direct-chat-infos clearfix">
-                          <span class="direct-chat-name float-left">Alexander Pierce</span>
-                          <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
-                        </div>
-                        <!-- /.direct-chat-infos -->
-                        <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
-                        <!-- /.direct-chat-img -->
-                        <div class="direct-chat-text">
-                          Is this template really for free? That's unbelievable!
-                        </div>
-                        <!-- /.direct-chat-text -->
-                      </div>
-                      <!-- /.direct-chat-msg -->
-
-                      <!-- Message to the right -->
-                      <div class="direct-chat-msg right">
-                        <div class="direct-chat-infos clearfix">
-                          <span class="direct-chat-name float-right">Sarah Bullock</span>
-                          <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
-                        </div>
-                        <!-- /.direct-chat-infos -->
-                        <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
-                        <!-- /.direct-chat-img -->
-                        <div class="direct-chat-text">
-                          You better believe it!
-                        </div>
-                        <!-- /.direct-chat-text -->
-                      </div>
-                      <!-- /.direct-chat-msg -->
-
-                      <!-- Message. Default to the left -->
-                      <div class="direct-chat-msg">
-                        <div class="direct-chat-infos clearfix">
-                          <span class="direct-chat-name float-left">Alexander Pierce</span>
-                          <span class="direct-chat-timestamp float-right">23 Jan 5:37 pm</span>
-                        </div>
-                        <!-- /.direct-chat-infos -->
-                        <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
-                        <!-- /.direct-chat-img -->
-                        <div class="direct-chat-text">
-                          Working with AdminLTE on a great new app! Wanna join?
-                        </div>
-                        <!-- /.direct-chat-text -->
-                      </div>
-                      <!-- /.direct-chat-msg -->
-
-                      <!-- Message to the right -->
-                      <div class="direct-chat-msg right">
-                        <div class="direct-chat-infos clearfix">
-                          <span class="direct-chat-name float-right">Sarah Bullock</span>
-                          <span class="direct-chat-timestamp float-left">23 Jan 6:10 pm</span>
-                        </div>
-                        <!-- /.direct-chat-infos -->
-                        <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
-                        <!-- /.direct-chat-img -->
-                        <div class="direct-chat-text">
-                          I would love to.
-                        </div>
-                        <!-- /.direct-chat-text -->
-                      </div>
-                      <!-- /.direct-chat-msg -->
-
+            
                     </div>
                     <!--/.direct-chat-messages-->
 
@@ -515,10 +433,10 @@
                 <!-- USERS LIST -->
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title">Latest Members</h3>
+                    <h3 class="card-title">Khách hàng nổi bật</h3>
 
                     <div class="card-tools">
-                      <span class="badge badge-danger">8 New Members</span>
+                      <span class="badge badge-danger">${sllistusernoibat}</span>
                       <button type="button" class="btn btn-tool" data-card-widget="collapse">
                         <i class="fas fa-minus"></i>
                       </button>
@@ -530,52 +448,20 @@
                   <!-- /.card-header -->
                   <div class="card-body p-0">
                     <ul class="users-list clearfix">
+                     <c:forEach items="${listusernoibat}" var="listusernoibat">
                       <li>
-                        <img src="dist/img/user1-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Alexander Pierce</a>
-                        <span class="users-list-date">Today</span>
+                      <c:url value="/images/user/${listusernoibat.avatar}" var="imgUrl"></c:url>
+                        <img src="${imgUrl}" alt="User Image">
+                        <a class="users-list-name" href="/admin/profileuser/${listusernoibat.id}">${listusernoibat.firstName} ${listusernoibat.lastName}</a>
+                        <span class="users-list-date">${listusernoibat.createat}</span>
                       </li>
-                      <li>
-                        <img src="dist/img/user8-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Norman</a>
-                        <span class="users-list-date">Yesterday</span>
-                      </li>
-                      <li>
-                        <img src="dist/img/user7-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Jane</a>
-                        <span class="users-list-date">12 Jan</span>
-                      </li>
-                      <li>
-                        <img src="dist/img/user6-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">John</a>
-                        <span class="users-list-date">12 Jan</span>
-                      </li>
-                      <li>
-                        <img src="dist/img/user2-160x160.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Alexander</a>
-                        <span class="users-list-date">13 Jan</span>
-                      </li>
-                      <li>
-                        <img src="dist/img/user5-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Sarah</a>
-                        <span class="users-list-date">14 Jan</span>
-                      </li>
-                      <li>
-                        <img src="dist/img/user4-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Nora</a>
-                        <span class="users-list-date">15 Jan</span>
-                      </li>
-                      <li>
-                        <img src="dist/img/user3-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Nadia</a>
-                        <span class="users-list-date">15 Jan</span>
-                      </li>
+                      </c:forEach>
                     </ul>
                     <!-- /.users-list -->
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer text-center">
-                    <a href="javascript:">View All Users</a>
+                    <a href="/admin/alluser">View All Users</a>
                   </div>
                   <!-- /.card-footer -->
                 </div>
@@ -606,68 +492,29 @@
                     <thead>
                     <tr>
                       <th>Order ID</th>
-                      <th>Item</th>
-                      <th>Status</th>
-                      <th>Popularity</th>
+                      <th>Đơn vị vận chuyển</th>
+                      <th>Trạng thái</th>
+                      <th>Khách hàng</th>
                     </tr>
                     </thead>
                     <tbody>
+                      <c:forEach items="${orderganday}" var="orderganday">
                     <tr>
-                      <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                      <td>Call of Duty IV</td>
-                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td><a href="/admin/orderdetail/${orderganday.id}">${orderganday.id}</a></td>
+                      <td>${orderganday.delivery.name}</td>
                       <td>
-                        <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
+                      <c:if test="${orderganday.giaohang==1}"><span class="badge badge-warning">Chờ xác nhận</span></c:if>
+                      <c:if test="${orderganday.giaohang==0}"><span class="badge badge-danger">Đã Hủy</span></c:if>
+                      <c:if test="${orderganday.giaohang==2}"><span class="badge badge-info">Đang giao</span></c:if>
+                       <c:if test="${orderganday.giaohang==3}"><span class="badge badge-info">Đang giao</span></c:if>
+                      <c:if test="${orderganday.giaohang==4}"><span class="badge badge-success">Đã nhận</span></c:if>
+                      </td>                      
+                      <td>
+                      <a href="/admin/profileuser/${orderganday.user.id}">${orderganday.user.lastName}</a>
+                        <%-- <div class="sparkbar" data-color="#00a65a" data-height="20">${orderganday.user.lastName}</div> --%>
                       </td>
                     </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                      <td>Samsung Smart TV</td>
-                      <td><span class="badge badge-warning">Pending</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                      <td>iPhone 6 Plus</td>
-                      <td><span class="badge badge-danger">Delivered</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                      <td>Samsung Smart TV</td>
-                      <td><span class="badge badge-info">Processing</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                      <td>Samsung Smart TV</td>
-                      <td><span class="badge badge-warning">Pending</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                      <td>iPhone 6 Plus</td>
-                      <td><span class="badge badge-danger">Delivered</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                      <td>Call of Duty IV</td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                      </td>
-                    </tr>
+                      </c:forEach>
                     </tbody>
                   </table>
                 </div>
@@ -675,8 +522,8 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer clearfix">
-                <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
-                <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
+                <!-- <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a> -->
+                <a href="/admin/allorder" class="btn btn-sm btn-secondary float-right">View All Orders</a>
               </div>
               <!-- /.card-footer -->
             </div>
@@ -690,8 +537,8 @@
               <span class="info-box-icon"><i class="fas fa-tag"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Inventory</span>
-                <span class="info-box-number">5,200</span>
+                <span class="info-box-text">Hàng trong kho</span>
+                <a type="color: black;" href="/admin/allsp" > <span class="info-box-number">${slproduct} sản phẩm</span></a>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -700,8 +547,8 @@
               <span class="info-box-icon"><i class="far fa-heart"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Mentions</span>
-                <span class="info-box-number">92,050</span>
+                <span class="info-box-text">Sản phẩm bán chạy nhất</span>               
+                <a type="color: black;" href="/admin/spbanchay" > <span class="info-box-number">${top1.name}</span></a>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -710,8 +557,8 @@
               <span class="info-box-icon"><i class="fas fa-cloud-download-alt"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Downloads</span>
-                <span class="info-box-number">114,381</span>
+                <span class="info-box-text">Sản phẩm bán chậm nhất</span>
+                 <a type="color: black;" href="/admin/spbancham" > <span class="info-box-number">${tope.name}</span></a>                
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -720,8 +567,9 @@
               <span class="info-box-icon"><i class="far fa-comment"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Direct Messages</span>
-                <span class="info-box-number">163,921</span>
+                <span class="info-box-text">Sản phẩm tốt nhất</span>
+                <a type="color: black;" href="/product/user/list/${toptotnhat.id}" class="info-box-number">${toptotnhat.name}</a>
+                
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -729,7 +577,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Browser Usage</h3>
+                <h3 class="card-title">Thống kê thương hiệu nổi bật</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -752,12 +600,12 @@
                   <!-- /.col -->
                   <div class="col-md-4">
                     <ul class="chart-legend clearfix">
-                      <li><i class="far fa-circle text-danger"></i> Chrome</li>
-                      <li><i class="far fa-circle text-success"></i> IE</li>
-                      <li><i class="far fa-circle text-warning"></i> FireFox</li>
-                      <li><i class="far fa-circle text-info"></i> Safari</li>
-                      <li><i class="far fa-circle text-primary"></i> Opera</li>
-                      <li><i class="far fa-circle text-secondary"></i> Navigator</li>
+                      <li><i class="far fa-circle text-danger"></i> Simple</li>
+                      <li><i class="far fa-circle text-success"></i> Colorkey</li>
+                      <li><i class="far fa-circle text-warning"></i> AHC</li>
+                      <li><i class="far fa-circle text-info"></i> Floslek</li>
+                      <li><i class="far fa-circle text-primary"></i> FOCALLURE</li>
+                      <li><i class="far fa-circle text-secondary"></i> Acness</li>
                     </ul>
                   </div>
                   <!-- /.col -->
@@ -769,7 +617,7 @@
                 <ul class="nav nav-pills flex-column">
                   <li class="nav-item">
                     <a href="#" class="nav-link">
-                      United States of America
+                      Thành Phố Hồ Chí Minh
                       <span class="float-right text-danger">
                         <i class="fas fa-arrow-down text-sm"></i>
                         12%</span>
@@ -777,7 +625,7 @@
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
-                      India
+                      Hà Nội
                       <span class="float-right text-success">
                         <i class="fas fa-arrow-up text-sm"></i> 4%
                       </span>
@@ -785,7 +633,7 @@
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
-                      China
+                      Đồng Nai
                       <span class="float-right text-warning">
                         <i class="fas fa-arrow-left text-sm"></i> 0%
                       </span>
@@ -814,60 +662,21 @@
               <!-- /.card-header -->
               <div class="card-body p-0">
                 <ul class="products-list product-list-in-card pl-2 pr-2">
+                  <c:forEach items="${spduocthemganday}" var="spduocthemganday">
                   <li class="item">
                     <div class="product-img">
-                      <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
+                    <c:url value="/images/${spduocthemganday.product.listimage}" var="imgUrl"></c:url>
+                      <img width="100px" height="100px" src="${imgUrl}" alt="Product Image" class="img-size-50">
                     </div>
                     <div class="product-info">
-                      <a href="javascript:void(0)" class="product-title">Samsung TV
-                        <span class="badge badge-warning float-right">$1800</span></a>
+                      <a href="/product/user/list/${spduocthemganday.product.id}" class="product-title">${spduocthemganday.product.name}
+                        <span class="badge badge-warning float-right">$${spduocthemganday.product.promotionaprice}</span></a>
                       <span class="product-description">
-                        Samsung 32" 1080p 60Hz LED Smart HDTV.
+                        ${spduocthemganday.product.desciption}
                       </span>
                     </div>
                   </li>
-                  <!-- /.item -->
-                  <li class="item">
-                    <div class="product-img">
-                      <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
-                    </div>
-                    <div class="product-info">
-                      <a href="javascript:void(0)" class="product-title">Bicycle
-                        <span class="badge badge-info float-right">$700</span></a>
-                      <span class="product-description">
-                        26" Mongoose Dolomite Men's 7-speed, Navy Blue.
-                      </span>
-                    </div>
-                  </li>
-                  <!-- /.item -->
-                  <li class="item">
-                    <div class="product-img">
-                      <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
-                    </div>
-                    <div class="product-info">
-                      <a href="javascript:void(0)" class="product-title">
-                        Xbox One <span class="badge badge-danger float-right">
-                        $350
-                      </span>
-                      </a>
-                      <span class="product-description">
-                        Xbox One Console Bundle with Halo Master Chief Collection.
-                      </span>
-                    </div>
-                  </li>
-                  <!-- /.item -->
-                  <li class="item">
-                    <div class="product-img">
-                      <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
-                    </div>
-                    <div class="product-info">
-                      <a href="javascript:void(0)" class="product-title">PlayStation 4
-                        <span class="badge badge-success float-right">$399</span></a>
-                      <span class="product-description">
-                        PlayStation 4 500GB Console (PS4)
-                      </span>
-                    </div>
-                  </li>
+                 </c:forEach>
                   <!-- /.item -->
                 </ul>
               </div>

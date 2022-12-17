@@ -103,22 +103,26 @@
 									<img width="100px" height="100px" src="${imgUrl}" alt="">
 								</td>
 								<td width="639px"><a
-									href="/product/user/list/${orderitem.product.id}">${orderitem.product.name}</a></td>
+									href="/product/user/list/${orderitem.product.id}">${orderitem.product.name}</a><br><br><br>
+									<c:if test="${ order.giaohang == 4}">
+										<a href="/user/cart/reviewAndRating/${orderitem.product.id }"><span
+											class="badge bg-success">Đánh giá sản phẩm</span></a>
+									</c:if></td>
 								<td width="233px"><c:if test="${order.giaohang==0}">
 										<div class="progress progress-xs">
-											<div class="progress-bar bg-danger" style="width: 10%"></div>
+											<div class="progress-bar bg-danger" style="width: 20%"></div>
 										</div>
 									</c:if> <c:if test="${order.giaohang==1}">
 										<div class="progress progress-xs">
-											<div class="progress-bar bg-warning" style="width: 10%"></div>
+											<div class="progress-bar bg-warning" style="width: 40%"></div>
 										</div>
 									</c:if> <c:if test="${order.giaohang==2}">
 										<div class="progress progress-xs">
-											<div class="progress-bar bg-primary" style="width: 35%"></div>
+											<div class="progress-bar bg-primary" style="width: 60%"></div>
 										</div>
 									</c:if> <c:if test="${order.giaohang==3}">
 										<div class="progress progress-xs">
-											<div class="progress-bar bg-primary" style="width: 75%"></div>
+											<div class="progress-bar bg-primary" style="width: 80%"></div>
 										</div>
 									</c:if> <c:if test="${order.giaohang==4}">
 										<div class="progress progress-xs">
@@ -136,6 +140,16 @@
 					</tbody>
 				</table>
 				<span class="badge bg-danger"> Tổng:$${order.price}</span>
+				<c:if test="${ order.giaohang == 1}">
+					<a href="/user/cart/process/${order.id }"><span
+						class="badge bg-danger">Hủy đơn</span></a>
+				</c:if>
+				<c:if test="${ order.giaohang == 3}">
+					<a href="/user/cart/process/${order.id }"><span
+						class="badge bg-success">Đã nhận</span></a>
+				</c:if>
+
+
 			</c:forEach>
 		</div>
 		<!-- /.card-body -->

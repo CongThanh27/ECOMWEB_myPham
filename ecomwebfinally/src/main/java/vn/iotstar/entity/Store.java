@@ -38,7 +38,7 @@ public class Store {
 	@Column(columnDefinition = "nvarchar(MAX)")
 	private String bio;// mô tả
 	// private Integer ownerId;// từ user nào id user
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "ownerid")
 	private User user;
 

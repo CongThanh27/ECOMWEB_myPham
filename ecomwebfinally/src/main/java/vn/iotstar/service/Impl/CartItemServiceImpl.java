@@ -99,5 +99,11 @@ public class CartItemServiceImpl implements ICartItemService {
 		return CartItemRepository.countByCart(cart);
 	}
 
+	@Override
+	public List<CartItem> findTop10ByOrderByCreateatDesc() {
+		// TODO Auto-generated method stub
+		return CartItemRepository.findTop10ByOrderByCreateatDesc();
+	}
+
 
 }

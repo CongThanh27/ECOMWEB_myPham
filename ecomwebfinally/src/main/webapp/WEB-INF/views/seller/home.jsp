@@ -4,9 +4,9 @@
 
 
 <c:url value="/resources/fe/" var="URL"></c:url>
-<a href="sellerRegister" style="text-align: center; top: 100px"><h2><center>Đăng ký trở thành người bán</center></h2></a>
-<c:if test="${user.isSeller == false}">
 
+<c:if test="${user.isSeller == false}">
+<a href="sellerRegister" style="text-align: center; top: 100px"><h2><center>Đăng ký trở thành người bán</center></h2></a>
 </c:if>
 
 
@@ -26,8 +26,7 @@
           <img src="${URL}dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div> --%>
         <div class="info">
-          <a href="/seller" class="d-block">Nhom 18</a>
-          <a>${user.id } Id</a>
+          <a href="/seller" class="d-block">Nhóm 9</a>
         </div>
       </div>
 

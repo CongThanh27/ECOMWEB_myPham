@@ -35,6 +35,7 @@ public class ProductModel {
     private String trademark;
     private Date createat;
     private Date updateat;
+    private int sldanhgia;
     
     private Boolean isEdit = false;
     

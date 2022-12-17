@@ -7,9 +7,10 @@
 	aria-orientation="vertical" style="margin: auto; margin-top: 150px">
 	<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill"
 		href="#v-pills-home" role="tab" aria-controls="v-pills-home"
-		aria-selected="true">Home</a> <a class="nav-link"
+		aria-selected="true">Overview</a> <a class="nav-link"
 		id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
-		role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
+		role="tab" aria-controls="v-pills-profile" aria-selected="false">Change
+		Password</a>
 </div>
 
 <div class="tab-content" id="v-pills-tabContent"
@@ -89,6 +90,8 @@
 												style="width: 85%;">
 										</div>
 
+										<input type="hidden" name="isSeller" value="${user.isSeller }">
+										<input type="hidden" name="role" value="${user.role }">
 
 										<div class="col-9 mb-3">
 											<input type="hidden" name="id" value="${user.id }">
@@ -195,6 +198,7 @@
 											value="${user.hashedpassword }"> <input type="hidden"
 											name="role" value="${user.role }"> <input
 											type="hidden" name="isSeller" value="${user.isSeller }">
+
 										<div class="col-9 mb-3">
 											<input type="hidden" name="id" value="${user.id }">
 											<button type="submit" class="btn btn-primary btn-sm">

@@ -13,4 +13,5 @@ import vn.iotstar.entity.User;
 @Repository
 public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
 	long countByCart(Cart cart);
+	List<CartItem> findTop10ByOrderByCreateatDesc();
 }

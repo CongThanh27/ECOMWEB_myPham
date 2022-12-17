@@ -1,4 +1,4 @@
-package vn.iotstar.controller;
+package vn.iotstar.controller.Common;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -69,22 +69,24 @@ public class CartItemController {
 	ServletContext application;
 	@Autowired
 	HttpSession session;
-	//User User= (User)session.getAttribute("user");
-	int userid=1;
+	// User User= (User)session.getAttribute("user");
+	int userid = 1;
+
 	@GetMapping("hi")
 	public String list(ModelMap model) {
-		
+
 		return "deliveries/list";
 	}
+
 	@GetMapping("Order")
 	public ModelAndView ListOrder(ModelMap model, HttpSession sesson) {
-		//users.getId()
-		User User= (User)session.getAttribute("user");
+		// users.getId()
+		User User = (User) session.getAttribute("user");
 		Optional<User> user = userService.findById(User.getId());
 		User users = user.get();
-		List<Order> listorder = users.getOrders();		
+		List<Order> listorder = users.getOrders();
 		model.addAttribute("order", listorder);
-		
+
 		User userss = (User) session.getAttribute("user");
 		long soSanPhamTrongGio = 0;
 		if (user != null) {
@@ -94,34 +96,33 @@ public class CartItemController {
 			}
 		}
 		model.addAttribute("count", soSanPhamTrongGio);
-		
+
 		return new ModelAndView("deliveries/list", model);
 	}
+
 	@GetMapping("List")
 	public ModelAndView ListC(ModelMap model, HttpSession sesson) {
-		float sum=0;
-		User User= (User)session.getAttribute("user");
+		float sum = 0;
+		User User = (User) session.getAttribute("user");
 		Optional<User> user = userService.findById(User.getId());
 		User users = user.get();
 		List<Cart> listcart = users.getCarts();
 		List<CartItem> listcartitem = new ArrayList<CartItem>();
-		
-		  for(Cart item : listcart) 
-		  { 
-			  listcartitem.addAll(item.getCartItems());
-			  
-		  }
 
-		  for(CartItem item : listcartitem) 
-		  { 
-			  sum= (float) (sum + (item.getProduct().getPromotionaprice())*item.getCount());
-			  
-		  }
-		model.addAttribute("userid", User.getId()); 
-		
+		for (Cart item : listcart) {
+			listcartitem.addAll(item.getCartItems());
+
+		}
+
+		for (CartItem item : listcartitem) {
+			sum = (float) (sum + (item.getProduct().getPromotionaprice()) * item.getCount());
+
+		}
+		model.addAttribute("userid", User.getId());
+
 		model.addAttribute("sum", sum);
 		model.addAttribute("cartitem", listcartitem);
-		
+
 		long soSanPhamTrongGio = 0;
 		if (User != null) {
 			for (Cart cart : User.getCarts()) {
@@ -131,140 +132,148 @@ public class CartItemController {
 		}
 
 		model.addAttribute("count", soSanPhamTrongGio);
-		
+
 		return new ModelAndView("carts/list", model);
 	}
 
-	
 	@GetMapping("AddThongTin")
 	public ModelAndView test(ModelMap model) {
-		User User= (User)session.getAttribute("user");
+		User User = (User) session.getAttribute("user");
 		Optional<User> opt = userService.findById(User.getId());
 		List<Delivery> deli = deliveryService.findAll();
 		UserModel user = new UserModel();
-		
-		User userss = (User) session.getAttribute("user");
 		long soSanPhamTrongGio = 0;
-		if (user != null) {
-			for (Cart cart : userss.getCarts()) {
+		if (User != null) {
+			for (Cart cart : User.getCarts()) {
 				Cart cartn = cart;
 				soSanPhamTrongGio += iCartItemService.countByCart(cartn);
 			}
 		}
 
 		model.addAttribute("count", soSanPhamTrongGio);
-		
-		float sum=0;
-		if (opt.isPresent() ) {
+
+		float sum = 0;
+		if (opt.isPresent()) {
 			User entity = opt.get();
 			User users = opt.get();
 			BeanUtils.copyProperties(entity, user);
 			List<Cart> listcart = users.getCarts();
 			List<CartItem> listcartitem = new ArrayList<CartItem>();
-			
-			  for(Cart item : listcart) 
-			  { 
-				  listcartitem.addAll(item.getCartItems());
-				  
-			  }
-			
-			  if (listcartitem.isEmpty()) {
-				  String message=" ";
-				  message ="Chưa có mặt hàng nào";
-				  model.addAttribute("message", message);  return new ModelAndView("redirect:/user/cart/List", model);}
-			  for(CartItem item : listcartitem) 
-			  { 
-				  sum= (float) (sum + (item.getProduct().getPromotionaprice())*item.getCount());
-				  
-			  }
-			model.addAttribute("sum", sum);			
+
+			for (Cart item : listcart) {
+				listcartitem.addAll(item.getCartItems());
+
+			}
+
+			if (listcartitem.isEmpty()) {
+				String message = " ";
+				message = "Chưa có mặt hàng nào";
+				model.addAttribute("message", message);
+				return new ModelAndView("redirect:/user/cart/List", model);
+			}
+			for (CartItem item : listcartitem) {
+				sum = (float) (sum + (item.getProduct().getPromotionaprice()) * item.getCount());
+
+			}
+			model.addAttribute("sum", sum);
 			model.addAttribute("user", user);
 			model.addAttribute("delivery", deli);
-			
+
 			return new ModelAndView("user/common/common", model);
 		}
 		model.addAttribute("error", "Product không tồn tại");
 		return new ModelAndView("redirect:/user/cart/List", model);
 	}
-	
+
 	@PostMapping("SaveOrder")
 	public ModelAndView AddCart(ModelMap model, @Valid @ModelAttribute("order") OrderModel order,
 			@Valid @ModelAttribute("cartit") CartItemModel cartit, BindingResult result) {
-			User User= (User)session.getAttribute("user");
-			Optional<User> user = userService.findById(User.getId());
-			User users = user.get();
-			List<Cart> listcart = users.getCarts();
-			//số store người đó mua
-			List<Store> liststore= new ArrayList<Store>();
-			  for(Cart item : listcart) 
-			  {  
-				  liststore.add(item.getStore());
-			  }
-			  //ứng mỗi cửa hàng tạo 1 orther riêng
-			  for(Store item : liststore) 
-			  {  
-				  Order entity = new Order();
-				  BeanUtils.copyProperties(order, entity);
-				  Date getDate = new Date();
-					entity.setCreateat(getDate);
-					entity.setUpdateat(getDate);
-					entity.setStore(item);
-					entity.setUser(users);
-					entity.setStatus("Chờ xác nhận và giao hàng");
-					Random generator = new Random(); 
-					int nhandang =generator.nextInt();					
-					entity.setTrangthai(nhandang);
-					entity.setDelivery(deliveryService.getById(order.getDelivereid()));
-					entity.setGiaohang(1);
-					//Tính tổng tiền cho 1 hóa đơn của store
-					Optional<Cart> cart = cartService.findByStore(item);
-					Cart gh = cart.get();
-					List<CartItem> listcartitem = gh.getCartItems();
-					float sum=0;
-					 for(CartItem item1 : listcartitem) 
-					 { 
-						  sum= (float) (sum + (item1.getProduct().getPromotionaprice())*item1.getCount());						  
-					 } 
-					 entity.setPrice(sum);
-					 orderService.save(entity);		
-					 
-					 Optional<User> user1 = userService.findById(User.getId());
-					 User user2 = user1.get();
-					  // nhưng giỏ hàng của user
-					  List<Order> listorder =user2.getOrders();
-					  for(Order item3 : listorder) 
-					  {  
-						  if (item3.getTrangthai()==nhandang) {
-							  Optional<Cart> cart1 = cartService.findByStore(item3.getStore());
-							  Cart gh2 = cart1.get();
-							  List<CartItem> CartItem1 = gh2.getCartItems();
-							 
-							  for(CartItem item2 : CartItem1) 
-								 { 
-									 OrderItem itemorder = new OrderItem();
-									 itemorder.setOrder(item3);
-									 Date getDate1 = new Date();
-									 itemorder.setCreateat(getDate1);
-									 itemorder.setUpdateat(getDate1);
-									 itemorder.setCount(item2.getCount());
-									 itemorder.setProduct(item2.getProduct());
-									 orderItemService.save(itemorder);	
-									 iCartItemService.deleteById(item2.getId());
-								 } 	
-						  }  
-						  
-					  }
-					 
-			  }
+		User User = (User) session.getAttribute("user");
+		Optional<User> user = userService.findById(User.getId());
+		User users = user.get();
+		// lấy giỏ hàng của user, mỗi cửa hàng có 1 giỏ hàng
+		List<Cart> allCart = users.getCarts();
+		List<Cart> listcart =  new ArrayList<>();
+		for (Cart cart : allCart) {
+			if (cart.getCartItems().size() != 0) {
+				listcart.add(cart);
+			}
+		}
+		// Số cửa hàng user mua
+		List<Store> liststore = new ArrayList<Store>();
+		// Mỗi cái cart lấy cái store ra
+		for (Cart item : listcart) {
+			liststore.add(item.getStore());
+		}
 
-			  	  
-			String message="";
-			message ="Thành công";
-			model.addAttribute("message", message); 
-			String a ="redirect:/user/cart/Order";
+		// Ứng mỗi cửa hàng tạo 1 hóa đơn riêng
+		for (Store item : liststore) {
+			Order entity = new Order();
+			BeanUtils.copyProperties(order, entity);
+			Date getDate = new Date();
+			entity.setCreateat(getDate);
+			entity.setUpdateat(getDate);
+			entity.setStore(item);
+			entity.setUser(users);
+			entity.setStatus("Chờ xác nhận và giao hàng");
+			Random generator = new Random();
+			int nhandang = generator.nextInt();
+			entity.setTrangthai(nhandang);
+			entity.setDelivery(deliveryService.getById(order.getDelivereid()));
+			entity.setGiaohang(1);
+			// Tính tổng tiền cho 1 hóa đơn của store
+			// Tìm giỏ hàng của user đó
+			Optional<Cart> cart = cartService.findByUserAndStore(User, item);
+			Cart gh = cart.get();
+			// lấy sản phẩm chứa trong cart ra tính tiền
+			List<CartItem> listcartitem = gh.getCartItems();
+			float sum = 0;
+			for (CartItem item1 : listcartitem) {
+				sum = (float) (sum + (item1.getProduct().getPromotionaprice()) * item1.getCount());
+			}
+			entity.setPrice(sum);
+			// Hoàn tất tạo 1 order
+			orderService.save(entity);
+
+			Optional<User> user1 = userService.findById(User.getId());
+			User user2 = user1.get();
+			// Những đơn hàng của user đó vừa tạo bên trên
+			List<Order> listorder = user2.getOrders();
+			// Chạy vòng for để tìm đơn hàng vừa tạo, rồi thêm sản phẩm cho đơn hàng đó
+			for (Order item3 : listorder) {
+				if (item3.getTrangthai() == nhandang) {
+					// sát định những giỏ hàng của user đó
+					Optional<Cart> cart1 = cartService.findByUserAndStore(User, item);
+						// Lấy nhưng sản phẩm bên trong những giỏ hàng của user đó
+						List<CartItem> CartItem1 = cart1.get().getCartItems();
+						// với từng sản phẩm tạo orderitem cho hóa đơn đã tạo
+						for (CartItem item2 : CartItem1) {
+							OrderItem itemorder = new OrderItem();
+							itemorder.setOrder(item3);
+							Date getDate1 = new Date();
+							itemorder.setCreateat(getDate1);
+							itemorder.setUpdateat(getDate1);
+							itemorder.setCount(item2.getCount());
+							itemorder.setProduct(item2.getProduct());
+							orderItemService.save(itemorder);
+							System.out.print("OrderItem: " + itemorder.getProduct().getName() + "Id: " + itemorder.getId());
+							// xóa cái sản phẩm trong giỏ hàng đi
+							iCartItemService.delete(item2);
+							System.out.print("CartItem: " + item2.getProduct().getName() + "Id: " + item2.getId());
+						}
+					}
+				}
+
+			}
+
+
+		String message = "";
+		message = "Thành công";
+		model.addAttribute("message", message);
+		String a = "redirect:/user/cart/Order";
 		return new ModelAndView(a, model);
 	}
-	
+
 	@GetMapping("")
 	public ModelAndView List(ModelMap model, HttpSession sesson) {
 
@@ -299,6 +308,7 @@ public class CartItemController {
 		return new ModelAndView("redirect:/user/cart/item", model);
 
 	}
+
 	@GetMapping("delete/{id}")
 	public ModelAndView delete(ModelMap model, @PathVariable("id") int id) {
 		iCartItemService.deleteById(id);
@@ -306,5 +316,24 @@ public class CartItemController {
 		return new ModelAndView("redirect:/user/cart/List", model);
 
 	}
+
+	@GetMapping("/process/{id}")
+	public String process(ModelMap model, @PathVariable("id") int id) {
+		Order order = orderService.findById(id).get();
+		if (order.getGiaohang() == 1) {
+			order.setGiaohang(0);
+		} else if (order.getGiaohang() == 3){
+			order.setGiaohang(4);
+		} /*else if (order.getGiaohang() == 4) {
+			return "redirect:/user/lists/" + id;
+		}*/
+		orderService.save(order);
+
+		return "redirect:/user/cart/Order";
+	}
 	
+	@GetMapping("/reviewAndRating/{id}")
+	public String reviewAndRating(ModelMap model, @PathVariable("id") int id) {
+		return "redirect:/product/user/lists/" + id;
+	}
 }
