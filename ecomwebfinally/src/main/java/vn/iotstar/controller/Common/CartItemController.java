@@ -71,9 +71,9 @@ public class CartItemController {
 	HttpSession session;
 	// User User= (User)session.getAttribute("user");
 	/* int userid = 1; */
-	
+
 	List<Integer> listInt = new ArrayList<>();
-	
+
 	@GetMapping("hi")
 	public String list(ModelMap model) {
 
@@ -190,7 +190,6 @@ public class CartItemController {
 	@PostMapping("SaveOrder")
 	public ModelAndView addOrder(ModelMap model, @Valid @ModelAttribute("order") OrderModel order) {
 		// Luw nhan dang
-		
 
 		User user = (User) session.getAttribute("user");
 		// Lay gio hang cua user, moi cua hang 1 gio hang
@@ -240,7 +239,7 @@ public class CartItemController {
 		}
 		model.addAttribute("nhandang", listInt);
 
-		for (Integer item: listInt) {
+		for (Integer item : listInt) {
 			System.out.println("Alala : " + item);
 		}
 		return new ModelAndView("redirect:/user/cart/addOrderItem", model);
@@ -248,12 +247,12 @@ public class CartItemController {
 
 	@GetMapping("addOrderItem")
 	public String addOrderItem(ModelMap model/* , @Valid @ModelAttribute("nhandang") List<Integer> listInt */) {
-		
+
 		session.removeAttribute("listInt");
-		for (Integer item: listInt) {
+		for (Integer item : listInt) {
 			System.out.println("Alola : " + item);
 		}
-		
+
 		User user = (User) session.getAttribute("user");
 		// Lay gio hang cua user, moi cua hang 1 gio hang
 		List<Cart> userCart = new ArrayList<>();
@@ -282,9 +281,12 @@ public class CartItemController {
 				orderItemService.save(entity);
 			}
 		}
+		
+		//Xoa item trong cartitem
 		for (Cart cart : userCart) {
 			iCartItemService.deleteByCart(cart);
 		}
+		
 		listInt.clear();
 		return "redirect:/user/cart/Order";
 	}
