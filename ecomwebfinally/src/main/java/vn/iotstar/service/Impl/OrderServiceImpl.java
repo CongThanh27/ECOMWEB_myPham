@@ -112,5 +112,10 @@ public class OrderServiceImpl implements IOrderService {
 		// TODO Auto-generated method stub
 		return orderRepository.findTop10ByOrderByCreateatDesc();
 	}
+	@Override
+	public Order findByTrangthai(Integer trangthai) {
+		// TODO Auto-generated method stub
+		return orderRepository.findByTrangthai(trangthai);
+	}
 	
 }

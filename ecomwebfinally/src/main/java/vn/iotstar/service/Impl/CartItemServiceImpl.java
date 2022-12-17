@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import vn.iotstar.entity.Cart;
 import vn.iotstar.entity.CartItem;
@@ -18,6 +19,7 @@ import vn.iotstar.Repository.CartItemRepository;
 import vn.iotstar.service.ICartItemService;
 
 @Service
+@Transactional
 public class CartItemServiceImpl implements ICartItemService {
 	@Autowired
 	CartItemRepository CartItemRepository;
@@ -79,8 +81,7 @@ public class CartItemServiceImpl implements ICartItemService {
 
 	@Override
 	public void delete(CartItem entity) {
-		CartItemRepository.delete(entity);
-	}
+		CartItemRepository.delete(entity);	}
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -103,6 +104,12 @@ public class CartItemServiceImpl implements ICartItemService {
 	public List<CartItem> findTop10ByOrderByCreateatDesc() {
 		// TODO Auto-generated method stub
 		return CartItemRepository.findTop10ByOrderByCreateatDesc();
+	}
+	
+	@Override
+	public void deleteByCart(Cart cart) {
+		// TODO Auto-generated method stub
+		CartItemRepository.deleteByCart(cart);
 	}
 
 

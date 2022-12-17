@@ -45,5 +45,7 @@ public interface IOrderService {
 	List<Order> findAllByStore(Store store);
 	int countByUser(User user);
 	List<Order> findTop10ByOrderByCreateatDesc();
+	
+	Order findByTrangthai(Integer trangthai);
 
 }
