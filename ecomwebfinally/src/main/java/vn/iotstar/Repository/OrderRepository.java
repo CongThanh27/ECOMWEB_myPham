@@ -15,5 +15,5 @@ public interface OrderRepository extends JpaRepository< Order, Integer >{
 	int countByUser(User user);
 	List<Order> findTop10ByOrderByCreateatDesc();
 	//List<Order> findTop10ByOrderByCreateatDesc();
-	
+	Order findByTrangthai(Integer trangthai);
 }

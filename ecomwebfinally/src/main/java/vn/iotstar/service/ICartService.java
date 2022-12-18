@@ -45,6 +45,6 @@ public interface ICartService {
 	Optional<Cart> findByUser(User user);
 	List<Cart> findByStore(Integer Storeid);
 	List<Cart> findByUser(Integer id);
-	
+	Optional<Cart> findByUserAndStore(User user, Store store);
 
 }

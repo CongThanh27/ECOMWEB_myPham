@@ -117,6 +117,10 @@ public class CartServiceImpl implements ICartService {
 		return CartRepository.findByUser(id);
 	}
 
-
+	@Override
+	public Optional<Cart> findByUserAndStore(User user, Store store) {
+		// TODO Auto-generated method stub
+		return CartRepository.findByUserAndStore(user, store);
+	}
 
 }

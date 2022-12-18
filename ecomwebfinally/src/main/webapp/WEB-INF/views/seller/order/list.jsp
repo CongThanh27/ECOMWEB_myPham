@@ -253,8 +253,8 @@
 					</tbody>
 				</table>
 				<span class="badge bg-danger"> Tổng:$${order.price}</span>
-				<c:if test="${ order.giaohang == 0}"><a href="/seller/ship/${order.id }"><span class="badge bg-danger">Xóa đơn hàng</span></a></c:if>
-				<c:if test="${ order.giaohang == 1}"><a href="/seller/ship/${order.id }"><span class="badge bg-danger">Xác nhận</span></a></c:if>
+				<c:if test="${ order.giaohang == 0}"><a href="/seller/delete/${order.id }"><span class="badge bg-danger">Xóa đơn hàng</span></a></c:if>
+				<c:if test="${ order.giaohang == 1}"><a href="/seller/process/${order.id }"><span class="badge bg-danger">Xác nhận</span></a></c:if>
 				<c:if test="${ order.giaohang == 2}"><a href="/seller/ship/${order.id }"><span class="badge bg-danger">Giao hàng</span></a></c:if>
 			</c:forEach>
 		</div>

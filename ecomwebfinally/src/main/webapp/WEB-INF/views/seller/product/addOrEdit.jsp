@@ -24,6 +24,7 @@
         </div> --%>
 				<div class="info">
 					<a href="/seller" class="d-block">Nhóm 9</a> 
+
 				</div>
 			</div>
 
@@ -197,9 +198,16 @@
 								
 								
 
-						
+
+						</div>
+						<%-- <div class="input-group mb-3">
+							<label for="storeid" class="form-lablel"> Storeid:</label> <br>
 							<input type="hidden" value="${product.storeid}" name="storeid">
+						</div> --%>
+						<input type="hidden" value="${product.storeid}" name="storeid">
+
 						
+
 						<%-- <div class="input-group mb-3">
 							<label for="rating" class="form-lablel"> Rating:</label> <br>
 							<input type="text" value="${product.rating}" name="rating">
