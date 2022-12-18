@@ -148,7 +148,8 @@ public class UserAdminCotroller {
 					 List<Order> ListOrder = item.getOrders();
 					 for(Order itemorder : ListOrder) 
 					 {
-						 sum+=itemorder.getPrice();
+						 if(itemorder.getGiaohang()==4)
+							 sum+=itemorder.getPrice();
 					 }
 					 modeluser.setSum(sum);
 					 usermodel.add(modeluser);

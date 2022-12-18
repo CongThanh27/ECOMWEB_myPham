@@ -98,7 +98,7 @@ public class LoginController {
 				return "redirect:/admin/ThongKe/1";
 			}
 			return "index";
-		} else {
+			} else {
 			System.out.println("Login that bai");
 			model.addAttribute("message", "Email or Password not exist");
 		}

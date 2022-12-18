@@ -184,7 +184,7 @@
 
 										<div class="col-5 mb-3">
 											<h6>First Name</h6>
-											<input type="text" class="form-control" name="firstName"
+											<input readonly="readonly" type="text" class="form-control" name="firstName"
 												value="${user.firstName }" style="width: 115%;">
 										</div>
 
