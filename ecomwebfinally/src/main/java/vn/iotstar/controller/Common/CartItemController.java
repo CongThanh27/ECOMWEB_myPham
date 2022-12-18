@@ -193,14 +193,17 @@ public class CartItemController {
 			User User= (User)session.getAttribute("user");
 			Optional<User> user = userService.findById(User.getId());
 			User users = user.get();
+			//lấy giỏ hàng của user, mỗi cửa hàng có 1 giỏ hàng
 			List<Cart> listcart = users.getCarts();
-			//số store người đó mua
+			//Số cửa hàng user mua
 			List<Store> liststore= new ArrayList<Store>();
+			// Mỗi cái cart lấy cái store ra 
 			  for(Cart item : listcart) 
 			  {  
 				  liststore.add(item.getStore());
 			  }
-			  //ứng mỗi cửa hàng tạo 1 orther riêng
+			  
+			  //Ứng mỗi cửa hàng tạo 1 hóa đơn riêng
 			  for(Store item : liststore) 
 			  {  
 				  Order entity = new Order();
@@ -217,8 +220,10 @@ public class CartItemController {
 					entity.setDelivery(deliveryService.getById(order.getDelivereid()));
 					entity.setGiaohang(1);
 					//Tính tổng tiền cho 1 hóa đơn của store
-					Optional<Cart> cart = cartService.findByStore(item);
+					//Tìm giỏ hàng của user đó 
+					Optional<Cart> cart = cartService.findByUser(User);
 					Cart gh = cart.get();
+					//lấy sản phẩm chứa trong cart ra tính tiền
 					List<CartItem> listcartitem = gh.getCartItems();
 					float sum=0;
 					 for(CartItem item1 : listcartitem) 
@@ -226,31 +231,38 @@ public class CartItemController {
 						  sum= (float) (sum + (item1.getProduct().getPromotionaprice())*item1.getCount());						  
 					 } 
 					 entity.setPrice(sum);
+					 //Hoàn tất tạo 1 order
 					 orderService.save(entity);		
 					 
 					 Optional<User> user1 = userService.findById(User.getId());
 					 User user2 = user1.get();
-					  // nhưng giỏ hàng của user
+					  // Những đơn hàng của user đó vừa tạo bên trên
 					  List<Order> listorder =user2.getOrders();
+					  // Chạy vòng for để tìm đơn hàng vừa tạo, rồi thêm sản phẩm cho đơn hàng đó
 					  for(Order item3 : listorder) 
 					  {  
 						  if (item3.getTrangthai()==nhandang) {
-							  Optional<Cart> cart1 = cartService.findByStore(item3.getStore());
-							  Cart gh2 = cart1.get();
-							  List<CartItem> CartItem1 = gh2.getCartItems();
-							 
-							  for(CartItem item2 : CartItem1) 
-								 { 
-									 OrderItem itemorder = new OrderItem();
-									 itemorder.setOrder(item3);
-									 Date getDate1 = new Date();
-									 itemorder.setCreateat(getDate1);
-									 itemorder.setUpdateat(getDate1);
-									 itemorder.setCount(item2.getCount());
-									 itemorder.setProduct(item2.getProduct());
-									 orderItemService.save(itemorder);	
-									 iCartItemService.deleteById(item2.getId());
-								 } 	
+							  //sát định những giỏ hàng của user đó
+							  List<Cart> cart1 = listcart = users.getCarts();
+							  for(Cart gh2 : cart1) 
+								 {							  
+								  //Lấy nhưng sản phẩm bên trong những giỏ hàng của user đó
+								  List<CartItem> CartItem1 = gh2.getCartItems();
+								 // với từng sản phẩm tạo orderitem cho hóa đơn đã tạo
+								  for(CartItem item2 : CartItem1) 
+									 { 
+										 OrderItem itemorder = new OrderItem();
+										 itemorder.setOrder(item3);
+										 Date getDate1 = new Date();
+										 itemorder.setCreateat(getDate1);
+										 itemorder.setUpdateat(getDate1);
+										 itemorder.setCount(item2.getCount());
+										 itemorder.setProduct(item2.getProduct());
+										 orderItemService.save(itemorder);	
+										 //xóa cái sản phẩm trong giỏ hàng đi
+										 iCartItemService.deleteById(item2.getId());
+									 }
+							  } 	
 						  }  
 						  
 					  }
