@@ -269,7 +269,10 @@ public class ProductController {
 				}
 			}
 			model.addAttribute("count", soSanPhamTrongGio);
-
+			
+			//truyen store
+			Store st = storeService.getById(entity.getStore().getId());
+			model.addAttribute("Store", st);
 			return new ModelAndView("user/product/productDetailsWithoutComment", model);
 		}
 		model.addAttribute("error", "Product không tồn tại");

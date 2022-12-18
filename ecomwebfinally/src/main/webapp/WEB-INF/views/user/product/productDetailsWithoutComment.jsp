@@ -127,6 +127,33 @@
 <div class="tabs_section_container">
 
 	<div class="container">
+
+		<div class="col">
+			<div class="tabs_container">
+				<ul
+					class="tabs d-flex flex-sm-row flex-column align-items-left align-items-md-center justify-content-center">
+					<li class="tab active" data-active-tab="tab_1"><c:url
+							value="/images/${Store.avatar}" var="imgUrl"></c:url> <img
+						src="${imgUrl}" alt=""
+						style="max-width: 100px; height: 100px; border-radius: 50%;" /></li>
+
+					<li class="tab" data-active-tab="tab_1"><span>Shop: ${Store.name}</span></li>
+					<li class="tab" data-active-tab="tab_1"><div
+							style="width: 250px; height: 100px;"></div></li>
+					<li class="tab" data-active-tab="tab_1"><span>Rate:
+							<ul class="star_rating">
+								<c:forEach var="i" begin="1" end="${Store.rating}">
+									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+								</c:forEach>
+								<c:forEach var="i" begin="1" end="${5-Store.rating}">
+									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+								</c:forEach>
+							</ul>
+					</span></li>
+				</ul>
+			</div>
+		</div>
+
 		<div class="row">
 			<div class="col">
 				<div class="tabs_container">
