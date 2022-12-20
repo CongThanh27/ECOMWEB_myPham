@@ -89,12 +89,16 @@ public class AdminController {
 	@Autowired
 	UserAdminCotroller userAdminCotroller;
 	int cos=1;
-	@GetMapping("hi")
-	public String list(ModelMap model) {
+	@GetMapping("mess")
+	public String mess(ModelMap model) {
 		
-		return "admin/orderdetail";
+		return "admin/mess";
 	}
-	
+	@GetMapping("tmess")
+	public String taotin (ModelMap model) {
+		
+		return "admin/createmess";
+	}
 	// trong ngày=1,tháng=2,năm=3
 	// Lấy ngày tháng, năm hiện tại
 

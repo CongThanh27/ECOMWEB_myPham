@@ -25,8 +25,8 @@
 	<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill"
 		href="#v-pills-home" role="tab" aria-controls="v-pills-home"
 		aria-selected="true">Home</a> <a class="nav-link"
-		id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
-		role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
+		id="v-pills-profile-tab" data-toggle="pill" href=""
+		role="tab" aria-controls="v-pills-profile" aria-selected="false">Nhắn tin</a>
 </div>
 
 <div class="tab-content" id="v-pills-tabContent"
@@ -158,7 +158,7 @@
 								<div class="m-2">
 
 									<input type="text" name="avatar" value="${user.avatar }"
-										hidden="true"> <input type="file" class="form-control"
+										hidden="true"> <input hidden="" type="file" class="form-control"
 										name="avatarFile" value="${user.avatarFile }"
 										accept=".jpg,.jpeg,.png">
 								</div>
@@ -190,24 +190,24 @@
 
 										<div class="col-5 mb-3">
 											<h6>Last Name</h6>
-											<input type="text" class="form-control" name="lastName"
+											<input readonly="readonly" type="text" class="form-control" name="lastName"
 												value="${user.lastName }" style="width: 115%;">
 										</div>
 
 										<div class="col-6 mb-3">
 											<h6>Email</h6>
-											<input type="text" class="form-control" name="email"
+											<input readonly="readonly" type="text" class="form-control" name="email"
 												value="${user.email }" style="width: 190%;"
 												readonly="readonly">
 										</div>
 										<div class="col-7 mb-3">
 											<h6>Phone</h6>
-											<input type="text" class="form-control" name="phone"
+											<input readonly="readonly" type="text" class="form-control" name="phone"
 												value="${user.phone }" style="width: 158%;">
 										</div>
 										<div class="col-8 mb-3">
 											<h6>Address</h6>
-											<input type="text" class="form-control" name="address"
+											<input readonly="readonly" type="text" class="form-control" name="address"
 												value="${user.address }" style="width: 135%;">
 										</div>
 											<input type="hidden" name="hashedpassword" value="${user.hashedpassword }">

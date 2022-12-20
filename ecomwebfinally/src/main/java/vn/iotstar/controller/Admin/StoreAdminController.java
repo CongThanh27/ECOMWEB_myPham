@@ -3,6 +3,7 @@ package vn.iotstar.controller.Admin;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -77,15 +78,15 @@ public class StoreAdminController {
 	//List cửa hàng mới
 	@SuppressWarnings("deprecation")
 	@GetMapping("ListNewStore")
-	public ModelAndView ListNewStore(ModelMap model,@PathVariable("co") int co, HttpSession sesson) {		
+	public ModelAndView ListNewStore(ModelMap model) {		
 		List<Store> liststore = storeService.findAll();
 		List<Store> store = new ArrayList<Store>();
-		if(co==1)
+		if(cos==1)
 			 for(Store item : liststore) 
 			 { 			 	
 				 if (item.getCreateat().getDay()==Day()&&item.getCreateat().getYear()==Year()&&item.getCreateat().getMonth()==Month()) store.add(item);			 
 			 }
-			else if(co==2)
+			else if(cos==2)
 			 for(Store item : liststore) 
 			 { 
 				 if (item.getCreateat().getMonth()==Month()&&item.getCreateat().getYear()==Year())store.add(item);
@@ -95,9 +96,35 @@ public class StoreAdminController {
 			 { 
 				if (item.getCreateat().getYear()==Year()) store.add(item);	
 			 }	
-		User usersession= (User)session.getAttribute("user");
-		model.addAttribute("usersession", usersession); 
 		model.addAttribute("store", store); 
-		return new ModelAndView("admin/store/list", model);
+		return new ModelAndView("admin/store/listStore", model);
+	}
+	@GetMapping("AllStore")
+	public ModelAndView ALL(ModelMap model) {		
+		List<Store> liststore = storeService.findAll();	
+		model.addAttribute("store", liststore); 
+		return new ModelAndView("admin/store/listStore", model);
+	}
+	@GetMapping("KhoaMo/{id}")
+	public ModelAndView KhoaMo(ModelMap model, @PathVariable("id")Integer id ) {	
+		Store store = storeService.findById(id).get();
+		if(store.getIsactive()==true)
+			store.setIsactive(false);
+		else store.setIsactive(true);
+		storeService.save(store);
+		List<Store> liststore = storeService.findAll();
+		model.addAttribute("store", liststore); 
+		return new ModelAndView("admin/store/listStore", model);
+	}
+	//Xem thông tin nhân viên
+	@GetMapping("/profistore/{id}")
+	public String profistore(ModelMap model, @PathVariable("id")Integer id) {
+		Optional<Store> store = storeService.findById(id);	
+		Store entity = store.get();
+		model.addAttribute("store", entity);
+		model.addAttribute("sumdonhang", entity.getOrder().size());
+		model.addAttribute("sumdanhgia", entity.getRating());
+ 
+		return "admin/store/info";
 	}
 }

@@ -201,6 +201,40 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item">
+            <a href="/admin/mess" class="nav-link active">
+              <i class="nav-icon far fa-envelope"></i>
+              <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                Hộp thư
+                </font></font><i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admin/mess" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hộp thư đến</font></font></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/tmess" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Soạn, biên soạn</font></font></p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+            <li class="nav-item">
+            <a href="/admin/ListNewStore" class="nav-link">
+                <i class="nav-icon fas fa-columns"></i>
+              <p>
+               Chi tiết thống kê cửa hàng
+
+              </p>
+            </a>
+      
+          </li>
 
           <li class="nav-item">
             <a href="/admin/order" class="nav-link">
@@ -281,6 +315,16 @@
             </a>
         
           
+          </li>
+           <li class="nav-item">
+            <a href="/admin/AllStore" class="nav-link">
+                <i class="nav-icon fas fa-columns"></i>
+              <p>
+               Quản lý cửa hàng
+
+              </p>
+            </a>
+      
           </li>
       </nav>
       <!-- /.sidebar-menu -->
