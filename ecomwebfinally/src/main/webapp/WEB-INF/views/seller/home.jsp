@@ -6,7 +6,7 @@
 <c:url value="/resources/fe/" var="URL"></c:url>
 
 <c:if test="${user.isSeller == false}">
-<a href="sellerRegister" style="text-align: center; top: 100px"><h2><center>Đăng ký trở thành người bán</center></h2></a>
+<a href="/sellerRegister" style="text-align: center; top: 100px"><h2><center>Đăng ký trở thành người bán</center></h2></a>
 </c:if>
 
 

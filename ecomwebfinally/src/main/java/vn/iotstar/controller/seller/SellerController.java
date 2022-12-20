@@ -65,9 +65,30 @@ public class SellerController {
 	@Autowired
 	ServletContext application;
 
+	@GetMapping("/notSeller")
+	public String regisSeller(ModelMap model) {
+		User user = (User) session.getAttribute("user");
+		Optional<Store> optStore = storeService.findByUser(user);
+		Store store = new Store();
+		if (optStore.isPresent()) {
+			store = optStore.get();
+		} 
+		model.addAttribute("store", store);
+		return "/seller/notSeller";
+	}
+	
 	@RequestMapping("")
 	public String sellerPage(ModelMap model) {
 		User user = (User) session.getAttribute("user");
+		Optional<Store> optStore = storeService.findByUser(user);
+		if (user.getIsSeller() == false) {
+			return "redirect:/seller/notSeller";
+		} else {
+			if (optStore.isPresent()) {
+				if (optStore.get().getIsactive() == false)
+					return "redirect:/seller/notSeller";
+			}
+		}
 		model.addAttribute("user", user);
 		Store store = user.getStores();
 		List<Order> allOrder = orderService.findAllByStore(store);

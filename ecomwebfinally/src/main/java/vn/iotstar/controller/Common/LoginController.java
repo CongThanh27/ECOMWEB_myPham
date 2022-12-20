@@ -224,11 +224,12 @@ public class LoginController {
 		try {
 			BeanUtils.copyProperties(entity, store);
 			entity.setCreateat(date);
-			entity.setIsactive(true);
+			entity.setIsactive(false);
 			entity.setRating(0);
 			entity.setUser(user);
 			user.setIsSeller(true);
 			storeService.save(entity);
+			userService.save(user);
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -236,6 +237,6 @@ public class LoginController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "redirect:/seller";
+		return "redirect:/";
 	}
 }
