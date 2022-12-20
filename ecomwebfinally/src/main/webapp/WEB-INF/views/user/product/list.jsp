@@ -192,7 +192,11 @@
 												<c:url value="/images/${product.listimage}" var="imgUrl"></c:url>
 												<img src="${imgUrl}" alt="">
 											</div>
-											<div class="favorite favorite_left"></div>
+											<!-- <div class="favorite favorite_left"></div> -->
+											<div
+												class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center">
+												<span>${product.sold}</span>
+											</div>
 											<c:if test="${product.price - product.promotionaprice > 0}">
 												<div
 													class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
@@ -204,9 +208,14 @@
 												<h6 class="product_name">
 													<a href="/product/user/list/${product.id}">${product.name}</a>
 												</h6>
-												<div class="product_price">
-													$${product.promotionaprice}<span>$${product.price}</span>
-												</div>
+												<c:if test="${product.price - product.promotionaprice > 0}">
+													<div class="product_price">
+														$${product.promotionaprice}<span>$${product.price}</span>
+													</div>
+												</c:if>
+												<c:if test="${product.price - product.promotionaprice <= 0}">
+													<div class="product_price">$${product.promotionaprice}</div>
+												</c:if>
 											</div>
 										</div>
 										<div class="red_button add_to_cart_button">

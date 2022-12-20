@@ -57,7 +57,9 @@
 					class="free_delivery d-flex flex-row align-items-center justify-content-center">
 					<span class="ti-truck"></span><span>free delivery</span>
 				</div>
-				<div class="original_price">$${product.price}</div>
+				<c:if test="${product.price - product.promotionaprice > 0}">
+					<div class="original_price">$${product.price}</div>
+				</c:if>
 				<div class="product_price">$${product.promotionaprice}</div>
 				<ul class="star_rating">
 					<c:forEach var="i" begin="1" end="${product.rating}">
@@ -127,7 +129,7 @@
 <div class="tabs_section_container">
 
 	<div class="container">
-
+		<!-- thông tin Shop -->
 		<div class="col">
 			<div class="tabs_container">
 				<ul
@@ -184,7 +186,9 @@
 								<p>${product.desciption}</p>
 							</div>
 							<div class="tab_image">
+								<c:url value="/images/${product.listimage}" var="imgUrl"></c:url>
 								<img src="${imgUrl}" alt="">
+								<%-- <img src="${imgUrl}" alt=""> --%>
 							</div>
 							<div class="tab_text_block">
 								<h2>${product.name}</h2>
