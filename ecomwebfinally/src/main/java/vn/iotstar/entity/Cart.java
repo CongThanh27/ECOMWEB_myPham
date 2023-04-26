@@ -51,7 +51,7 @@ public class Cart {
 	private Date updateat;
 
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "cart", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "cart")
 	private List<CartItem> cartItems;
 
 }
